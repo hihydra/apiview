@@ -1,9 +1,9 @@
 @inject('apiPresenter','App\Presenters\ApiPresenter')
 @if ($photos = $apiPresenter->photo($school,'TYPE_PHOTO',6)) @endif
-@if ($notices = $apiPresenter->notice($school,6,80)) @endif
+@if ($photoNews = $apiPresenter->intro($school,'TYPE_PHOTO_NEWS',6,50)) @endif
+@if ($news = $apiPresenter->intro($school,'TYPE_SCIENTIFIC_RESEARCH',6,80)) @endif
 @if ($teacherPhotos = $apiPresenter->teacherPhoto($school,6)) @endif
-@if ($news = $apiPresenter->new($school,3,50)) @endif
-@if ($kindsPhotos = $apiPresenter->picture($school,'TYPE_KINDS',6)) @endif
+@if ($kindsPhotos = $apiPresenter->intro($school,'TYPE_PHOTO_ACTIVITY',6,80)) @endif
 @extends('green.layouts')
 @section('content')
     <div class="fl_1">
@@ -21,27 +21,18 @@
     </div>
     <div class="fl_1 overview">
       <h2>园所简介&nbsp; | &nbsp;SCHOOL OVERVIEW</h2>
-      <p>{{$content}}</p>
+      <p>{{$data['content']}}</p>
     </div>
     <div class="clear"></div>
     <div class="fl_2">
       <div class="tittle_1"><img src="/assets/green/img/tittle_1.jpg" /></div>
       <ul class="fl_ul">
-      @foreach ($notices['datas'] as $notice)
+      @foreach ($photoNews['datas'] as $photoNew)
         <li>
-          <div class="ul-l">
-            <div class="holder">
-              <div class="month green">
-                <p>五月</p>
-              </div>
-              <div class="day">
-                <p>9</p>
-              </div>
-            </div>
-          </div>
+          <div class="ul-l"><img src="{{$photoNew['img']}}" width="137px" height="137px"/></div>
           <div class="ul-l notice">
-            <h2>{{$notice['title']}}</h2>
-            <p>{{$notice['reduced']}}</p>
+            <h2><a href="{{$photoNew['url']}}">{{$photoNew['title']}}</a></h2>
+            <p>{{$photoNew['reduced']}}</p>
           </div>
         </li>
       @endforeach
@@ -77,9 +68,9 @@
       <ul>
         @foreach ($kindsPhotos['datas'] as $key => $kindsPhoto)
           <li>
-              <a href="{{$kindsPhoto['url']}}"><img src="{{$kindsPhoto['img']}}"/></a>
+              <a href="{{$kindsPhoto['url']}}"><img src="{{$kindsPhoto['img']}}" width="327px" height="327px" /></a>
               @if($key == 0)
-              <div class="z-1"><h2></h2><p>{{$kindsPhoto['name']}}</p></div>
+              <div class="z-1"><h2>{{$kindsPhoto['timeStr']}}</h2><p>{{$kindsPhoto['title']}}</p></div>
               @endif
           </li>
         @endforeach

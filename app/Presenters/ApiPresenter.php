@@ -65,7 +65,7 @@ Eof;
 
 	public function photo($school,$type,$limit){
 		$this->api->school = $school;
-		$data = $this->api->loadSchoolPagePicture('TYPE_KINDS',$limit);
+		$data = $this->api->loadSchoolPagePicture($type,'',$limit);
 		return $data;
 	}
 
@@ -77,7 +77,7 @@ Eof;
 
 	public function notice($school,$limit,$word=120){
 		$this->api->school = $school;
-		$data = $this->api->loadRecentlyNoticePage($limit,$word);
+		$data = $this->api->loadRecentlyNotice($limit,$word);
 		return $data;
 	}
 

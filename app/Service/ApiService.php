@@ -8,11 +8,11 @@ class ApiService extends BaseService
 
 	public function __construct(){
         $this->url = env('API_URL');
-		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL').'/open/']);  //api接口地址
+		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL')]);  //api接口地址
 	}
     //基本信息
     public function loadSchoolInfo(){
-        $path  = 'school/'.$this->school.'/loadSchoolInfo';
+        $path  = '/open/school/'.$this->school.'/loadSchoolInfo';
         $query = array();
         $body = $this->result($path,$query);
         $body['logoUrl'] = $this->url.'/'.$body['logoUrl'];
@@ -20,7 +20,7 @@ class ApiService extends BaseService
     }
 	//学校简介
     public function loadSchoolIntro($word=''){
-		$path  = 'school/'.$this->school.'/loadSchoolIntro';
+		$path  = '/open/school/'.$this->school.'/loadSchoolIntro';
 		$query = array('word'=>$word);
         $body['content'] = $this->result($path,$query);
         $body['cateName'] = '学校简介';
@@ -28,7 +28,7 @@ class ApiService extends BaseService
     }
     //机构设置
     public function loadSchoolOrgStruct($word=''){
-        $path  = 'school/'.$this->school.'/loadSchoolOrgStruct';
+        $path  = '/open/school/'.$this->school.'/loadSchoolOrgStruct';
         $query = array('word'=>$word);
         $body['content'] = $this->result($path,$query);
         $body['cateName'] = '机构设置';
@@ -36,27 +36,27 @@ class ApiService extends BaseService
     }
     //招生信息
     public function loadSchoolEnrollment($word){
-		$path  = 'school/'.$this->school.'/loadSchoolEnrollment';
+		$path  = '/open/school/'.$this->school.'/loadSchoolEnrollment';
 		$query = array('word'=>$word);
 		$body['content'] = $this->result($path,$query);
         $body['cateName'] = '招生信息';
 		return $body;
     }
-    //教师风采
+    //教师队伍
     public function loadTeacherPagePhoto($limit=9,$pageNo=1){
-    	$path = 'school/'.$this->school.'/loadTeacherPagePhoto';
-    	$query = array('pageNo'=>$pageNo,'limit'=>$limit);
+    	$path = 'spaceList/load';
+    	$query = array('anchor'=>$pageNo,'orgId'=>$this->school);
 		$body = $this->result($path,$query);
         foreach ($body['datas'] as &$value) {
             $value['url'] = "/open/apply/".$this->school."/teacherIntro/{$value['id']}";
-            $value['img'] = $this->url.'/'.$value['teacherPhotoUrl'];
+            $value['img'] = $this->url.'/'.$value['photoUrl'];
         }
         $body['cateName'] = '教师队伍';
 		return $body;
     }
     //老师简介
     public function teacherIntro($id){
-    	$path = 'school/'.$this->school.'/teacherIntro/ajax';
+    	$path = '/open/school/'.$this->school.'/teacherIntro/ajax';
     	$query = array('id'=>$id);
 		$body['content'] = $this->result($path,$query);
         $body['cateName'] = '教师简介';
@@ -66,11 +66,11 @@ class ApiService extends BaseService
    	type： 学校写真(TYPE_PHOTO),学校荣誉(TYPE_HONOUR)
     */
     public function loadSchoolPagePicture($type,$pageNo=1,$limit =9){
-    	$path = 'school/'.$this->school.'/loadSchoolPicturePage';
+    	$path = '/open/school/'.$this->school.'/loadSchoolPicturePage';
     	$query = array('type'=>$type,'pageNo'=>$pageNo,'limit'=>$limit);
 		$body = $this->result($path,$query);
         foreach ($body['datas'] as &$value) {
-            $value['img'] = $value['url'] = $this->url."/open/school/0/photo/index_school_picture/{$value['hash']}/{$value['id']}.jpg";
+            $value['img'] = $value['url'] = $this->url."/open/school/0/photo/{$value['hash']}/{$value['id']}.jpg";
         }
         $body['type'] = $type;
         switch ($type) {
@@ -98,10 +98,13 @@ class ApiService extends BaseService
         TYPE_POLICY//政策文件
     */
     public function loadInfo($type,$pageNo=1,$limit=6,$word=80){
-        $path = 'school/'.$this->school.'/loadInfo';
+        $path = '/open/school/'.$this->school.'/loadInfo';
         $query = array('type'=>$type,'pageNo'=>$pageNo,'limit'=>$limit,'word'=>$word);
         $body = $this->result($path,$query);
         foreach ($body['datas'] as &$value) {
+            if($type == 'TYPE_PHOTO_NEWS' || $type == 'TYPE_PHOTO_ACTIVITY'){
+                $value['img'] = $this->url."/attachment/photo/source/{$value['faceHash']}/{$value['faceId']}.jpg";
+            }
             $value['url'] = "/open/info/{$value['id']}";
         }
         $body['type'] = $type;
@@ -144,7 +147,7 @@ class ApiService extends BaseService
    }
     //内容页
     public function article($id){
-        $path = 'info/'.$id;
+        $path = '/open/info/'.$id;
         $query = array();
         $body = $this->result($path,$query);
         return $body;
@@ -152,7 +155,7 @@ class ApiService extends BaseService
 
     //通知公告
     public function loadRecentlyNotice($limit=6,$word=80){
-        $path = 'school/'.$this->school.'/loadRecentlyNotice';
+        $path = '/open/school/'.$this->school.'/loadRecentlyNotice';
         $query = array('limit'=>$limit,'word'=>$word);
         $body = $this->result($path,$query);
         foreach ($body as &$value) {
@@ -164,15 +167,20 @@ class ApiService extends BaseService
     }
     //通知详情
     public function noticeDetail($id){
-        $path = 'notice/'.$id;
+        $path = '/open/notice/'.$id;
         $query = array();
         $body = $this->result($path,$query);
+        if(!empty($body['atts'])){
+            foreach ($body['atts'] as &$value) {
+                $value['url'] = $this->url."/attachment/download/{$value['hash']}/{$value['id']}";
+            }
+        }
         return $body;
     }
 
     //每周食谱
     public function loadSchoolRecipes($limit=8,$pageNo=1){
-    	$path = 'school/'.$this->school.'/loadSchoolRecipe';
+    	$path = '/open/school/'.$this->school.'/loadSchoolRecipe';
     	$query = array('pageNo'=>$pageNo,'limit'=>$limit);
 		$body = $this->result($path,$query);
         foreach ($body['datas'] as &$value) {
@@ -183,7 +191,7 @@ class ApiService extends BaseService
     }
     //食谱内容
     public function recipeDetail($id){
-    	$path = 'school/'.$this->school.'/loadSchoolRecipeDetail';
+    	$path = '/open/school/'.$this->school.'/loadSchoolRecipeDetail';
     	$query = array('recipeId'=>$id);
     	$body = $this->result($path,$query);
     	return $body;

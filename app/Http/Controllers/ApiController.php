@@ -16,7 +16,7 @@ class ApiController extends Controller
 
 	public function index($school){
 		$this->api->school = $school;
-		$data = $this->api->loadSchoolIntro(120);
+		$data = $this->api->loadSchoolIntro(380);
 		return view($this->theme.'.index')->with(compact('data','school'));
 	}
 

@@ -1,5 +1,5 @@
 @extends('green.layouts')
-@section('title'){{$cateName}}@stop
+@section('title'){{$cateName}}-@stop
 @section('content')
 @include('green.sidebar')
 <div class="three_l zixun_left">
