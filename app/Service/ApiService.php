@@ -9,6 +9,7 @@ class ApiService extends BaseService
 	public function __construct(){
         $this->url = env('API_URL');
 		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL')]);  //api接口地址
+        $this->school = app('request')->segment(3);
 	}
     //基本信息
     public function loadSchoolInfo(){
@@ -43,7 +44,7 @@ class ApiService extends BaseService
 		return $body;
     }
     //教师队伍
-    public function loadTeacherPagePhoto($limit=9,$pageNo=1){
+    public function loadTeacherPagePhoto($limit=6,$pageNo=1){
     	$path = 'spaceList/load';
     	$query = array('anchor'=>$pageNo,'orgId'=>$this->school);
 		$body = $this->result($path,$query);
@@ -65,7 +66,7 @@ class ApiService extends BaseService
     /*
    	type： 学校写真(TYPE_PHOTO),学校荣誉(TYPE_HONOUR)
     */
-    public function loadSchoolPagePicture($type,$pageNo=1,$limit =9){
+    public function loadSchoolPagePicture($type,$pageNo=1,$limit=9){
     	$path = '/open/school/'.$this->school.'/loadSchoolPicturePage';
     	$query = array('type'=>$type,'pageNo'=>$pageNo,'limit'=>$limit);
 		$body = $this->result($path,$query);
@@ -105,7 +106,7 @@ class ApiService extends BaseService
             if($type == 'TYPE_PHOTO_NEWS' || $type == 'TYPE_PHOTO_ACTIVITY'){
                 $value['img'] = $this->url."/attachment/photo/source/{$value['faceHash']}/{$value['faceId']}.jpg";
             }
-            $value['url'] = "/open/info/{$value['id']}";
+            $value['url'] = "/open/apply/".$this->school."/info/{$value['id']}";
         }
         $body['type'] = $type;
         switch ($type) {
@@ -154,12 +155,12 @@ class ApiService extends BaseService
     }
 
     //通知公告
-    public function loadRecentlyNotice($limit=6,$word=80){
+    public function loadRecentlyNotice($limit=10,$word=80){
         $path = '/open/school/'.$this->school.'/loadRecentlyNotice';
         $query = array('limit'=>$limit,'word'=>$word);
         $body = $this->result($path,$query);
         foreach ($body as &$value) {
-            $value['url'] = "/open/noticeDetail/{$value['id']}";
+            $value['url'] = "/open/apply/".$this->school."/noticeDetail/{$value['id']}";
         }
         $data['datas'] = $body;
         $data['cateName'] = '学校通知';
@@ -175,11 +176,13 @@ class ApiService extends BaseService
                 $value['url'] = $this->url."/attachment/download/{$value['hash']}/{$value['id']}";
             }
         }
+        $body['typeCh'] = '学校通知';
+        $body['type'] = 'notice';
         return $body;
     }
 
     //每周食谱
-    public function loadSchoolRecipes($limit=8,$pageNo=1){
+    public function loadSchoolRecipes($limit=6,$pageNo=1){
     	$path = '/open/school/'.$this->school.'/loadSchoolRecipe';
     	$query = array('pageNo'=>$pageNo,'limit'=>$limit);
 		$body = $this->result($path,$query);
@@ -194,6 +197,8 @@ class ApiService extends BaseService
     	$path = '/open/school/'.$this->school.'/loadSchoolRecipeDetail';
     	$query = array('recipeId'=>$id);
     	$body = $this->result($path,$query);
+        $body['typeCh'] = '每周食谱';
+        $body['type'] = 'recipe';
     	return $body;
     }
     protected function result($path,$query){

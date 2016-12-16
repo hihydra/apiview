@@ -1,5 +1,5 @@
 @inject('apiPresenter','App\Presenters\ApiPresenter')
-@if ($info = $apiPresenter->info(32)) @endif
+@if ($info = $apiPresenter->info()) @endif
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,9 +13,14 @@
   <div class="top">
     <div class="logo">
       <ul>
-        <li><a href="#"><img src="{{$info['logoUrl']}}" /></a></li>
-        <li><a href="#"><img src="/assets/green/img/logo-z.png" /></a></li>
+        <li><a href="{{$info['webUrl']}}"><img src="{{$info['logoUrl']}}" /></a></li>
       </ul>
+      <div class="des">
+          <ul>
+            <li>{{$info['cvalue']}}</li><br>
+            <li>{{$info['tenet']}}</li>
+          </ul>
+      </div>
     </div>
     <div class="login">
       <ul>
@@ -25,7 +30,7 @@
       </ul>
     </div>
     <div class="nav">
-        {!!$apiPresenter->navList(32)!!}
+        <ul>{!!$apiPresenter->navList()!!}</ul>
     </div>
   </div>
 

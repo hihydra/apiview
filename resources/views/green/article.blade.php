@@ -1,9 +1,10 @@
 @extends('green.layouts')
+@section('title'){{{ $title or $startStr.'-'.$startStr.'食谱' }}} - {{$typeCh}} - @stop
 @section('content')
 @include('green.sidebar')
     <div class="three_l zixun_left">
     <div class="three_tit clearfix">
-      <h3 class="title_name"></h3>
+      <h3 class="title_name">{{$typeCh}}</h3>
     </div>
     <div class="three_con clearfix">
       <div class="profile clearfix">
@@ -11,7 +12,7 @@
       		@if(!empty($title))
    				<h3>{{$title}}</h3>
    				<p class="info">发布机构：{{$orgName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{$timeStr}}</p>
-	   		   @endif
+	   		  @endif
 	   		</div>
 	   		<div class="content">
           @if(!empty($atts))

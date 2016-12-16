@@ -1,9 +1,9 @@
 @inject('apiPresenter','App\Presenters\ApiPresenter')
-@if ($photos = $apiPresenter->photo($school,'TYPE_PHOTO',6)) @endif
-@if ($photoNews = $apiPresenter->intro($school,'TYPE_PHOTO_NEWS',6,50)) @endif
-@if ($news = $apiPresenter->intro($school,'TYPE_SCIENTIFIC_RESEARCH',6,80)) @endif
-@if ($teacherPhotos = $apiPresenter->teacherPhoto($school,6)) @endif
-@if ($kindsPhotos = $apiPresenter->intro($school,'TYPE_PHOTO_ACTIVITY',6,80)) @endif
+@if ($photos = $apiPresenter->photo('TYPE_PHOTO',6)) @endif
+@if ($photoNews = $apiPresenter->intro('TYPE_PHOTO_NEWS',6,50)) @endif
+@if ($news = $apiPresenter->intro('TYPE_SCIENTIFIC_RESEARCH',3,50)) @endif
+@if ($teacherPhotos = $apiPresenter->teacherPhoto(6)) @endif
+@if ($kindsPhotos = $apiPresenter->intro('TYPE_PHOTO_ACTIVITY',6,80)) @endif
 @extends('green.layouts')
 @section('content')
     <div class="fl_1">
@@ -21,7 +21,7 @@
     </div>
     <div class="fl_1 overview">
       <h2>园所简介&nbsp; | &nbsp;SCHOOL OVERVIEW</h2>
-      <p>{{$data['content']}}</p>
+      <p>{{$content}}</p>
     </div>
     <div class="clear"></div>
     <div class="fl_2">
@@ -31,7 +31,7 @@
         <li>
           <div class="ul-l"><img src="{{$photoNew['img']}}" width="137px" height="137px"/></div>
           <div class="ul-l notice">
-            <h2><a href="{{$photoNew['url']}}">{{$photoNew['title']}}</a></h2>
+            <h2><a href="{{$photoNew['url']}}">{!!mb_substr($photoNew['title'],0,20)!!}</a></h2>
             <p>{{$photoNew['reduced']}}</p>
           </div>
         </li>
@@ -55,7 +55,7 @@
         <li>
           <div class="ul-l ul-l-{{$key+1}}">&nbsp;</div>
           <div class="ul-l notice">
-            <h2><span>{{$new['timeStr']}}</span>{{$new['title']}}</h2>
+            <h2><span>{{$new['timeStr']}}</span><a href="{{$new['url']}}">{{$new['title']}}</a></h2>
             <p>{{$new['reduced']}}</p>
           </div>
         </li>
@@ -70,7 +70,7 @@
           <li>
               <a href="{{$kindsPhoto['url']}}"><img src="{{$kindsPhoto['img']}}" width="327px" height="327px" /></a>
               @if($key == 0)
-              <div class="z-1"><h2>{{$kindsPhoto['timeStr']}}</h2><p>{{$kindsPhoto['title']}}</p></div>
+              <div class="z-1"><h2>{{$kindsPhoto['timeStr']}}</h2><p>{!!mb_substr($kindsPhoto['title'],0,30)!!}</p></div>
               @endif
           </li>
         @endforeach

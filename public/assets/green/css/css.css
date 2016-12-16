@@ -17,6 +17,9 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .top{ height:132px; position:relative;}
 .logo{ height:70px; padding:13px 0 12px;}
 .logo ul li{ float:left;}
+.logo .des{float:left;margin:15px;color:#007a37;border-left:2px solid #007a37;}
+.logo .des ul{padding-left: 10px;}
+.logo .des ul li{padding-top: 5px;}
 .search{ background:url(../img/search-bg.png) no-repeat; width:266px; height:34px; position:absolute; left:570px; top:30px;}
 .j-input{ height:34px; line-height:34px; width:200px; border:none; background:none; margin-left:20px; margin-bottom:10px;}
 .j-label{ background:url(../img/search-btn.png) no-repeat; width:15px; height:15px; display:inline-block; margin-left:10px; margin-top:10px;}
@@ -77,7 +80,7 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .fl_5 .space .space-ul ul{ border:none; padding:0; margin-left:70px;}
 .fl_5 .space .space-ul ul li{ text-align:left; line-height:25px; width:100%;color:#515151; font-size:12px;}
 
-.crumbs{ height:20px; line-height:20px;}
+.crumbs{ height:40px; line-height:20px;}
 .crumbs ul li{ float:left;}
 .crumbs ul li a{ padding-left:20px; font-size:14px; background:url(../img/crumbs.png) no-repeat 4px 5px;}
 .crumbs ul li a:hover,.crumbs ul li a.hover{ color:#007a37;}

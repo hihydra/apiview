@@ -13,18 +13,17 @@ class ApiController extends Controller
 		$this->theme = env('THEME_STYLE');   //设置主题目录
 		$this->api = $api;
 	}
-
-	public function index($school){
-		$this->api->school = $school;
+	//首页
+	public function index(){
 		$data = $this->api->loadSchoolIntro(380);
-		return view($this->theme.'.index')->with(compact('data','school'));
+		return view($this->theme.'.index',$data);
 	}
 
 	//列表页
-	public function list(Request $request,$school,$cate){
-		$this->api->school = $school;
+	public function list(Request $request){
 		$page = $request->input('page',1);
-		switch ($cate) {
+		$type = $request->input('type');
+		switch ($type) {
 			case 'intro':
 				$data = $this->api->loadSchoolIntro();
 				return view($this->theme.'.content',$data);
@@ -34,24 +33,22 @@ class ApiController extends Controller
 				return view($this->theme.'.content',$data);
 				break;
 			case 'recipe':
-			    $data = $this->api->loadSchoolRecipes('10',$page);
+			    $data = $this->api->loadSchoolRecipes('',$page);
 				return view($this->theme.'.list',$data);
 				break;
 			case 'teacher':
-				$data = $this->api->loadTeacherPagePhoto('9',$page);
+				$data = $this->api->loadTeacherPagePhoto('',$page);
 				return view($this->theme.'.photo',$data);
 				break;
-			case 'photo':
-				$type = $request->input('type');
+			case 'TYPE_PHOTO': case 'TYPE_HONOUR':
 				$data = $this->api->loadSchoolPagePicture($type,$page);
 				return view($this->theme.'.photo',$data);
 				break;
 			case 'notice':
-				$data = $this->api->loadRecentlyNotice(10);
+				$data = $this->api->loadRecentlyNotice();
 				return view($this->theme.'.deslist',$data);
 				break;
-			case 'category':
-				$type = $request->input('type');
+			default:
 				$data = $this->api->loadInfo($type,$page);
 				return view($this->theme.'.deslist',$data);
 				break;
@@ -68,14 +65,12 @@ class ApiController extends Controller
 		return view($this->theme.'.article',$data);
 	}
 	//食谱内容
-	public function recipe($school,$id){
-		$this->api->school = $school;
+	public function recipe($id){
 		$data = $this->api->recipeDetail($id);
 		return view($this->theme.'.article',$data);
 	}
 	//教师简介
-	public function profiles($school,$id){
-		$this->api->school = $school;
+	public function profiles($id){
 		$data = $this->api->teacherIntro($id);
 		return view($this->theme.'.intro',$data);
 	}

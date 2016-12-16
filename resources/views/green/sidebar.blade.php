@@ -1,3 +1,15 @@
+<div class="crumbs">
+	<ul>
+	  <li><a class="no" href="#">首页</a></li>
+	  @if(empty($cateName))
+	  <li><a href="/open/apply/32/category?type={{$type}}">{{$typeCh}}</a></li>
+	  <li><a href="">{{{ $title or $startStr.'-'.$startStr.'食谱' }}}</a></li>
+	  @else
+	  <li><a href="">{{$cateName}}</a></li>
+	  @endif
+	</ul>
+</div>
+<div class="clear"></div>
 <div class="three_2">
   <h2>园所简介</h2>
   <ul>
