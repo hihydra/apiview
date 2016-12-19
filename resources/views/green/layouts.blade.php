@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>@yield('title'){{$info['name']}}</title>
 <link rel="stylesheet" type="text/css" href="/assets/green/css/css.css">
+@yield('css')
 <script type="text/javascript" src="/assets/green/js/jquery.min.js"></script>
 </head>
 

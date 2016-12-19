@@ -32,6 +32,10 @@ class ApiController extends Controller
 				$data = $this->api->loadSchoolOrgStruct();
 				return view($this->theme.'.content',$data);
 				break;
+			case 'enrollment':
+				$data = $this->api->loadSchoolEnrollment();
+				return view($this->theme.'.content',$data);
+				break;
 			case 'recipe':
 			    $data = $this->api->loadSchoolRecipes('',$page);
 				return view($this->theme.'.list',$data);
@@ -73,6 +77,15 @@ class ApiController extends Controller
 	public function profiles($id){
 		$data = $this->api->teacherIntro($id);
 		return view($this->theme.'.intro',$data);
+	}
+	//空间
+	public function space($id){
+		$data = $this->api->personal($id);
+		return view($this->theme.'.space',$data);
+	}
+	//登陆
+	public function login(){
+		return view($this->theme.'.login');
 	}
 
 }

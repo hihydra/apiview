@@ -8,7 +8,7 @@ class ApiService extends BaseService
 
 	public function __construct(){
         $this->url = env('API_URL');
-		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL')]);  //api接口地址
+		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL'),'cookies' => true]);  //api接口地址
         $this->school = app('request')->segment(3);
 	}
     //基本信息
@@ -37,15 +37,15 @@ class ApiService extends BaseService
         $body['type'] = 'orgStruct';
         return $body;
     }
-    /*/招生信息
-    public function loadSchoolEnrollment($word){
+    //招生信息
+    public function loadSchoolEnrollment($word=''){
 		$path  = '/open/school/'.$this->school.'/loadSchoolEnrollment';
 		$query = array('word'=>$word);
 		$body['content'] = $this->result($path,$query);
-        $body['cateName'] = '招生信息';
-        $body['type'] = config('category.survey.next.intro');
+        $body['typeCh'] = config('category.survey.next.enrollment');
+        $body['type'] = 'enrollment';
 		return $body;
-    }*/
+    }
     //教师队伍
     public function loadTeacherPagePhoto($limit=6,$pageNo=1){
     	$path = 'spaceList/load';
@@ -181,6 +181,14 @@ class ApiService extends BaseService
         $body['typeCh'] = config('category.interaction.next.recipe');
         $body['type'] = 'recipe';
     	return $body;
+    }
+    //教师信息
+    public function personal($id){
+        $path = '/personal/info/ajax';
+        $query = array('id'=>$id);
+        $body = $this->result($path,$query);
+        $body['img'] = $this->url.'/'.$body['photoUrl'];
+        return $body;
     }
     protected function result($path,$query){
     	$response = $this->client->request('GET',$path,['query'=>$query]);

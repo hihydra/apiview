@@ -86,6 +86,11 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .crumbs ul li a:hover,.crumbs ul li a.hover{ color:#007a37;}
 .crumbs ul li a.no{ background:none; padding:0; color:#515151;}
 
+span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:bold; color:#333; line-height:50px;}
+.pf_head {left:0px; top:30px;padding-bottom:20px;height: 123px;}
+.pf_head_pic {float: left; height: 120px;  border:1px solid #ddd;background:#fff;padding: 2px; position: relative; width: 120px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);}
+.pf_head_pic img{ width:120px; height:120px;}
+
 .three_2{ float:left;background:#fffbf7; margin-right:15px;}
 .three_2 h2{ background:#007a37; color:#fff; font-size:20px; font-weight:100; text-align:center; height:40px; line-height:40px;}
 .three_2 ul{ margin:5px 20px;  width:115px;}
@@ -93,7 +98,7 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .three_2 ul li a.hover{ color:#007a37;font-size: 19px;font-weight:bold;}
 .three_2 ul li{ border-bottom:1px solid #f6ece2; text-align:center;}
 .three_2 ul li.no{ border-bottom:none;}
-.three_l {width:832px;float: left;}
+.three_l {width:832px;float: left;min-height:500px;}
 .three_l .three_tit {border-bottom: 1px solid #d9d9d9; height:40px;/*width:577px;*/}/*2016-8-25*/
 .three_l .title_name {background: url(../img/btn-1.png) no-repeat; width: 138px;height: 40px;font-size: 20px;line-height: 40px;color: #fff;padding-left: 18px;float: left; margin:0; font-weight:100;}
 .three_l .title_span {float: left;font-size: 12px;color: #979fa6;background-color: #545f69;height: 30px;margin-top: 10px;line-height: 30px;padding: 0 15px;font-family: "lit";letter-spacing: 1px;}
@@ -231,3 +236,74 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .icon-Import-information{ background-position:-204px -148px;}
 .icon-Upload{ background-position:-176px -62px;}
 /*图标样式 结束*/
+
+
+
+.qz-poster textarea{overflow: visible; height: 55px; width:87%; float:left;    background: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04) inset;
+    border: 1px solid #d9d9d9;
+    font-size: 14px;
+    border-radius: 2px 0 0 2px;
+    height: 60px;
+    line-height: 20px;
+    padding: 3px 8px 5px;}
+.qz-poster input.Btn {
+    background: #56b463;
+    color: #fff;
+    font-size: 12px;
+    height: 70px;
+    width: 86px;
+    line-height: 25px;
+    padding: 0 8px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.control-inner {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.newMessage{
+	margin: 20px;
+}
+.messageCon {
+    clear: both;
+    color: #666;
+    display: block;
+}
+.pull-right {
+    float: right;
+}
+.list-inline > li {
+    display: inline-block;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 5px;
+    float: left;
+}
+.feedbacks > li {
+    color: #999;
+    font-size: 12px;
+    font-weight: normal;
+}
+a {
+	text-decoration: none;
+    color: #56b463;
+}
+.media .subMessage {
+    background: #f3f3f3;
+    padding: 7px;
+    margin-top: 10px;
+}
+.msgBox textarea {
+    border: 1px solid #ddd;
+    height: 40px;
+    resize: none;
+    width: 99%;
+
+}

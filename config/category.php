@@ -5,6 +5,7 @@ return [
 		'next' => [
 			'intro' 		                =>  '学校简介',
 	        'orgStruct'                     =>  '机构设置',
+	        'enrollment'                    =>  '招生信息',
 	        'teacher'     	                =>  '教师队伍',
 	        'TYPE_HONOUR'                   =>  '学校荣誉',
 	        'TYPE_PHOTO'                    =>  '校园写真',
@@ -41,4 +42,13 @@ return [
 		    'email'                         =>  '园长信箱',
 		]
 	],
+	'space' => [
+		'name' => '空间管理',
+		'next' => [
+			'teacherSpace'                  =>  '教师空间',
+			'parentSpace'                   =>  '家长空间',
+			'childEvaluation'               =>  '幼儿评测',
+			'teacherWrote'                  =>  '教师寄语',
+		]
+	]
 ];
