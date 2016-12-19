@@ -66,7 +66,7 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .fl_4 ul li a img{width:327px; height:327px;}
 .fl_4 ul li .z-1{ position:absolute; background:url(../img/img-m.png) repeat; height:247px; width:247px; left:0; top:0; padding:40px;}
 .fl_4 ul li .z-1 h2{ color:#fff; padding-bottom:20px; padding-top:30px;}
-.fl_4 ul li .z-1 p{ color:#fff; font-size:24px; line-height:45px;}
+.fl_4 ul li .z-1 p a{ color:#fff; font-size:24px; line-height:45px;}
 .fl_4 ul li.li-2{ padding-right:0;}
 
 .fl_5 .space{ background:url(../img/free-bg.png) repeat; width:96%; padding:10px 20px;}
@@ -90,7 +90,7 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .three_2 h2{ background:#007a37; color:#fff; font-size:20px; font-weight:100; text-align:center; height:40px; line-height:40px;}
 .three_2 ul{ margin:5px 20px;  width:115px;}
 .three_2 ul li a{ font-size:16px; color:#666666; height:50px; line-height:50px;}
-.three_2 ul li a.hover{ color:#007a37;}
+.three_2 ul li a.hover{ color:#007a37;font-size: 19px;font-weight:bold;}
 .three_2 ul li{ border-bottom:1px solid #f6ece2; text-align:center;}
 .three_2 ul li.no{ border-bottom:none;}
 .three_l {width:832px;float: left;}
@@ -132,8 +132,8 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 
 .nav ul li ul{display: none}
 .nav ul li:hover ul{display: block;position: absolute;}
-.nav ul li:hover ul li a{width:55px;display:block;background:#fff;color:#007a37;text-align: center;border: 1px solid #f2f2f2;}
-.nav ul li:hover ul li a:hover{background:#007a37;color:#fff;}
+.nav ul li:hover ul li a{width:60px;display:block;background:#fff;color:#007a37;text-align: center;border: 1px solid #f2f2f2;}
+.nav ul li:hover ul li a:hover,.nav ul li:hover ul li a.hover{background:#007a37;color:#fff;}
 
 .callbacks_container{margin-bottom: 50px;position: relative;float: left;width: 100%;z-index:-1;}
 .callbacks{position: relative;list-style: none;overflow: hidden;width: 100%;padding: 0;margin: 0;}

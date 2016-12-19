@@ -15,7 +15,7 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('index','ApiController@index');
 	$app->get('recipe/{id}', 'ApiController@recipe');
 	$app->get('teacherIntro/{id}', 'ApiController@profiles');
-	$app->get('category','ApiController@list');
+	$app->get('category','ApiController@category');
 	$app->get('info/{id}', 'ApiController@article');
 	$app->get('noticeDetail/{id}', 'ApiController@noticeDetail');
 });

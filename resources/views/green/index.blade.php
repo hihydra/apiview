@@ -70,7 +70,7 @@
           <li>
               <a href="{{$kindsPhoto['url']}}"><img src="{{$kindsPhoto['img']}}" width="327px" height="327px" /></a>
               @if($key == 0)
-              <div class="z-1"><h2>{{$kindsPhoto['timeStr']}}</h2><p>{!!mb_substr($kindsPhoto['title'],0,30)!!}</p></div>
+              <div class="z-1"><h2>{{$kindsPhoto['timeStr']}}</h2><p><a href="{{$kindsPhoto['url']}}">{!!mb_substr($kindsPhoto['title'],0,30)!!}</a></p></div>
               @endif
           </li>
         @endforeach

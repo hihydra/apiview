@@ -20,7 +20,7 @@ class ApiController extends Controller
 	}
 
 	//列表页
-	public function list(Request $request){
+	public function category(Request $request){
 		$page = $request->input('page',1);
 		$type = $request->input('type');
 		switch ($type) {

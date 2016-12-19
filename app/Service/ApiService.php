@@ -24,7 +24,8 @@ class ApiService extends BaseService
 		$path  = '/open/school/'.$this->school.'/loadSchoolIntro';
 		$query = array('word'=>$word);
         $body['content'] = $this->result($path,$query);
-        $body['cateName'] = '学校简介';
+        $body['typeCh'] = config('category.survey.next.intro');
+        $body['type'] = 'intro';
 		return $body;
     }
     //机构设置
@@ -32,17 +33,19 @@ class ApiService extends BaseService
         $path  = '/open/school/'.$this->school.'/loadSchoolOrgStruct';
         $query = array('word'=>$word);
         $body['content'] = $this->result($path,$query);
-        $body['cateName'] = '机构设置';
+        $body['typeCh'] = config('category.survey.next.orgStruct');
+        $body['type'] = 'orgStruct';
         return $body;
     }
-    //招生信息
+    /*/招生信息
     public function loadSchoolEnrollment($word){
 		$path  = '/open/school/'.$this->school.'/loadSchoolEnrollment';
 		$query = array('word'=>$word);
 		$body['content'] = $this->result($path,$query);
         $body['cateName'] = '招生信息';
+        $body['type'] = config('category.survey.next.intro');
 		return $body;
-    }
+    }*/
     //教师队伍
     public function loadTeacherPagePhoto($limit=6,$pageNo=1){
     	$path = 'spaceList/load';
@@ -52,9 +55,11 @@ class ApiService extends BaseService
             $value['url'] = "/open/apply/".$this->school."/teacherIntro/{$value['id']}";
             $value['img'] = $this->url.'/'.$value['photoUrl'];
         }
-        $body['cateName'] = '教师队伍';
+        $body['typeCh'] = config('category.survey.next.teacher');
+        $body['type'] = 'teacher';
 		return $body;
     }
+    /*
     //老师简介
     public function teacherIntro($id){
     	$path = '/open/school/'.$this->school.'/teacherIntro/ajax';
@@ -62,7 +67,7 @@ class ApiService extends BaseService
 		$body['content'] = $this->result($path,$query);
         $body['cateName'] = '教师简介';
 		return $body;
-    }
+    }*/
     /*
    	type： 学校写真(TYPE_PHOTO),学校荣誉(TYPE_HONOUR)
     */
@@ -74,14 +79,7 @@ class ApiService extends BaseService
             $value['img'] = $value['url'] = $this->url."/open/school/0/photo/{$value['hash']}/{$value['id']}.jpg";
         }
         $body['type'] = $type;
-        switch ($type) {
-            case 'TYPE_PHOTO':
-                $body['cateName'] = '校园写真';
-                break;
-            case 'TYPE_HONOUR':
-                $body['cateName'] = '学校荣誉';
-                break;
-        }
+        $body['typeCh'] = config('category.survey.next.'.$type);
 		return $body;
     }
     /*列表页
@@ -110,38 +108,19 @@ class ApiService extends BaseService
         }
         $body['type'] = $type;
         switch ($type) {
-            case 'TYPE_PHOTO_NEWS':
-                $body['cateName'] = '动态新闻';
-                break;
             case 'TYPE_PHOTO_ACTIVITY':
-                $body['cateName'] = '活动图片';
+                $body['typeCh'] = config('category.survey.next.'.$type);
                 break;
-            case 'TYPE_DEVELOPMENT_PLANNING':
-                $body['cateName'] = '发展计划';
+            case 'TYPE_NEWS':case 'TYPE_PHOTO_NEWS':case 'TYPE_DEVELOPMENT_PLANNING':
+            case 'TYPE_POLICY':case 'TYPE_HOT_TOPICS':
+                $body['typeCh'] = config('category.information.next.'.$type);
                 break;
-            case 'TYPE_HOT_TOPICS':
-                $body['cateName'] = '热点专题';
-                break;
-            case 'TYPE_ACADEMIC_ARRANGEMENT':
-                $body['cateName'] = '教务安排';
-                break;
-            case 'TYPE_SPECIAL_PROGRAMS':
-                $body['cateName'] = '特色课程';
-                break;
-            case 'TYPE_TEACHING_RESULTS':
-                $body['cateName'] = '教学成果';
-                break;
+            case 'TYPE_ACADEMIC_ARRANGEMENT':case 'TYPE_SPECIAL_PROGRAMS':case 'TYPE_TEACHING_RESULTS':
             case 'TYPE_SCIENTIFIC_RESEARCH':
-                $body['cateName'] = '科研课题';
+                $body['typeCh'] = config('category.teaching.next.'.$type);
                 break;
-            case 'TYPE_NEWS':
-                $body['cateName'] = '公示公告';
-                break;
-            case 'TYPE_POLICY':
-                $body['cateName'] = '政策法规';
-                break;
-            case 'TYPE_FAMILY_EDUCATION':
-                $body['cateName'] = '家庭教育';
+            case 'TYPE_PHOTO_ACTIVITY':case 'TYPE_FAMILY_EDUCATION':
+                $body['typeCh'] = config('category.interaction.next.'.$type);
                 break;
         }
         return $body;
@@ -163,7 +142,8 @@ class ApiService extends BaseService
             $value['url'] = "/open/apply/".$this->school."/noticeDetail/{$value['id']}";
         }
         $data['datas'] = $body;
-        $data['cateName'] = '学校通知';
+        $data['typeCh'] = config('category.interaction.next.notice');
+        $data['type'] = 'notice';
         return $data;
     }
     //通知详情
@@ -176,7 +156,7 @@ class ApiService extends BaseService
                 $value['url'] = $this->url."/attachment/download/{$value['hash']}/{$value['id']}";
             }
         }
-        $body['typeCh'] = '学校通知';
+        $body['typeCh'] = config('category.interaction.next.notice');
         $body['type'] = 'notice';
         return $body;
     }
@@ -189,7 +169,8 @@ class ApiService extends BaseService
         foreach ($body['datas'] as &$value) {
             $value['url'] = "/open/apply/".$this->school."/recipe/{$value['id']}";
         }
-        $body['cateName'] = '每周食谱';
+        $body['typeCh'] = config('category.interaction.next.recipe');
+        $body['type'] = 'recipe';
 		return $body;
     }
     //食谱内容
@@ -197,7 +178,7 @@ class ApiService extends BaseService
     	$path = '/open/school/'.$this->school.'/loadSchoolRecipeDetail';
     	$query = array('recipeId'=>$id);
     	$body = $this->result($path,$query);
-        $body['typeCh'] = '每周食谱';
+        $body['typeCh'] = config('category.interaction.next.recipe');
         $body['type'] = 'recipe';
     	return $body;
     }

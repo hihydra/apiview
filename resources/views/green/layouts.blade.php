@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>@yield('title'){{$info['name']}}</title>
 <link rel="stylesheet" type="text/css" href="/assets/green/css/css.css">
+<script type="text/javascript" src="/assets/green/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -83,12 +84,7 @@
 
 </div>
 <div class="foot-bg"></div>
-<script type="text/javascript" src="/assets/green/js/jquery.min.js"></script>
-<script type="text/javascript">
-  //导航高亮
-  var urlstr = window.location.pathname;
-  $(".nav").find("a[href='" + urlstr+ "']").addClass("hover");
-</script>
+
 @yield('script')
 </body>
 </html>

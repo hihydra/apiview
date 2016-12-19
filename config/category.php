@@ -8,6 +8,7 @@ return [
 	        'teacher'     	                =>  '教师队伍',
 	        'TYPE_HONOUR'                   =>  '学校荣誉',
 	        'TYPE_PHOTO'                    =>  '校园写真',
+	        'TYPE_PHOTO_ACTIVITY'           =>  '校园活动',
 		]
 	],
 	'information' => [
@@ -35,6 +36,9 @@ return [
 		'next' => [
 		    'notice'                        =>  '学校通知',
 		    'TYPE_FAMILY_EDUCATION'         =>  '家庭教育',
+		    'recipe'						=>  '每周食谱',
+		    'lunt'						    =>  '家校论坛',
+		    'email'                         =>  '园长信箱',
 		]
 	],
 ];

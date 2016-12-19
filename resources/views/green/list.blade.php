@@ -1,10 +1,10 @@
 @extends('green.layouts')
-@section('title'){{$cateName}}-@stop
+@section('title'){{$typeCh}}-@stop
 @section('content')
 @include('green.sidebar')
 <div class="three_l zixun_left">
 	<div class="three_tit clearfix">
-		<h3 class="title_name">{{$cateName}}</h3>
+		<h3 class="title_name">{{$typeCh}}</h3>
 	</div>
 	<div class="three_con clearfix">
 		@if(!empty($datas))
@@ -34,7 +34,7 @@
 			@include('vendor.pagination')
 		</div>
 		@else
-		暂时没有{{$cateName}}哟
+		暂时没有{{$typeCh}}哟
 		@endif
 	</div>
 </div>

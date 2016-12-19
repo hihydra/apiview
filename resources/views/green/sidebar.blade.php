@@ -1,22 +1,21 @@
+@inject('apiPresenter','App\Presenters\ApiPresenter')
 <div class="crumbs">
 	<ul>
-	  <li><a class="no" href="#">首页</a></li>
-	  @if(empty($cateName))
-	  <li><a href="/open/apply/32/category?type={{$type}}">{{$typeCh}}</a></li>
+	  {!!$apiPresenter->nav($type,$typeCh)!!}
+	  @if(!empty($title)||!empty($startStr))
 	  <li><a href="">{{{ $title or $startStr.'-'.$startStr.'食谱' }}}</a></li>
-	  @else
-	  <li><a href="">{{$cateName}}</a></li>
 	  @endif
 	</ul>
 </div>
 <div class="clear"></div>
 <div class="three_2">
-  <h2>园所简介</h2>
-  <ul>
-    <li><a href="#">公示公告</a></li>
-    <li><a href="#">动态新闻</a></li>
-    <li><a href="#">发展计划</a></li>
-    <li><a href="#">热点专题</a></li>
-    <li class="no"><a href="#">政策法规</a></li>
-  </ul>
+{!!$apiPresenter->sidebar($type)!!}
 </div>
+<script type="text/javascript">
+  //导航高亮
+  $(".nav").find("a[class='hover']").removeClass();
+  var nav = $(".nav").find("[href$='{{$type}}']");
+  nav.parent().parent().parent().find('a:first').addClass("hover");
+  nav.addClass("hover");
+  $(".three_2").find("a[href$='{{$type}}']").addClass("hover");
+</script>
