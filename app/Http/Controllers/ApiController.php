@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service\ApiService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class ApiController extends Controller
 {
@@ -84,8 +86,20 @@ class ApiController extends Controller
 		return view($this->theme.'.space',$data);
 	}
 	//登陆
-	public function login(){
-		return view($this->theme.'.login');
+	public function login(Request $request){
+		$school = $this->api->school;
+		if($request->isMethod('post')){
+			$username = $request->input('username');
+			$password = $request->input('password');
+			$data = $this->api->login_in($username,$password);
+			if (empty($data['retCode'])) {
+				$_SESSION['userId']=1111;
+				return $_SESSION['userId'];
+				return redirect('/open/apply/'.$this->api->school.'/index');
+			}else{
+				return view($this->theme.'.login',compact('school','data'));
+			}
+		}
+		return view($this->theme.'.login',compact('school'));
 	}
-
 }

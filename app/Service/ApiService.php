@@ -190,8 +190,22 @@ class ApiService extends BaseService
         $body['img'] = $this->url.'/'.$body['photoUrl'];
         return $body;
     }
-    protected function result($path,$query){
-    	$response = $this->client->request('GET',$path,['query'=>$query]);
+    //登陆
+    public function login_in($username,$password){
+        $path = '/login_in';
+        $query = array('username'=>$username,'password'=>$password);
+        $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+    //教师动态
+    public function teacherSpace($id,$pageNo){
+        $path = '/personal/info/ajax';
+        $query = array('id'=>$id,'pageNo'=>$pageNo);
+        $body = $this->result($path,$query);
+        return $body;
+    }
+    protected function result($path,$query,$mothod="GET"){
+    	$response = $this->client->request($mothod,$path,['query'=>$query]);
     	if ($response->getStatusCode() == 200) {
 			$body = json_decode($response->getbody(),true);
 			if ($body['retCode'] == 100000) {
@@ -201,7 +215,7 @@ class ApiService extends BaseService
                     return "";
                 }
 			}else{
-			   abort(404,$body['message']);
+			   return $body;
 			}
 		}else{
 			abort(404);

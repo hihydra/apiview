@@ -20,4 +20,6 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('noticeDetail/{id}', 'ApiController@noticeDetail');
 	$app->get('login','ApiController@login');
 	$app->get('space/{id}','ApiController@space');
+	$app->post('login','ApiController@login');
 });
+

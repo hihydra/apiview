@@ -47,8 +47,6 @@ return [
 		'next' => [
 			'teacherSpace'                  =>  '教师空间',
 			'parentSpace'                   =>  '家长空间',
-			'childEvaluation'               =>  '幼儿评测',
-			'teacherWrote'                  =>  '教师寄语',
 		]
 	]
 ];

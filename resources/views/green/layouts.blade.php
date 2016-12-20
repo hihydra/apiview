@@ -26,7 +26,7 @@
     </div>
     <div class="login">
       <ul>
-        <li><a href="#">登录</a></li>
+        <li><a href="{{ url('/open/apply/'.$info['id'].'/login') }}">登录</a></li>
         <li>|</li>
         <li><a href="#">找回密码</a></li>
       </ul>

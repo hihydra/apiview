@@ -8,15 +8,12 @@
     </div>
     <div class="three_con clearfix">
     @if(!empty($datas))
-        <div class="profile clearfix">
+        <div class="profile clearfix photo">
            <ul>
            @foreach ($datas as $photo)
              <li>
-               <a href="{{$photo['url']}}"><img src="{{$photo['img']}}" width="248px" height="132px" /></a>
-               <div class="li-a-div">
-                 <div class="right"><span>{{$photo['name']}}</span></div>
-                 <div class="left">{{$typeCh}}</div>
-               </div>
+                <img src="{{$photo['img']}}" />
+               <a href="{{$photo['url']}}">{{$photo['name']}}</a>
              </li>
             @endforeach
            </ul>
