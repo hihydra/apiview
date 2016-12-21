@@ -182,7 +182,7 @@ class ApiService extends BaseService
         $body['type'] = 'recipe';
     	return $body;
     }
-    //教师信息
+    //用户信息
     public function personal($id){
         $path = '/personal/info/ajax';
         $query = array('id'=>$id);
@@ -198,9 +198,16 @@ class ApiService extends BaseService
         return $body;
     }
     //教师动态
-    public function teacherSpace($id,$pageNo){
-        $path = '/personal/info/ajax';
-        $query = array('id'=>$id,'pageNo'=>$pageNo);
+    public function teacherSpace($id,$anchor=""){
+        $path = '/task/teacherSpace/load';
+        $query = array('teacherId'=>$id,'anchor'=>$anchor);
+        $body = $this->result($path,$query);
+        return $body;
+    }
+    //动态评论
+    public function loadComments($id,$anchor=""){
+        $path = '/task/teacherSpace/loadComments';
+        $query = array('spaceId'=>$id,'anchor'=>$anchor);
         $body = $this->result($path,$query);
         return $body;
     }

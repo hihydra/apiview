@@ -36,9 +36,6 @@
             <input type="password" name="password" placeholder="您的密码">
           </div>
           <div class="loginFormCheck">
-            <div class="forgetPwdLine">
-              <a title="找回密码" href="#" class="forgetPwd">忘记密码了?</a>
-            </div>
             <label><input type="checkbox" name="rememberMe" value="true">记住我</label>
             <div class="clearfix"></div>
           </div>

@@ -18,8 +18,11 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('category','ApiController@category');
 	$app->get('info/{id}', 'ApiController@article');
 	$app->get('noticeDetail/{id}', 'ApiController@noticeDetail');
-	$app->get('login','ApiController@login');
 	$app->get('space/{id}','ApiController@space');
-	$app->post('login','ApiController@login');
-});
+	$app->get('teacherSpace/{id}','ApiController@teacherSpace');
 
+
+	$app->get('login','LoginController@login');
+	$app->post('login','LoginController@login');
+	$app->get('loginOut','LoginController@loginOut');
+});

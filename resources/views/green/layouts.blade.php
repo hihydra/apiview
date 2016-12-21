@@ -24,13 +24,21 @@
           </ul>
       </div>
     </div>
+    @if(isset($_SESSION['userId']))
+    <div class="login">
+      <ul>
+        <li><a href="{!!env('API_URL').'/index'!!}">管理</a></li>
+        <li>|</li>
+        <li><a href="{{ url('/open/apply/'.$info['id'].'/loginOut') }}">退出</a></li>
+      </ul>
+    </div>
+    @else
     <div class="login">
       <ul>
         <li><a href="{{ url('/open/apply/'.$info['id'].'/login') }}">登录</a></li>
-        <li>|</li>
-        <li><a href="#">找回密码</a></li>
       </ul>
     </div>
+    @endif
     <div class="nav">
         <ul>{!!$apiPresenter->navList()!!}</ul>
     </div>

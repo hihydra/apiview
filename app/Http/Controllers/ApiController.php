@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service\ApiService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 
 class ApiController extends Controller
 {
@@ -85,21 +83,47 @@ class ApiController extends Controller
 		$data = $this->api->personal($id);
 		return view($this->theme.'.space',$data);
 	}
-	//登陆
-	public function login(Request $request){
-		$school = $this->api->school;
-		if($request->isMethod('post')){
-			$username = $request->input('username');
-			$password = $request->input('password');
-			$data = $this->api->login_in($username,$password);
-			if (empty($data['retCode'])) {
-				$_SESSION['userId']=1111;
-				return $_SESSION['userId'];
-				return redirect('/open/apply/'.$this->api->school.'/index');
-			}else{
-				return view($this->theme.'.login',compact('school','data'));
-			}
+	//空间动态
+	public function teacherSpace(Request $request,$id){
+		$anchor = $request->input('anchor','');
+		$data = $this->api->teacherSpace($id,$anchor);
+		/*
+		$html = "";
+		foreach ($data['datas'] as $key => $value) {
+		$html .= <<<Eof
+		<div class="control-inner" style="height:0px;"></div>
+		    <div class="media newMessage">
+				<div class="media-body">
+				    <p class="messageCon">{$value['c']}</p>
+				        <h4 class="media-heading">
+				            <ul class="feedbacks pull-right list-inline">
+				                <li><a>删除</a></li>
+				                <li>|</li>
+				                <li><a>赞</a> (<span>{$value['lc']}</span>)</li>
+				                <li>|</li>
+				                <li><a>评论</a>({$value['cc']})
+				                </li>
+				            </ul>
+				            <ul class="feedbacks pull-left list-inline">
+				                <li>{$value['timeStr']}</li>
+				            </ul>
+				        </h4>
+				</div>
+		    </div>
+		</div>
+Eof;
 		}
-		return view($this->theme.'.login',compact('school'));
+		if($data['hasMore']){
+			$html .= '<button id="hasMore" value="'.$data['anchor'].'">点击加载更多</button>';
+		}
+		$data['datas'] = $html;
+		*/
+		return $data;
+	}
+	//空间动态评论
+	public function loadComments(Request $request,$id){
+		$anchor = $request->input('anchor','');
+		$data = $this->api->teacherSpace($id,$anchor);
+		return $data;
 	}
 }
