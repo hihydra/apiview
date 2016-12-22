@@ -8,7 +8,7 @@ class ApiService extends BaseService
 
 	public function __construct(){
         $this->url = env('API_URL');
-		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL'),'cookies' => true]);  //api接口地址
+		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL')]);  //api接口地址
         $this->school = app('request')->segment(3);
 	}
     //基本信息
@@ -194,13 +194,14 @@ class ApiService extends BaseService
     public function login_in($username,$password){
         $path = '/login_in';
         $query = array('username'=>$username,'password'=>$password);
-        $body = $this->result($path,$query,'POST');
+        $body = $this->result($path,$query,'POST',true);
         return $body;
     }
     //教师动态
-    public function teacherSpace($id,$anchor=""){
-        $path = '/task/teacherSpace/load';
-        $query = array('teacherId'=>$id,'anchor'=>$anchor);
+    public function teacherSpace($id,$pageNo=""){
+        $path = '/teacherSpace/load';
+        $query = array('teacherId'=>$id,'pageNo'=>$pageNo,
+                'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
         $body = $this->result($path,$query);
         return $body;
     }
@@ -211,15 +212,65 @@ class ApiService extends BaseService
         $body = $this->result($path,$query);
         return $body;
     }
-    protected function result($path,$query,$mothod="GET"){
+    //发布动态
+    public function doAddteacherSpace($c,$fname='',$fid='',$ftype=''){
+        $path = "/task/teacherSpace/add";
+        $query = array('c'=>$c,'fname'=>$fname,'fid'=>$fid,'ftype'=>$ftype,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+    //删除动态
+    public function doDelTeacherSpace($id){
+        $path = "/task/teacherSpace/del";
+        $query = array('id'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+    //点赞
+    public function doLike($id){
+        $path = "/task/teacherSpace/addLike";
+        $query = array('spaceId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+    //取消赞
+    public function doCancelLike($id){
+        $path = "/task/teacherSpace/cancelLike";
+        $query = array('spaceId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+    //添加评论
+    public function addComment($id,$c){
+        $path = "/task/teacherSpace/addComment";
+        $query = array('c'=>$c,'spaceId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+    //删除评论
+    public function delComment($id){
+        $path = "/task/teacherSpace/delComment";
+        $query = array('commentId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+    protected function result($path,$query,$mothod="GET",$cookie=false){
     	$response = $this->client->request($mothod,$path,['query'=>$query]);
+        if ($cookie) {
+            $headers = $response->getHeaders();
+            foreach ($headers['Set-Cookie'] as $key => &$value) {
+                $value = preg_replace('/;.*/','',$value);
+                $str = explode('=',$value);
+                setcookie($str[0],$str[1]);
+            }
+        }
     	if ($response->getStatusCode() == 200) {
 			$body = json_decode($response->getbody(),true);
 			if ($body['retCode'] == 100000) {
 				if(!empty($body['data'])){
                     return $body['data'];
                 }else{
-                    return "";
+                    return $body;
                 }
 			}else{
 			   return $body;

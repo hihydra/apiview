@@ -50,5 +50,21 @@
 
 @section('script')
 <script type="text/javascript">
+$(document).ready(function(){
+  var pageNo = '';
+  var methods = {
+    get_data: function() {
+        $.ajax({url: "http://111.47.13.92:9004/login_in",
+          data:{username:'12345678911',password:'ls123456'},
+          type: 'post',
+          dataType: 'JSON',
+          error: function(){},
+          success: function(data){
+          }
+        });
+      },
+  };
+  methods.get_data();
+});
 </script>
 @stop

@@ -290,11 +290,33 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .btn1{border-radius:3px; cursor:pointer; display:block; height:38px; outline:0 none; padding:0; text-align:center; vertical-align:baseline; width:300px;}
 /*登陆结束*/
 
-#waitbox,#get_more{font-size: 14px;text-align:center;cursor:pointer;color:#56b463;}
+#waitbox,#get_more{font-size: 14px;text-align:center;cursor:pointer;color:#56b463;padding-top: 5px;}
 
+/*输入框 开始*/
 .qz-poster textarea{overflow: visible;height: 55px;width:87%;float:left;background: #fff;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04) inset;border: 1px solid #d9d9d9;font-size: 14px;border-radius: 2px 0 0 2px;height: 60px;line-height: 20px;padding: 3px 8px 5px;}
 .qz-poster input.Btn{background: #56b463;color: #fff;font-size: 12px;height: 70px;width: 86px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;border-radius: 2px;}
-.control-inner{height: 40px;line-height: 40px;border-bottom: 1px solid #ddd;padding-top: 20px;}
+.qz-poster { margin-bottom: 12px; padding-top:35px; background:url(../img/news.png) no-repeat;}
+.qz-poster-inner { position: relative;}
+.qz-poster-bd { display:block; z-index:3; position:relative; zoom:1;}
+.qz-poster .qz-inputer { background-color: #fff; border-color: #d9d9d9;}
+.qz-poster-bd textarea { background:#fff; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04) inset; border:1px solid #d9d9d9; font-size: 14px; border-radius:2px 0 0 2px; height: 60px; line-height: 20px; padding: 3px 8px 5px;}
+.qz-poster .pop-drop li { height: 68px;}
+.qz-poster .cell-8 { width: 197px;}
+.qz-poster-ft{ height:35px; line-height:35px;}
+.qz-poster-ft a{ padding-right:5px; color:#333;}
+.qz-poster-ft a i{ display:inline-block; padding-right:2px;}
+.post-img{ margin:10px 0;}
+.post-img img{ max-height:80px; width:100%;}
+
+.control-inner{ height:40px; line-height:40px; border-bottom:1px solid #ddd;}
+.left-form{ position:relative;}
+.photo-input{ position:absolute; left:50px; top:0; height:35px; width:50px; cursor:pointer; opacity:0;filter: alpha(opacity=0);}
+.seleJs-1 input.update-input{filter: alpha(opacity=0); position:absolute; left:0; top:0;}
+.File-input{ position:absolute; left:0px; top:0; height:35px; width:50px; cursor:pointer; opacity:0;filter: alpha(opacity=0);}/*2015-7-31*/
+/*输入框 结束*/
+
+
+.control-inner{height: 40px;line-height: 40px;border-bottom: 1px solid #ddd;}
 .newMessage{margin: 20px;}
 .messageCon{clear: both;color: #666;display: block;line-height: 25px;font-size: 14px;}
 .pull-right{float: right;}
@@ -306,8 +328,7 @@ a{text-decoration: none;color: #56b463;}
 .media .subMessage{background: #f3f3f3;padding: 7px;overflow: auto;}
 .subMessage{line-height: 22px;font-size: 14px;}
 .subMessage .media-body p{float:left;width:10%;}
-.subMessage .media-body .col-sm-12 p{float:left;width:80%;}
-.subMessage .media-body .col-sm-12 p ll{font-size: 13px;}
+.subMessage .media-body .col-sm-12 p{float:left;width:80%;font-size: 12.5px;color: #666;}
 .msgBox textarea{border: 1px solid #ddd;height: 40px;resize: none;width: 99%;}
 .media-review{background: #f3f3f3;padding:0 10px 10px;}
 .media-review .subMessage{border-bottom:1px dotted #ccc;padding:10px 0 7px;width:auto;}

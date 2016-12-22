@@ -18,11 +18,19 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('category','ApiController@category');
 	$app->get('info/{id}', 'ApiController@article');
 	$app->get('noticeDetail/{id}', 'ApiController@noticeDetail');
-	$app->get('space/{id}','ApiController@space');
-	$app->get('teacherSpace/{id}','ApiController@teacherSpace');
 
+
+	$app->get('space/load','SpaceController@load');
+	$app->post('space/add','SpaceController@doAddteacherSpace');
+	$app->post('space/del','SpaceController@doDelTeacherSpace');
+	$app->post('space/doLike','SpaceController@doLike');
+	$app->post('space/doCancelLike','SpaceController@doCancelLike');
+	$app->post('space/addComment','SpaceController@addComment');
+	$app->post('space/delComment','SpaceController@delComment');
+	$app->get('space/{id}','SpaceController@space');
 
 	$app->get('login','LoginController@login');
 	$app->post('login','LoginController@login');
 	$app->get('loginOut','LoginController@loginOut');
 });
+

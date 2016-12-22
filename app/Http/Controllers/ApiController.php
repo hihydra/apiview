@@ -78,52 +78,5 @@ class ApiController extends Controller
 		$data = $this->api->teacherIntro($id);
 		return view($this->theme.'.intro',$data);
 	}
-	//空间
-	public function space($id){
-		$data = $this->api->personal($id);
-		return view($this->theme.'.space',$data);
-	}
-	//空间动态
-	public function teacherSpace(Request $request,$id){
-		$anchor = $request->input('anchor','');
-		$data = $this->api->teacherSpace($id,$anchor);
-		/*
-		$html = "";
-		foreach ($data['datas'] as $key => $value) {
-		$html .= <<<Eof
-		<div class="control-inner" style="height:0px;"></div>
-		    <div class="media newMessage">
-				<div class="media-body">
-				    <p class="messageCon">{$value['c']}</p>
-				        <h4 class="media-heading">
-				            <ul class="feedbacks pull-right list-inline">
-				                <li><a>删除</a></li>
-				                <li>|</li>
-				                <li><a>赞</a> (<span>{$value['lc']}</span>)</li>
-				                <li>|</li>
-				                <li><a>评论</a>({$value['cc']})
-				                </li>
-				            </ul>
-				            <ul class="feedbacks pull-left list-inline">
-				                <li>{$value['timeStr']}</li>
-				            </ul>
-				        </h4>
-				</div>
-		    </div>
-		</div>
-Eof;
-		}
-		if($data['hasMore']){
-			$html .= '<button id="hasMore" value="'.$data['anchor'].'">点击加载更多</button>';
-		}
-		$data['datas'] = $html;
-		*/
-		return $data;
-	}
-	//空间动态评论
-	public function loadComments(Request $request,$id){
-		$anchor = $request->input('anchor','');
-		$data = $this->api->teacherSpace($id,$anchor);
-		return $data;
-	}
+
 }
