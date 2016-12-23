@@ -52,7 +52,7 @@ class ApiService extends BaseService
     	$query = array('anchor'=>$pageNo,'orgId'=>$this->school);
 		$body = $this->result($path,$query);
         foreach ($body['datas'] as &$value) {
-            $value['url'] = "/open/apply/".$this->school."/teacherIntro/{$value['id']}";
+            $value['url'] = "/open/apply/".$this->school."/space?id={$value['id']}";
             $value['img'] = $this->url.'/'.$value['photoUrl'];
         }
         $body['typeCh'] = config('category.survey.next.teacher');
@@ -183,7 +183,7 @@ class ApiService extends BaseService
     	return $body;
     }
     //用户信息
-    public function personal($id){
+    public function personal($id=""){
         $path = '/personal/info/ajax';
         $query = array('id'=>$id);
         $body = $this->result($path,$query);
@@ -198,10 +198,9 @@ class ApiService extends BaseService
         return $body;
     }
     //教师动态
-    public function teacherSpace($id,$pageNo=""){
+    public function teacherSpace($id="",$pageNo=""){
         $path = '/teacherSpace/load';
-        $query = array('teacherId'=>$id,'pageNo'=>$pageNo,
-                'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $query = array('teacherId'=>$id,'pageNo'=>$pageNo);
         $body = $this->result($path,$query);
         return $body;
     }
@@ -215,46 +214,68 @@ class ApiService extends BaseService
     //发布动态
     public function doAddteacherSpace($c,$fname='',$fid='',$ftype=''){
         $path = "/task/teacherSpace/add";
-        $query = array('c'=>$c,'fname'=>$fname,'fid'=>$fid,'ftype'=>$ftype,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $query = array('c'=>$c,'fname'=>$fname,'fid'=>$fid,'ftype'=>$ftype);
         $body = $this->result($path,$query,'POST');
         return $body;
     }
     //删除动态
     public function doDelTeacherSpace($id){
         $path = "/task/teacherSpace/del";
-        $query = array('id'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $query = array('id'=>$id);
         $body = $this->result($path,$query,'POST');
         return $body;
     }
     //点赞
     public function doLike($id){
         $path = "/task/teacherSpace/addLike";
-        $query = array('spaceId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $query = array('spaceId'=>$id);
         $body = $this->result($path,$query,'POST');
         return $body;
     }
     //取消赞
     public function doCancelLike($id){
         $path = "/task/teacherSpace/cancelLike";
-        $query = array('spaceId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $query = array('spaceId'=>$id);
         $body = $this->result($path,$query,'POST');
         return $body;
     }
     //添加评论
     public function addComment($id,$c){
         $path = "/task/teacherSpace/addComment";
-        $query = array('c'=>$c,'spaceId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $query = array('c'=>$c,'spaceId'=>$id);
         $body = $this->result($path,$query,'POST');
         return $body;
     }
     //删除评论
     public function delComment($id){
         $path = "/task/teacherSpace/delComment";
-        $query = array('commentId'=>$id,'kindergarten_sid'=>$_COOKIE['kindergarten_sid']);
+        $query = array('commentId'=>$id);
         $body = $this->result($path,$query,'POST');
         return $body;
     }
+    //查看评论
+    public function loadComment($id,$anchor){
+        $path = "/task/teacherSpace/loadComments";
+        $query = array('spaceId'=>$id,'anchor'=>$anchor);
+        $body = $this->result($path,$query);
+        return $body;
+    }
+    //查看动态详情
+    public function comments($id){
+        $path = "/teacherSpace/info";
+        $query = array('id'=>$id);
+        $body = $this->result($path,$query);
+        return $body;
+    }
+
+    public function judgeCookie(){
+       return !empty($_COOKIE['kindergarten_sid']);
+    }
+
     protected function result($path,$query,$mothod="GET",$cookie=false){
+        if (!empty($_COOKIE['kindergarten_sid'])) {
+            $query['kindergarten_sid'] = $_COOKIE['kindergarten_sid'];
+        }
     	$response = $this->client->request($mothod,$path,['query'=>$query]);
         if ($cookie) {
             $headers = $response->getHeaders();

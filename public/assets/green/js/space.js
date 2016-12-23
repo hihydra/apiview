@@ -6,16 +6,15 @@ var CODE_NOT_LOGIN			= 100003;//未登录
 var CODE_UNAUTHORIZED		= 100004;//权限不够
 var CODE_PARAMETER_NULL     = 100005;//数据为空
 
-
-var ctx = "/open/apply/32/space";
-var teacherSpace_loadUrl = ctx+"/load";
-var teacherSpace_addUrl = ctx+"/add";
-var teacherSpace_delUrl = ctx+"/del";
+var teacherSpace_loadUrl = ctx+"/loadSpace";
+var teacherSpace_addUrl = ctx+"/addSpace";
+var teacherSpace_delUrl = ctx+"/delSpace";
 
 var dynamic_likeUrl = ctx+"/doLike";
 var dynamic_cancelLikeUrl = ctx+"/doCancelLike";
 var dynamic_saveCommentUrl = ctx+"/addComment";
 var dynamic_delCommentUrl = ctx+"/delComment";
+var dynamic_loadComment = ctx+"/loadComment";
 
 var paramName_commentId = "commentId";
 
@@ -27,13 +26,15 @@ var methods = {
     get_data: function() {
         $("#vlist").append('<div class="loading ft12" id="waitbox"><img src="/assets/green/img/loader.gif" width="19" height="19" />载入中..</div>');
         $.ajax({url:teacherSpace_loadUrl,
-          data:{id:1132,pageNo:pageNo},
+          data:{id:userId,pageNo:pageNo},
           type: 'GET',
+          async: false,
           error: function(){},
           success: function(data){
           	 html = $(".busbox").html();
              $(".busbox").html(html+data.datas);
              $("#waitbox").remove();
+             $('.busbox').ReplaceFace();
              if (data.hasMore) {
                 pageNo = data.anchor;
                 $('#get_more').css('display', 'block');
@@ -253,6 +254,35 @@ function reply_hide(blogId){
 	$("#span_reply_"+_eleId).remove();
 	$("#form_comment_div_"+_eleId).hide();
 }
+function loadComment(id){
+	var params = {};
+	params.url = dynamic_loadComment;
+	params.postData = {id:id};
+	params.postType = "get";
+	//params.error = "获取动态失败";
+	params.mustCallBack = true;//是否必须回调
+	params.callBack = function (json){
+		if(json.retCode==CODE_SUCCESS){
+			/*
+			var userType = $("#ipt_userType").val();
+			if(userType=="SCHOOL_RECTOR"
+					||userType=="SCHOOL_TEACHER"
+					||userType=="SCHOOL_STUDENT"){
+				json.isSchoolUser = true;
+			}else{
+				json.isSchoolUser = false;
+			}
+			$("#div_display").prepend(replaceHtml(createHtmlUseModel("model_dataDetail",json)));
+			$("#ipt_userId").val(json.data.uid);
+			loadPersonalInfo(false);
+			*/
+			alert(json.datas);
+			$('.more_'+id).after(json.datas);
+		}
+	};
+	//$("#div_display").html($("#div_comments_loading").html());
+	ajaxJSON(params);
+}
 function doDelComment(id){
 	var _eleId = id;
 	var isDo = confirm("确定要删除吗？");
@@ -311,4 +341,49 @@ function showFaceList(replyContent,faceTitle){
 	$("#"+faceTitle).attr("onclick","");
 	$("#"+replyContent).FormFace({ faceTitle : "#"+faceTitle, cid : "", left : "-5" , top : "5" });
 	$("#"+faceTitle).click();
+}
+
+
+
+/**********************空间图片*******************************/
+function delAttachment(){
+	$("#ipt_form_ftype").val("NONE");
+	$("#ipt_form_fid").val("");
+	$("#ipt_form_fname").val("");
+	$("#weibo_div_uploadResult").hide();
+	$("#weibo_img").attr("src",ctp+"/resource/front/img/loading.gif");
+	$("#div_ipt_photo").html('<input type="file" class="photo-input" accept="image/*" name="file" onchange="javascript:weiboAttachmentUpload(this,\'weibo_form_upload\',\'PHOTO\')" />');
+}
+function weiboAttachmentUpload(sender,uploadForm,type){
+	if(sender.value==""){
+		return false;
+	}
+	if (type=="PHOTO"&&!sender.value.match(/.jpg|.jpeg|.gif|.png|.bmp/i)) {
+		alert("\u56fe\u7247\u683c\u5f0f\u65e0\u6548\uff01");
+		return false;
+	}
+	$("#weibo_ipt_upload_type").val(type);
+	$("#"+uploadForm).submit();
+}
+function weiboAttachmentUpload_callBack(retCode,fileName,size,id,type){
+	if(CODE_SUCCESS==retCode){
+		$("#ipt_form_ftype").val(type);
+		$("#ipt_form_fid").val(id);
+		$("#ipt_form_fname").val(fileName);
+		$("#weibo_img").attr("src",ctp+"/attachment/photo/weibo_l/"+id+"/"+id+".jpg");
+		$("#weibo_span_fname").html(fileName);
+		$("#weibo_div_uploadResult").show();
+	}else if(CODE_NOT_LOGIN==retCode){
+		alert("登录超时，请重新登录！");
+	}else{
+		alert("图片上传失败！");
+	}
+}
+function doShowLong(id){
+	$("#p_short_"+id).hide();
+	$("#p_long_"+id).show();
+}
+function doShowShort(id){
+	$("#p_short_"+id).show();
+	$("#p_long_"+id).hide();
 }

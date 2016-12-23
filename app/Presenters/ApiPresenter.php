@@ -22,6 +22,9 @@ class ApiPresenter
 
 			$html .= "</ul></li>";
 		}
+		if($this->api->judgeCookie()){
+			$html .= "<li><a href='{$url}/space'>我的空间</a></li>";
+		}
 		return  $html;
 	}
 	public function nav($type,$typeCh){
@@ -69,5 +72,8 @@ class ApiPresenter
 	public function info(){
 		$data = $this->api->loadSchoolInfo();
 		return $data;
+	}
+	public function judgeCookie(){
+		return $this->api->judgeCookie();
 	}
 }

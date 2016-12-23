@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/green/css/css.css">
 @yield('css')
 <script type="text/javascript" src="/assets/green/js/jquery.min.js"></script>
+@yield('headScript')
 </head>
 
 <body>
@@ -24,7 +25,7 @@
           </ul>
       </div>
     </div>
-    @if(isset($_SESSION['userId']))
+    @if($apiPresenter->judgeCookie())
     <div class="login">
       <ul>
         <li><a href="{!!env('API_URL').'/index'!!}">管理</a></li>

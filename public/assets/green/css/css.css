@@ -1,6 +1,6 @@
 ﻿@charset "utf-8";
 /* CSS Document */
-body,form,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,table,fieldset{margin:0; padding:0;}
+body,form,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,table,fieldset{margin:0; padding:0;font-size: 12px;}
 input,select,textarea{color:#888; font-size:12px;line-height:140%; font-family:'宋体';vertical-align: middle;resize:none;}
 img{border:0; vertical-align:middle;}
 em,i{font-style:normal;}
@@ -12,7 +12,7 @@ a{ text-decoration:none; color:#515151;}
 .clear{ padding:0; margin:0; clear:both;}
 
 body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relative;}
-.foot-bg{ background:url(../img/foot-bg.jpg) no-repeat; display:block; width:100%; position:absolute; left:0; bottom:0; height:350px; z-index:-1;}
+.foot-bg{ background:url(../img/foot-bg.jpg) center no-repeat; display:block; width:100%; position:absolute; left:0; bottom:0; height:350px; z-index:-1;}
 .all{ width:1002px; margin:auto; position:static; z-index:99;}
 .top{ height:132px; position:relative;}
 .logo{ height:70px; padding:13px 0 12px;}
@@ -163,20 +163,30 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 
 
 /*图标样式 开始*/
-.icon{display: inline-block;width: 18px;height: 18px;margin-top:-1px;line-height: 18px;vertical-align: text-top;background-image:url(../img/all.png);background-repeat: no-repeat;padding:0 5px 0 0;line-height:40px;vertical-align: middle;margin-left:-4px;}
+.icon{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-top:-1px;
+    line-height: 18px;
+    vertical-align: text-top;
+    background-image:url(../img/all.png);
+    background-repeat: no-repeat;
+	padding:0 2px 0 2px; line-height:40px;vertical-align: middle;
+}
 .icon-home{ background-position:-5px -5px;}
-.icon-comment{ background-position:-36px -6px;}
-.icon-th-large{ background-position:-64px -5px;}
+.icon-comment{ background-position:-35px -4px;}
+.icon-th-large{ background-position:-64px -6px;}
 .icon-down{ background-position:-91px -6px;}
 .icon-cog{ background-position:-120px -6px;}
 
 .icon-glyphs ul li{ float:left; width:20%; padding:10px 0;}
 
 .icon-home-1{ background-position:-5px -35px;}
-.icon-comment-1{ background-position:-36px -36px;}
-.icon-th-large-1{ background-position:-64px -35px;}
-.icon-down-1{ background-position:-91px -36px;}
-.icon-cog-1{ background-position:-120px -36px;}
+.icon-comment-1{ background-position:-35px -34px;}
+.icon-th-large-1{ background-position:-62px -34px;}/*2014-12-24*/
+.icon-down-1{ background-position:-88px -34px;}
+.icon-cog-1{ background-position:-117px -35px;}
 .icon-remove{ background-position:-233px -5px;}
 .icon-chevron-up{ background-position:-262px -6px;}
 .icon-chevron-left{ background-position:-289px -6px;}
@@ -191,7 +201,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .icon-share{ background-position:-403px -5px;}
 .icon-Comment{ background-position:-432px -5px;}
 .icon-group{ background-position:-460px -5px;}
-.icon-user{ background-position:-459px -63px;}
+.icon-user{ background-position:-457px -63px;}/*2014-12-24*/
 .icon-repeat-1{ background-position:-375px -34px;}
 .icon-share-1{ background-position:-403px -34px;}
 .icon-Comment-1{ background-position:-432px -34px;}
@@ -201,7 +211,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .icon-camera{ background-position:-347px -63px;}
 .icon-film{ background-position:-376px -63px;}
 .icon-at{ background-position:-403px -63px;}
-.icon-pic{ background-position:-431px -63px;}
+.icon-pic{ background-position:-432px -63px;}
 .icon-globe-1{ background-position:-319px -91px;}
 .icon-camera-1{ background-position:-347px -91px;}
 .icon-film-1{ background-position:-376px -91px;}
@@ -210,7 +220,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .icon-User{ background-position:-5px -63px;}
 .icon-Group{ background-position:-35px -63px;}
 .icon-envelope{ background-position:-63px -63px;}
-.icon-search{ background-position:-91px -62px;}
+.icon-search{ background-position:-91px -63px;}
 .icon-align-bottom{ background-position:-119px -63px;}
 .icon-question-sign{ background-position:-5px -91px;}
 .icon-star{ background-position:-35px -91px;}
@@ -228,7 +238,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .icon-editor { background-position:-261px -120px;}
 .icon-info-sign{ background-position:-290px -120px;}
 .icon-curriculum{ background-position:-4px -119px;}
-.icon-homework{ background-position:-4px -148px;}
+.icon-homework{ background-position:-5px -148px;}
 .icon-report{ background-position:-34px -148px;}
 .icon-Repeat{ background-position:-63px -148px;}
 .icon-Add{ background-position:-91px -148px;}
@@ -238,6 +248,31 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .icon-Envelope{ background-position:-120px -91px;}
 .icon-Import-information{ background-position:-204px -148px;}
 .icon-Upload{ background-position:-176px -62px;}
+.icon-Put-away{ background-position:-204px -63px;}
+.icon-Amplification{ background-position:-233px -63px;}
+.icon-Towards-left{ background-position:-261px -63px;}
+.icon-Towards-right{ background-position:-290px -63px;}
+.icon-Preview{ background-position:-147px -91px;}
+.icon-File{ background-position:-175px -92px;}
+.icon-PPT{ background-position:-202px -91px;}
+.icon-Shop{ background-position:-233px -91px;}
+.icon-time{ background-position:-233px -148px;}
+.icon-Preservation{ background-position:-261px -91px;}
+.icon-add{ background-position:-261px -148px;}
+.icon-Have{ background-position:-289px -147px;}
+.icon-Change-password{ background-position:-290px -92px;}
+.icon-Close{ background-position:-317px -120px;}
+.icon-homework-1{ background-position:-317px -148px;}
+.icon-Space{ background-position:-347px -120px;}
+.icon-School{ background-position:-376px -120px;}
+.icon-Healthy{ background-position:-347px -148px;}
+.icon-Kindergarten{ background-position:-403px -120px;}
+.icon-Policy-document{ background-position:-376px -148px;}
+.icon-School-1{ background-position:-459px -148px;}
+.icon-Teaching-activity{ background-position:-403px -148px;}
+.icon-Yearly-inspection{ background-position:-431px -148px;}
+.icon-Activity-dynamics{ background-position:-432px -120px;}
+.icon-Institute-Information{ background-position:-459px -120px;}
 /*图标样式 结束*/
 
 /*登陆开始*/
@@ -316,6 +351,29 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 /*输入框 结束*/
 
 
+.red{ color:#C00;}
+.Red{ color:#C00; font-size:20px; padding:0 5px; font-weight:bold;}
+.left{ float:left;}
+.right{ float:right;}
+#weibo_div_uploadResult {border: 1px dashed rgb(221, 221, 221);margin: 10px 0px;padding: 5px;width: 97.7%;}
+
+/*动态图片开始*/
+.msgBox textarea {border: 1px solid #ddd;height: 20px;resize: none;width: 97%;padding: 10px;}
+.subMessage-img{text-align:center; padding:10px 0; width:99.5%;}
+.subMessage-img img{ max-width:99.5%;}
+.subMessage-img-min{padding:10px 0; width:50%; }
+.subMessage-img-min img{ /*max-width:50%;*/cursor: pointer; width:80px; height:80px; padding:0 4px 2px 0;}/*2015-1-5*/
+.messageCon { clear: both; color: #666; display: block; /*padding-bottom: 5px; padding-top: 5px;*/}
+.media .subMessage {background: #f3f3f3; margin-top: 0; padding:7px 10px 4px; position: relative; /*width:96.5%;*/ }
+.media .subMessage-1{border-bottom:1px dashed #ccc; padding:7px 0; width:100%;}
+.media-review{background: #f3f3f3; padding:0 10px 10px;}
+.media-review .subMessage{ border-bottom:1px dotted #ccc; padding:4px 0 7px; width:auto;}
+.imgXsmall { max-width: 35px;}
+.imgSmall{ height: auto; max-width: 50px; opacity: 1; transition: opacity 0.25s ease 0s; border-radius:4px;}
+.media-object { display: block;}
+/*动态图片结束*/
+
+p.more{ height:30px; line-height:30px;}
 .control-inner{height: 40px;line-height: 40px;border-bottom: 1px solid #ddd;}
 .newMessage{margin: 20px;}
 .messageCon{clear: both;color: #666;display: block;line-height: 25px;font-size: 14px;}
@@ -329,7 +387,7 @@ a{text-decoration: none;color: #56b463;}
 .subMessage{line-height: 22px;font-size: 14px;}
 .subMessage .media-body p{float:left;width:10%;}
 .subMessage .media-body .col-sm-12 p{float:left;width:80%;font-size: 12.5px;color: #666;}
-.msgBox textarea{border: 1px solid #ddd;height: 40px;resize: none;width: 99%;}
+.msgBox textarea{border: 1px solid #ddd;height: 40px;resize: none;width: 97%;}
 .media-review{background: #f3f3f3;padding:0 10px 10px;}
 .media-review .subMessage{border-bottom:1px dotted #ccc;padding:10px 0 7px;width:auto;}
 .imgXsmall{max-width: 35px;}

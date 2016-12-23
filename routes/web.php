@@ -20,14 +20,16 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('noticeDetail/{id}', 'ApiController@noticeDetail');
 
 
-	$app->get('space/load','SpaceController@load');
-	$app->post('space/add','SpaceController@doAddteacherSpace');
-	$app->post('space/del','SpaceController@doDelTeacherSpace');
+	$app->get('space','SpaceController@space');
+	$app->get('space/loadSpace','SpaceController@loadSpace');
+	$app->post('space/addSpace','SpaceController@doAddteacherSpace');
+	$app->post('space/delSpace','SpaceController@doDelTeacherSpace');
 	$app->post('space/doLike','SpaceController@doLike');
 	$app->post('space/doCancelLike','SpaceController@doCancelLike');
+	$app->get('space/loadComment','SpaceController@loadComment');
 	$app->post('space/addComment','SpaceController@addComment');
 	$app->post('space/delComment','SpaceController@delComment');
-	$app->get('space/{id}','SpaceController@space');
+
 
 	$app->get('login','LoginController@login');
 	$app->post('login','LoginController@login');

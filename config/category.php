@@ -42,11 +42,4 @@ return [
 		    'email'                         =>  '园长信箱',
 		]
 	],
-	'space' => [
-		'name' => '空间管理',
-		'next' => [
-			'teacherSpace'                  =>  '教师空间',
-			'parentSpace'                   =>  '家长空间',
-		]
-	]
 ];
