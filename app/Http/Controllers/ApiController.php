@@ -88,8 +88,9 @@ class ApiController extends Controller
 	}
 	//上传图片
 	public function uploadPhoto(Request $request){
-		dd($request->input('file'));
-		$data = $this->api->uploadPhoto($request->all());
+		$file = $request->file('file');
+		$filePath = $file->path();
+		$data = $this->api->uploadPhoto($filePath);
 		return $data;
 	}
 

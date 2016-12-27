@@ -6,15 +6,15 @@ var CODE_NOT_LOGIN			= 100003;//未登录
 var CODE_UNAUTHORIZED		= 100004;//权限不够
 var CODE_PARAMETER_NULL     = 100005;//数据为空
 
-var teacherSpace_loadUrl = ctx+"/loadSpace";
-var teacherSpace_addUrl = ctx+"/addSpace";
-var teacherSpace_delUrl = ctx+"/delSpace";
+var teacherSpace_loadUrl = ctx+"/space/loadSpace";
+var teacherSpace_addUrl = ctx+"/space/addSpace";
+var teacherSpace_delUrl = ctx+"/space/delSpace";
 
-var dynamic_likeUrl = ctx+"/doLike";
-var dynamic_cancelLikeUrl = ctx+"/doCancelLike";
-var dynamic_saveCommentUrl = ctx+"/addComment";
-var dynamic_delCommentUrl = ctx+"/delComment";
-var dynamic_loadComment = ctx+"/loadComment";
+var dynamic_likeUrl = ctx+"/space/doLike";
+var dynamic_cancelLikeUrl = ctx+"/space/doCancelLike";
+var dynamic_saveCommentUrl = ctx+"/space/addComment";
+var dynamic_delCommentUrl = ctx+"/space/delComment";
+var dynamic_loadComment = ctx+"/space/loadComment";
 
 var paramName_commentId = "commentId";
 
@@ -122,7 +122,7 @@ function doAddTeacherSpaceData(){
 			$(".busbox").html('');
 			methods.get_data();
 			$("#textarea_content").val("");
-			//delAttachment();
+			delAttachment();
 		}else{
 			alert("发布失败！");
 		}
@@ -388,34 +388,34 @@ function weiboAttachmentUpload(sender,uploadForm,type){
 	}
 	$("#weibo_ipt_upload_type").val(type);
 
-	$("#"+uploadForm).submit();
-	/*
+	//$("#"+uploadForm).submit();
 	var params = {};
 	var formData = new FormData($( "#weibo_form_upload" )[0]);
-	formData.kindergarten_sid = "1uq4p0upa6perya9wm0tfia52";
-	params.url = "/uploadPhoto";
-	params.postType = "post";
-	params.postData = formData;
-	console.log(params.postData);
-	//params.contentType = false;
-	//fileElementId:'weibo_ipt_upload_type';
-	params.error = "发布失败，请确认您的网络是否正常！"
-	params.mustCallBack = true;//是否必须回调
-	params.callBack = function (json){
-		if(json.retCode==CODE_SUCCESS){
-			pageNo = "";
-			$(".busbox").html('');
-			methods.get_data();
-			$("#textarea_content").val("");
-			//delAttachment();
-		}else{
-			alert("发布失败！");
-		}
-	};
-	ajaxJSON(params);
-	*/
-
+	$.ajax({
+		url  : ctx+"/uploadPhoto",
+		type : "post",
+		data : formData,
+		dataType: "json",
+		contentType : false,
+		processData : false,
+		success : function(json) {
+			var data = json.data;
+			if(json.retCode==CODE_SUCCESS){
+				$("#ipt_form_ftype").val(type);
+				$("#ipt_form_fid").val(data.id);
+				$("#ipt_form_fname").val(data.name);
+				$("#weibo_img").attr("src",ctp+"/attachment/photo/source/"+data.hash+"/"+data.id+".jpg");
+				$("#weibo_span_fname").html(data.name);
+				$("#weibo_div_uploadResult").show();
+			}else if(json.retCode==CODE_NOT_LOGIN){
+				alert("登录超时，请重新登录！");
+			}else{
+				alert("图片上传失败！");
+			}
+		},
+	});
 }
+/*
 function weiboAttachmentUpload_callBack(retCode,fileName,hash,id,type){
 	if(CODE_SUCCESS==retCode){
 		$("#ipt_form_ftype").val(type);
@@ -430,6 +430,7 @@ function weiboAttachmentUpload_callBack(retCode,fileName,hash,id,type){
 		alert("图片上传失败！");
 	}
 }
+*/
 function doShowLong(id){
 	$("#p_short_"+id).hide();
 	$("#p_long_"+id).show();

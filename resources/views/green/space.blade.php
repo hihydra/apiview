@@ -2,7 +2,7 @@
 @section('title')空间-@stop
 @section('headScript')
 <script type="text/javascript">
-    var ctx = "/open/apply/{{$orgId}}/space";
+    var ctx = "/open/apply/{{$orgId}}";
     var ctp = "{{env("API_URL")}}";
     var userId = {{$id}}
 </script>
@@ -33,7 +33,6 @@
             <input type="hidden" id="ipt_form_ftype" name="ftype" value="NONE">
             <input type="hidden" id="ipt_form_fid" name="fid">
             <input type="hidden" id="ipt_form_fname" name="fname">
-            <!--
             <div class="item Special">
                 <label class="radioTb">
                     <input type="radio" name="isAll">
@@ -44,15 +43,13 @@
                         <span>自己</span>
                 </label>
             </div>
-            !-->
             <textarea id="textarea_content" placeholder="我想说的是..." tabindex="1" name="c"></textarea>
             <input class="Btn" type="button" value="发表" onclick="javascript:doAddTeacherSpaceData();">
           </form>
         </div>
         <div class="qz-poster-ft">
             <div class="left">
-              <iframe id="formFrame" name="formFrame" style="display:none;"></iframe>
-              <form id="weibo_form_upload" class="left-form" action="{{env('API_URL')}}/attachment/uploadForTask" method="post" target="formFrame" enctype="multipart/form-data">
+              <form id="weibo_form_upload" class="left-form" action="/open/apply/{{$orgId}}/uploadPhoto" method="post"  enctype="multipart/form-data">
                 <input type="hidden" id="weibo_ipt_upload_type"  name="type" />
                 <a id="a_weibo_face" href="javascript:void(0);"><i class="icon icon-Expression-1"></i>表情</a>
                 <a id="a_photo" href="javascript:showAttachmentUpload('请选择一个图片格式的文件',2);"><i class="icon icon-pic-1"></i>图片 </a>

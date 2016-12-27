@@ -29,11 +29,11 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->post('space/addComment','SpaceController@addComment');
 	$app->post('space/delComment','SpaceController@delComment');
 
+	$app->post('uploadPhoto','ApiController@uploadPhoto');
+
 
 	$app->get('login','LoginController@login');
 	$app->post('login','LoginController@login');
 	$app->get('loginOut','LoginController@loginOut');
 });
-
-$app->post('uploadPhoto','ApiController@uploadPhoto');
 

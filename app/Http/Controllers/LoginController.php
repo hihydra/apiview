@@ -21,7 +21,7 @@ class LoginController extends Controller
 			$password = $request->input('password');
 			$data = $this->api->login_in($username,$password);
 			if (empty($data['retCode'])) {
-				$_SESSION['userId']=$data[0]['id'];
+				//$_SESSION['userId']=$data[0]['id'];
 				return redirect('/open/apply/'.$this->api->school.'/index');
 			}else{
 				return view($this->theme.'.login',compact('school','data'));
@@ -31,7 +31,6 @@ class LoginController extends Controller
 	}
     //退出
 	public function loginOut(){
-		session_destroy();
 		setcookie('kindergarten_sid','');
 		return redirect('/open/apply/'.$this->api->school.'/index');
 	}

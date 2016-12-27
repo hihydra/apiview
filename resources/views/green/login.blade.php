@@ -60,6 +60,8 @@ $(document).ready(function(){
           dataType: 'JSON',
           error: function(){},
           success: function(data){
+            //alert(document.cookie);
+           // document.cookie="kindergarten_sid="+;
           }
         });
       },

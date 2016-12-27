@@ -8,7 +8,7 @@ class ApiService extends BaseService
 
 	public function __construct(){
         $this->url = env('API_URL');
-		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL')]);  //api接口地址
+		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL'),'cookie'=>true]);  //api接口地址
         $this->school = app('request')->segment(3);
 	}
     //基本信息
@@ -268,9 +268,10 @@ class ApiService extends BaseService
         return $body;
     }
     //上传图片
-    public function uploadPhoto($file){
-        $path = "/attachment/uploadForTask";
-        $body = $this->result($path,$file,'POST');
+    public function uploadPhoto($filePath){
+        $path = env('API_URL')."/attachment/uploadForTask";
+        $query = array('file'=>new \CURLFile($filePath));
+        $body = $this->result_curl($path,$query);
         return $body;
     }
 
@@ -305,5 +306,24 @@ class ApiService extends BaseService
 		}else{
 			abort(404);
 		}
+    }
+
+    protected function result_curl($path,$query){
+        if (!empty($_COOKIE['kindergarten_sid'])) {
+            $cookieStr = 'kindergarten_sid='.$_COOKIE['kindergarten_sid'];
+        }
+        //初始化
+        $ch = curl_init ();
+        curl_setopt ( $ch, CURLOPT_URL,$path);
+        curl_setopt ( $ch, CURLOPT_POST, 1 );//post方式
+        curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt ( $ch, CURLOPT_COOKIE,$cookieStr);
+        curl_setopt ( $ch, CURLOPT_POSTFIELDS,$query);
+        $body = curl_exec ( $ch );
+
+        curl_close ( $ch );
+
+        return $body;
     }
 }
