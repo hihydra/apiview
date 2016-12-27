@@ -276,11 +276,35 @@ function loadComment(id){
 			$("#ipt_userId").val(json.data.uid);
 			loadPersonalInfo(false);
 			*/
-			alert(json.datas);
-			$('.more_'+id).after(json.datas);
+			$('#div_dynamic_comments_'+id).html(json.datas);
 		}
 	};
 	//$("#div_display").html($("#div_comments_loading").html());
+	ajaxJSON(params);
+}
+function page(data){
+
+}
+function toPage(id,pageNo){
+	//var dataId = $("#ipt_dataId").val();
+	var postData = {};
+	postData.pageNo = pageNo;
+	postData.id = id;
+
+	var params = {};
+	params.url = dynamic_loadComment;
+	params.postData = postData;
+	params.postType = "get";
+	//params.error = "获取动态失败";
+	params.mustCallBack = true;//是否必须回调
+	params.callBack = function (json){
+		if(json.retCode==CODE_SUCCESS){
+			$('#div_dynamic_comments_'+id).html(json.datas);
+			//useModel("model_dataDetail_comments","div_dynamic_comments_"+dataId,json.data);
+			//$("#div_dynamic_comments_"+dataId).ReplaceFace();
+		}
+	};
+	//$("#div_dynamic_comments_"+dataId).html($("#div_comments_loading").html());
 	ajaxJSON(params);
 }
 function doDelComment(id){
@@ -363,14 +387,41 @@ function weiboAttachmentUpload(sender,uploadForm,type){
 		return false;
 	}
 	$("#weibo_ipt_upload_type").val(type);
+
 	$("#"+uploadForm).submit();
+	/*
+	var params = {};
+	var formData = new FormData($( "#weibo_form_upload" )[0]);
+	formData.kindergarten_sid = "1uq4p0upa6perya9wm0tfia52";
+	params.url = "/uploadPhoto";
+	params.postType = "post";
+	params.postData = formData;
+	console.log(params.postData);
+	//params.contentType = false;
+	//fileElementId:'weibo_ipt_upload_type';
+	params.error = "发布失败，请确认您的网络是否正常！"
+	params.mustCallBack = true;//是否必须回调
+	params.callBack = function (json){
+		if(json.retCode==CODE_SUCCESS){
+			pageNo = "";
+			$(".busbox").html('');
+			methods.get_data();
+			$("#textarea_content").val("");
+			//delAttachment();
+		}else{
+			alert("发布失败！");
+		}
+	};
+	ajaxJSON(params);
+	*/
+
 }
-function weiboAttachmentUpload_callBack(retCode,fileName,size,id,type){
+function weiboAttachmentUpload_callBack(retCode,fileName,hash,id,type){
 	if(CODE_SUCCESS==retCode){
 		$("#ipt_form_ftype").val(type);
 		$("#ipt_form_fid").val(id);
 		$("#ipt_form_fname").val(fileName);
-		$("#weibo_img").attr("src",ctp+"/attachment/photo/weibo_l/"+id+"/"+id+".jpg");
+		$("#weibo_img").attr("src",ctp+"/attachment/photo/source/"+hash+"/"+id+".jpg");
 		$("#weibo_span_fname").html(fileName);
 		$("#weibo_div_uploadResult").show();
 	}else if(CODE_NOT_LOGIN==retCode){

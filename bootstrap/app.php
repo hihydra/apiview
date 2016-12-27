@@ -103,6 +103,5 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
 
 $app->configure('category');
 
-session_start();
 
 return $app;

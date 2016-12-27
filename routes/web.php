@@ -17,7 +17,6 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('teacherIntro/{id}', 'ApiController@profiles');
 	$app->get('category','ApiController@category');
 	$app->get('info/{id}', 'ApiController@article');
-	$app->get('noticeDetail/{id}', 'ApiController@noticeDetail');
 
 
 	$app->get('space','SpaceController@space');
@@ -35,4 +34,6 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->post('login','LoginController@login');
 	$app->get('loginOut','LoginController@loginOut');
 });
+
+$app->post('uploadPhoto','ApiController@uploadPhoto');
 

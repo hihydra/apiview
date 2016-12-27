@@ -8,7 +8,7 @@ ol,ul,li{ list-style:none;}
 h1,h2,h3,h4,h5{color:#333;}
 textarea{resize:none;}
 label{vertical-align:middle}
-a{ text-decoration:none; color:#515151;}
+a{ text-decoration:none;}
 .clear{ padding:0; margin:0; clear:both;}
 
 body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relative;}
@@ -125,8 +125,8 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 /*****分页turnPage*****/
 .turnPage{ padding:10px; text-align:right;height: 20px;}
 .turnPage .pagination{float:right;}
-.turnPage ul.on,.pagination a{padding: 0px 7px;border: 1px solid #cecece;margin: 0 2px 0px 3px;color: #3d3d3d;font-size: 12px;display:inline-block;height: 21px;line-height: 21px;vertical-align: middle}
-.turnPage ul.on,.pagination a:hover,.turnPage a.hover{background:#007a37;color: #fff;text-decoration:none;border:#007a37 solid 1px;}
+.pagination a{padding: 0px 7px;border: 1px solid #cecece;margin: 0 2px 0px 3px;color: #3d3d3d;font-size: 12px;display:inline-block;height: 21px;line-height: 21px;vertical-align: middle}
+.pagination a:hover,.pagination a.hover{background:#007a37;color: #fff;text-decoration:none;border:#007a37 solid 1px;}
 .turnPage span.txt{line-height:24px; background:none; padding:0; vertical-align: middle; font-size:12px;float: left;}
 .turnPage a.page{/* border-radius:3px*/}
 .turnPage a.page:hover{color:#fff; background:#3d95d5;text-decoration:none}
@@ -327,6 +327,25 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 
 #waitbox,#get_more{font-size: 14px;text-align:center;cursor:pointer;color:#56b463;padding-top: 5px;}
 
+/*论坛 开始*/
+.profile-1 .forum table thead{border: 1px solid #888;}
+.profile-1 .forum table th {background:#F2F2F2;color:#333333;}
+.profile-1 .forum table th select{left: 0px;top: 0px;width: 84px;height: 22px;font-family: 'Arial Normal', 'Arial';font-weight: 400;font-style: normal;font-size: 13px;text-decoration: none;color: #000000;}
+.profile-1 .forum table tbody tr{border-bottom: 1px solid #F4F4F4;}
+.profile-1 .forum table tbody tr td{background:#FFF;color: #666;}
+.profile-1 .forum table tbody tr td a{color: #333333;}
+/*论坛 结束*/
+
+
+/*院长信箱 开始*/
+.mailbox{width：100%;height: 200px;border: 1px solid #888;margin: 10px;}
+.mailbox .mailbox-from{margin:20px;color: #000000;}
+.mailbox .mailbox-from .item{padding-bottom:6px;}
+.mailbox textarea {width: 98%; height: 100px;line-height: 20px;padding: 3px 8px 5px;}
+.mailbox .mailbox-from .tel{padding-left: 200px;padding-top: 5px;height:35px;line-height: 25px;}
+.mailbox .mailbox-from .Btn{float: right;background: #56b463;color: #fff;font-size: 12px;height: 25px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;}
+/*院长信箱 结束*/
+
 /*输入框 开始*/
 .qz-poster textarea{overflow: visible;height: 55px;width:87%;float:left;background: #fff;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04) inset;border: 1px solid #d9d9d9;font-size: 14px;border-radius: 2px 0 0 2px;height: 60px;line-height: 20px;padding: 3px 8px 5px;}
 .qz-poster input.Btn{background: #56b463;color: #fff;font-size: 12px;height: 70px;width: 86px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;border-radius: 2px;}
@@ -373,6 +392,12 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .media-object { display: block;}
 /*动态图片结束*/
 
+.spaceCate{font-size: 10px;height:40px;margin-top: 10px;line-height:38px;border: 1px solid #ddd;}
+.spaceCate h3{float:left;padding-left: 20px;}
+.spaceCate ul{padding-left: 100px;}
+.spaceCate ul li{float:left;padding-right: 20px;color: #fff;}
+.spaceCate ul li a{color: #333;}
+.spaceCate ul li a:hover,.spaceCate ul li a.hover{color: #56b463;}
 p.more{ height:30px; line-height:30px;}
 .control-inner{height: 40px;line-height: 40px;border-bottom: 1px solid #ddd;}
 .newMessage{margin: 20px;}
@@ -396,3 +421,6 @@ a{text-decoration: none;color: #56b463;}
 .action{margin: 5px;}
 .action .right{float: right;}
 .action .right .Btn{background: #56b463;color: #fff;font-size: 12px;height: 25px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;border-radius: 2px;}
+.pagination {text-align: right;}
+.radioTb {line-height: 30px;}
+.radioTb input {margin-top: -2px;}

@@ -112,9 +112,12 @@ Eof;
 	//查看评论
 	public function loadComment(Request $request){
 		$id = $request->input('id');
-		$anchor = $request->input('anchor');
-		$data = $this->api->loadComment($id,$anchor);
+		$pageNo = $request->input('pageNo');
+		$data = $this->api->loadComment($id,$pageNo);
 		$data['datas'] = $this->commenthtml($data['datas']);
+		$html = $this->pagination($id,$data['totalPages'],$data['currentPage']);
+		$data['datas'] .= $html;
+		$data['retCode'] = 100000;
 		return $data;
 	}
 
@@ -137,8 +140,8 @@ Eof;
 		}
 
 		if(!empty($space['comments'])&&$space['cc']>count($space['comments'])){
-			$cmmentCount = $space['cc']-count($space['comments']);
-			$commentmore = "<p class=\"more_{$space['id']}\">后面还有{$cmmentCount}条评论，<a href=\"javascript:loadComment('{$space['id']}');\">点击查看<span>&gt;&gt;</span></a></p>";
+			$comentCount = $space['cc']-count($space['comments']);
+			$commentmore = "<p class=\"more_{$space['id']}\">后面还有{$comentCount}条评论，<a href=\"javascript:loadComment('{$space['id']}');\">点击查看<span>&gt;&gt;</span></a></p>";
 		}else{
 			$commentmore = "";
 		}

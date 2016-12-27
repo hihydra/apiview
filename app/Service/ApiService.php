@@ -254,9 +254,9 @@ class ApiService extends BaseService
         return $body;
     }
     //查看评论
-    public function loadComment($id,$anchor){
-        $path = "/task/teacherSpace/loadComments";
-        $query = array('spaceId'=>$id,'anchor'=>$anchor);
+    public function loadComment($id,$pageNo){
+        $path = "/teacherSpace/comments";
+        $query = array('dataId'=>$id,'pageNo'=>$pageNo);
         $body = $this->result($path,$query);
         return $body;
     }
@@ -265,6 +265,12 @@ class ApiService extends BaseService
         $path = "/teacherSpace/info";
         $query = array('id'=>$id);
         $body = $this->result($path,$query);
+        return $body;
+    }
+    //上传图片
+    public function uploadPhoto($file){
+        $path = "/attachment/uploadForTask";
+        $body = $this->result($path,$file,'POST');
         return $body;
     }
 

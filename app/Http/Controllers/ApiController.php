@@ -38,7 +38,7 @@ class ApiController extends Controller
 				break;
 			case 'recipe':
 			    $data = $this->api->loadSchoolRecipes('',$page);
-				return view($this->theme.'.list',$data);
+				return view($this->theme.'.recipe',$data);
 				break;
 			case 'teacher':
 				$data = $this->api->loadTeacherPagePhoto('',$page);
@@ -51,6 +51,14 @@ class ApiController extends Controller
 			case 'notice':
 				$data = $this->api->loadRecentlyNotice();
 				return view($this->theme.'.deslist',$data);
+				break;
+			case 'mailbox':
+				$data = $this->api->loadInfo('TYPE_ACADEMIC_ARRANGEMENT',$page);
+				return view($this->theme.'.mailbox',$data);
+				break;
+			case 'forum':
+			    $data = $this->api->loadSchoolRecipes('',$page);
+				return view($this->theme.'.forum',$data);
 				break;
 			default:
 				$data = $this->api->loadInfo($type,$page);
@@ -77,6 +85,12 @@ class ApiController extends Controller
 	public function profiles($id){
 		$data = $this->api->teacherIntro($id);
 		return view($this->theme.'.intro',$data);
+	}
+	//上传图片
+	public function uploadPhoto(Request $request){
+		dd($request->input('file'));
+		$data = $this->api->uploadPhoto($request->all());
+		return $data;
 	}
 
 }
