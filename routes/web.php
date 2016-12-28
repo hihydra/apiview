@@ -18,7 +18,7 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('category','ApiController@category');
 	$app->get('info/{id}', 'ApiController@article');
 
-
+	//空间
 	$app->get('space','SpaceController@space');
 	$app->get('space/loadSpace','SpaceController@loadSpace');
 	$app->post('space/addSpace','SpaceController@doAddteacherSpace');
@@ -28,10 +28,15 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('space/loadComment','SpaceController@loadComment');
 	$app->post('space/addComment','SpaceController@addComment');
 	$app->post('space/delComment','SpaceController@delComment');
+	$app->post('userPhoto/save','SpaceController@saveUserPhoto');
 
+	//园长信箱
+	$app->get('info/{id}', 'ApiController@article');
+
+	//上传图片
 	$app->post('uploadPhoto','ApiController@uploadPhoto');
 
-
+	//登陆
 	$app->get('login','LoginController@login');
 	$app->post('login','LoginController@login');
 	$app->get('loginOut','LoginController@loginOut');

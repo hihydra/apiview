@@ -57,7 +57,7 @@ class ApiController extends Controller
 				return view($this->theme.'.mailbox',$data);
 				break;
 			case 'forum':
-			    $data = $this->api->loadSchoolRecipes('',$page);
+			    $data = $this->api->loadChildStar($page);
 				return view($this->theme.'.forum',$data);
 				break;
 			default:

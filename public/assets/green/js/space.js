@@ -390,7 +390,6 @@ function weiboAttachmentUpload(sender,uploadForm,type){
 	}
 	$("#weibo_ipt_upload_type").val(type);
 	//$("#"+uploadForm).submit();
-	var params = {};
 	var formData = new FormData($( "#weibo_form_upload" )[0]);
 	$.ajax({
 		url  : dynamic_Upload,

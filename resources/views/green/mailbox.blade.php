@@ -45,13 +45,16 @@
         <div><img id="weibo_img" src=""></div>
         <div class="clear"></div>
     </div>
+    <div class="control-inner" style="height:0px;"></div>
     @if(!empty($datas))
     <div class="profile-1 clearfix">
      <ul>
        @foreach ($datas as $list)
        <li>
-         <span>{{$list['timeStr']}}</span>
-         <a href="{{$list['url']}}">{{$list['title']}}</a>
+          <div class="mailbox-title">
+            <span>{{$list['timeStr']}}</span>
+            <a href="{{$list['url']}}">{{$list['title']}}</a>
+          </div>
          <span class="mailbox-content-left">
                 <img src="http://111.47.13.92:9004/attachment/userPhoto/944.jpg"><br>【管理员】
          </span>

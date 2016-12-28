@@ -89,7 +89,7 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 
 span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:bold; color:#333; line-height:50px;}
 .pf_head {left:0px; top:30px;padding-bottom:20px;height: 123px;}
-.pf_head_pic {z-index: -1;float: left; height: 120px;  border:1px solid #ddd;background:#fff;padding: 2px; position: relative; width: 120px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);}
+.pf_head_pic {float: left; height: 120px;  border:1px solid #ddd;background:#fff;padding: 2px; position: relative; width: 120px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);}
 .pf_head_pic img{ width:120px; height:120px;}
 
 .three_2{ float:left;background:#fffbf7; margin-right:15px;}
@@ -118,7 +118,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .li-a-div .right span{ float:left; display:block;}
 
 .profile-1{ padding:15px 0;}
-.profile-1 ul li{ width:95%; line-height:32px; display: inline-block; font-size:12px; border-bottom:1px dashed #ddd; margin:9px; padding:0 10px;}
+.profile-1 ul li{ width:95%; line-height:32px; display: inline-block; font-size:12px; border-bottom:1px solid #ddd; margin:9px; padding:0 10px;}
 .profile-1 ul li a{ display:inline-block; width:80%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font: 600 16px "microsoft yahei",arial;color: #333;padding-bottom:10px;}
 .profile-1 ul li span{ float:right;}
 
@@ -426,6 +426,47 @@ a{text-decoration: none;color: #56b463;}
 .radioTb input {margin-top: -2px;}
 
 
+/*个人名片 开始*/
+.pf_head_pic {height: 120px;padding: 2px;position: relative;width: 120px;}
+.pf_head_pic img{ width:120px; height:120px;}
+.change_btn_div{ background:url(../img/user-name-bg.png) repeat-x; padding:0 4px; position:absolute; right:5px; top:100px; height:20px; line-height:20px;}
+.change_btn_div a{ color:#fff;}
+.preview_fake img{ width:108px; height:108px;}
+.preview_fake_1 img{ width:180px; height:180px;}
+/*个人名片 结束*/
+
+/*弹出框 开始*/
+.item{ line-height:24px; padding-bottom:5px;}
+.Btn-1{ background:#ccc; color:#666; font-size:12px; height:25px; line-height:25px; padding:0 8px; border:none;cursor: pointer; display:inline-block; vertical-align:middle; border-radius: 2px;}
+.Btn{ background:#56b463; color:#fff; font-size:12px; height:25px; line-height:25px; padding:0 8px; border:none;cursor: pointer; display:inline-block; vertical-align:middle; border-radius: 2px;}
+a.Btn:hover{ color:#fff;}
+.btn_blue{background:url(../img/upload.png) no-repeat 10px 7px #3799d6;padding:0 10px 0 30px;}
+.btn_blue:hover{background:url(../img/upload.png) no-repeat 10px 7px #72beed;}
+.control-inner{ height:40px; line-height:40px; border-bottom:1px solid #ddd;}
+.left-form{ position:relative;}
+.photo-input{ position:absolute; left:50px; top:0; height:35px; width:50px; cursor:pointer; opacity:0;filter: alpha(opacity=0);}
+.seleJs-1 input.update-input{filter: alpha(opacity=0); position:absolute; left:0; top:0;}
+.File-input{ position:absolute; left:0px; top:0; height:35px; width:50px; cursor:pointer; opacity:0;filter: alpha(opacity=0);}
+.popup .content{background:#ffffff; border: 1px solid #888; border-radius: 2px; position: relative;box-shadow: 0 0 5px #535658; z-index:999;}
+.popup .title { background:#f3f3f3; color: #595959; height: 30px; line-height: 30px; padding: 0 0 0 20px; vertical-align: middle;}
+.popup .close { position: absolute; right: 14px; top: 5px; z-index: 2;cursor: pointer;}
+.layer_forward { padding: 0 20px 5px;  /*position: relative;*/ /*width: 400px;*/}
+.hidden { /* display: none;*/}
+.popup .layer_forward { padding: 0 20px; /*position: relative;*/ /*width: 400px;*/word-wrap: break-word;}
+.layer_forward .tab {margin-top: 15px; background:url(../img/layer_tab_bottom_bg.png) repeat-x 0 -49px; padding:4px 4px 0 6px; height:27px;}
+.tab .sd01{ background:#fff; border-color:#f0f0f0; border-style:solid;border-top-left-radius:2px;border-top-right-radius:2px; border-width:1px 1px 0;cursor: default;}
+.tab a { display: inline-block; height: 26px; line-height: 26px; margin: 0 -2px; padding: 0 11px;  position: relative; z-index: 1;white-space: nowrap;}
+.W_vline { display: inline-block; text-indent: -1px; color:#ddd;}
+.feed_repeat_1 { line-height: 20px; padding-top: 5px;}
+.feed_repeat_1 .num { color: #b8b7b7; float: right; margin-top: 5px; position: relative; text-align: right;}
+.feed_repeat_1 { line-height: 20px;}
+.feed_repeat_1 .input textarea { color: #595959; font-size: 12px; width: 390px;}
+.item-1{ height:30px; background:#f3f3f3; text-align:right; padding:5px 5px;}
+/*弹出框 结束*/
+
+.profile-1 ul li .mailbox-title{
+	border-bottom: 1px dashed #ddd;
+}
 .profile-1 ul li .mailbox-reply{
 	margin: 0 0 15px 50px;
     max-height: 800px;

@@ -120,6 +120,13 @@ Eof;
 		$data['retCode'] = 100000;
 		return $data;
 	}
+	//修改用户图片
+    public function saveUserPhoto(Request $request){
+        $form = $request->all();
+        $data = $this->api->saveUserPhoto($form);
+        $data['retCode'] = 100000;
+        return $data;
+    }
 
 	//是否有权限操作
 	private function ishtml($space){

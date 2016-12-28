@@ -187,7 +187,7 @@ class ApiService extends BaseService
         $path = '/personal/info/ajax';
         $query = array('id'=>$id);
         $body = $this->result($path,$query);
-        $body['img'] = $this->url.'/'.$body['photoUrl'];
+        $body['img'] = $this->url.'/'.$body['largePhotoUrl'];
         return $body;
     }
     //登陆
@@ -276,7 +276,38 @@ class ApiService extends BaseService
         $body['data']['img'] = $this->url."/attachment/photo/source/{$body['data']['hash']}/{$body['data']['id']}.jpg";
         return $body;
     }
+    //修改用户图片
+    public function saveUserPhoto($form){
+        $path = "/userPhoto/save";
+        $body = $this->result($path,$form);
+        $body['img'] = $this->url.'/'.$body['photoUrl'];
+        return $body;
+    }
 
+    //院长信箱
+    public function loadChildStar($pageNo){
+        $path = "/childStar/load";
+        $query = array('schoolId'=>$this->school,'pageNo'=>$pageNo);
+        $body = $this->result($path,$query);
+        return $body;
+    }
+
+    public function detailChildStar($id){
+        $path = "/childStar/detail";
+        $query = array('schoolId'=>$this->school,'id'=>$id);
+        $body = $this->result($path,$query);
+        return $body;
+    }
+
+    public function saveChildStar($from){
+        $path = "/childStar/save";
+        $from['schoolId'] = $this->school;
+        $body = $this->result($path,$from);
+        return $body;
+    }
+
+
+    //验证登陆
     public function judgeCookie(){
        return !empty($_COOKIE['kindergarten_sid']);
     }
