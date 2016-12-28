@@ -289,6 +289,11 @@ class ApiService extends BaseService
         $path = "/childStar/load";
         $query = array('schoolId'=>$this->school,'pageNo'=>$pageNo);
         $body = $this->result($path,$query);
+        foreach ($body['datas'] as $value) {
+            $body['processed'] = $this->detailChildStar($value['id']);
+        }
+        $body['typeCh'] = config('category.interaction.next.mailbox');
+        $body['type'] = 'mailbox';
         return $body;
     }
 

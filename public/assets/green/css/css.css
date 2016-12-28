@@ -342,7 +342,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .mailbox .mailbox-from{margin:20px;color: #000000;}
 .mailbox .mailbox-from .item{padding-bottom:6px;}
 .mailbox textarea {width: 98%; height: 100px;line-height: 20px;padding: 3px 8px 5px;}
-.mailbox .mailbox-from .tel{padding-left: 200px;padding-top: 5px;height:35px;line-height: 25px;}
+.mailbox .mailbox-from .tel{/*padding-left: 200px;*/padding-top: 5px;height:35px;line-height: 25px;}
 .mailbox .mailbox-from .Btn{float: right;background: #56b463;color: #fff;font-size: 12px;height: 25px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;}
 /*院长信箱 结束*/
 
@@ -478,9 +478,10 @@ a.Btn:hover{ color:#fff;}
     display: block;
     width: 110px;
     float: left;
-    padding-top: 20px;
+    padding-top: 16px;
     text-align: center;
     margin-bottom: 10px;
+    font-size: 14px;
 }
 .profile-1 ul li span.mailbox-content-left img{
 	width: 70px;

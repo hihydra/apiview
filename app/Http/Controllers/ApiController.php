@@ -53,7 +53,7 @@ class ApiController extends Controller
 				return view($this->theme.'.deslist',$data);
 				break;
 			case 'mailbox':
-				$data = $this->api->loadInfo('TYPE_ACADEMIC_ARRANGEMENT',$page);
+				$data = $this->api->loadChildStar($page);
 				return view($this->theme.'.mailbox',$data);
 				break;
 			case 'forum':
@@ -85,6 +85,16 @@ class ApiController extends Controller
 	public function profiles($id){
 		$data = $this->api->teacherIntro($id);
 		return view($this->theme.'.intro',$data);
+	}
+	//院长信箱
+	public function saveMaibox(Request $request){
+		$form = $request->all();
+		$data = $this->api->saveChildStar($form);
+		if ($data['retCode'] == 100000) {
+			return redirect('/open/apply/'.$this->api->school.'/category?type=mailbox');
+		}else{
+
+		}
 	}
 	//上传图片
 	public function uploadPhoto(Request $request){

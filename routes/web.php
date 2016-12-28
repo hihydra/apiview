@@ -31,7 +31,7 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->post('userPhoto/save','SpaceController@saveUserPhoto');
 
 	//园长信箱
-	$app->get('info/{id}', 'ApiController@article');
+	$app->post('/saveMaibox', 'ApiController@saveMaibox');
 
 	//上传图片
 	$app->post('uploadPhoto','ApiController@uploadPhoto');
