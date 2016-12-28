@@ -2,9 +2,7 @@
 @section('title')空间-@stop
 @section('headScript')
 <script type="text/javascript">
-    var ctx = "/open/apply/{{$orgId}}";
-    var ctp = "{{env("API_URL")}}";
-    var userId = {{$id}}
+      var userId = {{$id}};
 </script>
 <script type="text/javascript" src="/assets/green/js/space.js"></script>
 <script type="text/javascript" src="/assets/green/js/main.js"></script>
@@ -49,10 +47,10 @@
         </div>
         <div class="qz-poster-ft">
             <div class="left">
-              <form id="weibo_form_upload" class="left-form" action="/open/apply/{{$orgId}}/uploadPhoto" method="post"  enctype="multipart/form-data">
+              <form id="weibo_form_upload" class="left-form" method="post"  enctype="multipart/form-data">
                 <input type="hidden" id="weibo_ipt_upload_type"  name="type" />
                 <a id="a_weibo_face" href="javascript:void(0);"><i class="icon icon-Expression-1"></i>表情</a>
-                <a id="a_photo" href="javascript:showAttachmentUpload('请选择一个图片格式的文件',2);"><i class="icon icon-pic-1"></i>图片 </a>
+                <a id="a_photo"><i class="icon icon-pic-1"></i>图片</a>
                 <div id="div_ipt_photo"><input type="file" class="photo-input" accept="image/*" name="file" onchange="javascript:weiboAttachmentUpload(this,'weibo_form_upload','PHOTO')" /></div>
               </form>
             </div>

@@ -118,7 +118,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .li-a-div .right span{ float:left; display:block;}
 
 .profile-1{ padding:15px 0;}
-.profile-1 ul li{ width:95%; line-height:32px; height:100px; font-size:12px; border-bottom:1px dashed #f6ece2; margin:9px; padding:0 10px;}
+.profile-1 ul li{ width:95%; line-height:32px; display: inline-block; font-size:12px; border-bottom:1px dashed #ddd; margin:9px; padding:0 10px;}
 .profile-1 ul li a{ display:inline-block; width:80%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font: 600 16px "microsoft yahei",arial;color: #333;padding-bottom:10px;}
 .profile-1 ul li span{ float:right;}
 
@@ -424,3 +424,40 @@ a{text-decoration: none;color: #56b463;}
 .pagination {text-align: right;}
 .radioTb {line-height: 30px;}
 .radioTb input {margin-top: -2px;}
+
+
+.profile-1 ul li .mailbox-reply{
+	margin: 0 0 15px 50px;
+    max-height: 800px;
+    min-height: 90px;
+    background-color: #f2f2f2;
+    float: left;
+}
+.profile-1 ul li span.mailbox-content-left {
+    display: block;
+    width: 110px;
+    float: left;
+    padding-top: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.profile-1 ul li span.mailbox-content-left img{
+	width: 70px;
+	height: 70px;
+}
+.profile-1 ul li span.mailbox-content-right{
+    overflow: auto;
+    min-height: 66px;
+    max-height: 700px;
+    display: block;
+    margin: 10px;
+    float: left;
+    width: 570px;
+    text-align: left;
+    padding-top: 5px;
+    color: #394953;
+}
+.profile-1 ul li span.li-content-time {
+    width: 147px;
+    display: block;
+}

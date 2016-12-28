@@ -89,9 +89,14 @@ class ApiController extends Controller
 	//上传图片
 	public function uploadPhoto(Request $request){
 		$file = $request->file('file');
-		$filePath = $file->path();
-		$data = $this->api->uploadPhoto($filePath);
-		return $data;
+		if ($file->isValid()) {
+			$filedir="upload/images/";
+			$imagesName=$file->getClientOriginalName();
+			$fileMove = $file->move($filedir,$imagesName);
+			$filePath = base_path().'\public\\'.str_replace('/','\\',$filedir.$imagesName);
+			$data = $this->api->uploadPhoto($filePath);
+			return $data;
+		}
 	}
 
 }

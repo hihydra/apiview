@@ -16,6 +16,8 @@ var dynamic_saveCommentUrl = ctx+"/space/addComment";
 var dynamic_delCommentUrl = ctx+"/space/delComment";
 var dynamic_loadComment = ctx+"/space/loadComment";
 
+var dynamic_Upload  = ctx+"/uploadPhoto";
+
 var paramName_commentId = "commentId";
 
 var sync_div_display = {};
@@ -371,11 +373,11 @@ function showFaceList(replyContent,faceTitle){
 
 /**********************空间图片*******************************/
 function delAttachment(){
-	$("#ipt_form_ftype").val("NONE");
+	$("#ipt_form_ftype").val("");
 	$("#ipt_form_fid").val("");
 	$("#ipt_form_fname").val("");
 	$("#weibo_div_uploadResult").hide();
-	$("#weibo_img").attr("src",ctp+"/resource/front/img/loading.gif");
+	$("#weibo_img").attr("src","");
 	$("#div_ipt_photo").html('<input type="file" class="photo-input" accept="image/*" name="file" onchange="javascript:weiboAttachmentUpload(this,\'weibo_form_upload\',\'PHOTO\')" />');
 }
 function weiboAttachmentUpload(sender,uploadForm,type){
@@ -387,12 +389,11 @@ function weiboAttachmentUpload(sender,uploadForm,type){
 		return false;
 	}
 	$("#weibo_ipt_upload_type").val(type);
-
 	//$("#"+uploadForm).submit();
 	var params = {};
 	var formData = new FormData($( "#weibo_form_upload" )[0]);
 	$.ajax({
-		url  : ctx+"/uploadPhoto",
+		url  : dynamic_Upload,
 		type : "post",
 		data : formData,
 		dataType: "json",
@@ -404,7 +405,7 @@ function weiboAttachmentUpload(sender,uploadForm,type){
 				$("#ipt_form_ftype").val(type);
 				$("#ipt_form_fid").val(data.id);
 				$("#ipt_form_fname").val(data.name);
-				$("#weibo_img").attr("src",ctp+"/attachment/photo/source/"+data.hash+"/"+data.id+".jpg");
+				$("#weibo_img").attr("src",data.img);
 				$("#weibo_span_fname").html(data.name);
 				$("#weibo_div_uploadResult").show();
 			}else if(json.retCode==CODE_NOT_LOGIN){

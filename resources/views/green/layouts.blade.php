@@ -8,6 +8,9 @@
 <link rel="stylesheet" type="text/css" href="/assets/green/css/css.css">
 @yield('css')
 <script type="text/javascript" src="/assets/green/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var ctx = "/open/apply/{{$info['id']}}";
+</script>
 @yield('headScript')
 </head>
 

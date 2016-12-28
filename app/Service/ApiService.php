@@ -272,6 +272,8 @@ class ApiService extends BaseService
         $path = env('API_URL')."/attachment/uploadForTask";
         $query = array('file'=>new \CURLFile($filePath));
         $body = $this->result_curl($path,$query);
+        unlink($filePath);
+        $body['data']['img'] = $this->url."/attachment/photo/source/{$body['data']['hash']}/{$body['data']['id']}.jpg";
         return $body;
     }
 
@@ -324,6 +326,6 @@ class ApiService extends BaseService
 
         curl_close ( $ch );
 
-        return $body;
+        return json_decode($body,true);
     }
 }

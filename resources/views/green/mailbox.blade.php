@@ -1,5 +1,8 @@
 @extends('green.layouts')
 @section('title'){{$typeCh}}-@stop
+@section('headScript')
+<script type="text/javascript" src="/assets/green/js/space.js"></script>
+@stop
 @section('content')
 @include('green.sidebar')
 <div class="three_l zixun_left">
@@ -17,11 +20,13 @@
             <textarea type="content" name="" placeholder="请输入内容..."></textarea>
         </div>
         <div class="qz-poster-ft left">
-            <form id="weibo_form_upload" class="left-form" action="/attachment/upload" method="post" target="formFrame" enctype="multipart/form-data">
-               <a id="a_photo" href="javascript:showAttachmentUpload('请选择一个图片格式的文件',2);"><i class="icon icon-pic"></i>图片 </a>
-               <div id="div_ipt_photo"><input type="file" class="photo-input" accept="image/*" name="file" onchange="javascript:weiboAttachmentUpload(this,'weibo_form_upload','PHOTO')">
-               </div>
+          <div class="left">
+            <form id="weibo_form_upload" class="left-form" method="post"  enctype="multipart/form-data">
+                <input type="hidden" id="weibo_ipt_upload_type"  name="type" />
+                <a id="a_photo"><i class="icon icon-pic-1"></i>图片</a>
+                <div id="div_ipt_photo"><input type="file" class="photo-input" accept="image/*" name="file" onchange="javascript:weiboAttachmentUpload(this,'weibo_form_upload','PHOTO')" /></div>
             </form>
+          </div>
         </div>
         <div class="tel item">
           手机号:  <input type="tel" name="">
@@ -47,8 +52,19 @@
        <li>
          <span>{{$list['timeStr']}}</span>
          <a href="{{$list['url']}}">{{$list['title']}}</a>
-         <p>{{$list['reduced']}}</p>
-          <span>浏览量:</span><span>已处理|</span>
+         <span class="mailbox-content-left">
+                <img src="http://111.47.13.92:9004/attachment/userPhoto/944.jpg"><br>【管理员】
+         </span>
+         <span class="mailbox-content-right"><p>{{$list['reduced']}}</p></span>
+            <div class="mailbox-reply">
+                <span class="mailbox-content-left">
+                  <img src="http://111.47.13.92:9004/attachment/userPhoto/944.jpg"><br>【管理员】
+                </span>
+                <span class="mailbox-content-right">
+                  <p>家长您好！校服厂商下周四—周六三天时间来附小补售校服，学校也会通知班主任提醒家长，请您关注学校通知，按时来买。如果还有疑问请联系人魏老师 办公电话87540332<br></p>
+                </span>
+                <span class="li-content-time">2014-02-24 16:38:28</span>
+            </div>
        </li>
        @endforeach
      </ul>
