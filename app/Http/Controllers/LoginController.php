@@ -10,9 +10,9 @@ class LoginController extends Controller
 	private $api;
 
 	public function __construct(ApiService $api){
-		$this->theme = env('THEME_STYLE');   //设置主题目录
 		$this->api = $api;
 	}
+
 	//登陆
 	public function login(Request $request){
 		$school = $this->api->school;
@@ -24,11 +24,12 @@ class LoginController extends Controller
 				//$_SESSION['userId']=$data[0]['id'];
 				return redirect('/open/apply/'.$this->api->school.'/index');
 			}else{
-				return view($this->theme.'.login',compact('school','data'));
+				return view($this->api->theme.'.login',compact('school','data'));
 			}
 		}
-		return view($this->theme.'.login',compact('school'));
+		return view($this->api->theme.'.login',compact('school'));
 	}
+
     //退出
 	public function loginOut(){
 		setcookie('kindergarten_sid','');

@@ -76,5 +76,7 @@ $(document).ready(function(){
     })
     $("#textarea_content").FormFace({ faceTitle : "#a_weibo_face", cid : "", left : "-5" , top : "5" });
 });
+
 </script>
+
 @stop

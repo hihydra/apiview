@@ -8,7 +8,7 @@ class ApiMiddleware
 {
     public function handle($request, Closure $next)
     {
-    	//return $request->route();
+
         return $next($request);
     }
 }

@@ -1,5 +1,5 @@
 @extends('green.layouts')
-@section('title')登陆-@stop
+@section('title')修改密码-@stop
 @section('content')
 <div class="logins">
     @if(!empty($data['retCode']))
@@ -36,37 +36,17 @@
             <input type="password" name="password" placeholder="您的密码">
           </div>
           <div class="loginFormCheck">
+            <div class="forgetPwdLine">
+              <a target="_top" href="{{ url('open/apply/'.$school.'/rePassword') }}">修改密码</a>
+            </div>
             <label><input type="checkbox" name="rememberMe" value="true">记住我</label>
             <div class="clearfix"></div>
           </div>
           <div class="loginFormBtn">
-            <button type="submit" tabindex="6" class="btn1 btn-login" style=" float:left; border:0 none;">&nbsp;</button>
+            <button type="submit" tabindex="6" class="btn1 btn-login" style=" float:left; border:0 none;">登陆</button>
           </div>
         </form>
       </div>
     </div>
  </div>
  @stop
-
-@section('script')
-<script type="text/javascript">
-$(document).ready(function(){
-  var pageNo = '';
-  var methods = {
-    get_data: function() {
-        $.ajax({url: "http://111.47.13.92:9004/login_in",
-          data:{username:'12345678911',password:'ls123456'},
-          type: 'post',
-          dataType: 'JSON',
-          error: function(){},
-          success: function(data){
-            //alert(document.cookie);
-           // document.cookie="kindergarten_sid="+;
-          }
-        });
-      },
-  };
-  methods.get_data();
-});
-</script>
-@stop

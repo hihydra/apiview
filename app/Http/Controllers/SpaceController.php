@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service\ApiService;
+use App\Service\SpaceService;
 
 class SpaceController extends Controller
 {
 	private $api;
 
-	public function __construct(ApiService $api){
-		$this->theme = env('THEME_STYLE');   //设置主题目录
+	public function __construct(SpaceService $api){
 		$this->api = $api;
 	}
 
@@ -18,8 +17,31 @@ class SpaceController extends Controller
 	public function space(Request $request){
 		$id = $request->input('id','');
 		$data = $this->api->personal($id);
-		return view($this->theme.'.space',$data);
+		return view($this->api->theme.'.space.dynamic',$data);
 	}
+
+	//修改密码
+	public function rePassword(Request $request){
+		$data = $this->api->personal();
+		if($request->isMethod('post')){
+			$oldPwd = $request->input('oldPwd');
+			$newPwd = $request->input('newPwd');
+			$data = $this->api->rePassword($oldPwd,$newPwd);
+			if($body['retCode'] == 100000){
+            	setcookie('kindergarten_sid','');
+            	return redirect('/open/apply/'.$this->school.'/login');
+       		}
+		}
+		return view($this->api->theme.'.space.rePassword',$data);
+	}
+
+	//确认密码
+	public function checkPassword(Request $request){
+		$oldPwd = $request->input('oldPwd','');
+		$data = $this->api->checkPassword($oldPwd);
+		return $data;
+	}
+
 	//空间动态
 	public function loadSpace(Request $request){
 		$id = $request->input('id','');
@@ -51,10 +73,7 @@ class SpaceController extends Controller
 
 									{$str['spacefrom']}
 
-									<div id="div_dynamic_comments_{$value['id']}" class="media-review">
-										{$str['commenthtml']}
-										{$str['commentmore']}
-									</div>
+									{$str['commenthtml']}
 						</div>
 				    </div>
 				</div>
@@ -131,7 +150,13 @@ Eof;
 	//是否有权限操作
 	private function ishtml($space){
 		if (!empty($space['comments'])) {
-			$commenthtml = $this->commenthtml($space['comments']);
+			$commenthtml  = '<div id="div_dynamic_comments_'.$space['id'].'" class="media-review">';
+			$commenthtml .= $this->commenthtml($space['comments']);
+			if ($space['cc']>count($space['comments'])) {
+				$comentCount = $space['cc']-count($space['comments']);
+				$commenthtml .= "<p class=\"more_{$space['id']}\">后面还有{$comentCount}条评论，<a href=\"javascript:loadComment('{$space['id']}');\">点击查看<span>&gt;&gt;</span></a></p>";
+			}
+			$commenthtml .= "</div>";
 		}else{
 			$commenthtml = "";
 		}
@@ -144,13 +169,6 @@ Eof;
 	    	$delspace = "<li id=\"delspace\"><a href=\"javascript:doDelTeacherSpaceData('{$space['id']}');\">删除</a></li><li>|</li>";
 	    }else{
 	    	$delspace = "";
-		}
-
-		if(!empty($space['comments'])&&$space['cc']>count($space['comments'])){
-			$comentCount = $space['cc']-count($space['comments']);
-			$commentmore = "<p class=\"more_{$space['id']}\">后面还有{$comentCount}条评论，<a href=\"javascript:loadComment('{$space['id']}');\">点击查看<span>&gt;&gt;</span></a></p>";
-		}else{
-			$commentmore = "";
 		}
 
 		if($this->api->judgeCookie()){
@@ -195,8 +213,7 @@ Eof;
 			'atthtml'     => $atthtml,
 			'delspace'    => $delspace,
 			'hasLike'     => $hasLike,
-			'spacefrom'   => $spacefrom,
-			'commentmore' => $commentmore
+			'spacefrom'   => $spacefrom
 			);
 	}
 

@@ -1,5 +1,9 @@
 @extends('green.layouts')
 @section('title'){{$typeCh}}-@stop
+@section('headScript')
+<script type="text/javascript" src="/assets/green/js/utils.js"></script>
+@stop
+@section('content')
 @section('content')
 @include('green.sidebar')
 <div class="three_l zixun_left">
@@ -9,12 +13,12 @@
   <div class="three_con clearfix">
     <div class="mailbox">
       <div class="mailbox-from">
-      <form method="post" class="saveMaibox">
+      <form class="saveMaibox">
         <div class="title item">
-            <input type="title" name="title" placeholder="请输入标题..." required="required">
+            <input type="title" name="title" placeholder="请输入标题...">
         </div>
         <div class="content item">
-            <textarea type="content" name="content" placeholder="请输入内容..." required="required"></textarea>
+            <textarea type="content" name="content" placeholder="请输入内容..."></textarea>
         </div>
         <div class="tel item">
           <input type="tel" name="mobile" placeholder="请输入手机号..." required="required">
@@ -30,8 +34,43 @@
        <li>
          <span>{{$list['ftStr']}}</span>
          <a>{{$list['title']}}</a>
-         <p>{{$list['content']}}</p>
-         <span>{{$list['isProcessed']?'已处理':'未处理'}}</span>
+         <span class="mailbox-content"><p>{{$list['content']}}</p></span>
+            @if($list['isProcessed']||$list['isOwner'])
+            <div class="mailbox-reply">
+                <span class="mailbox-content-left">
+                  【回复】
+                </span>
+                <span class="mailbox-content-right">
+                @if(!$list['isProcessed'] && $list['isOwner'])
+                <div class="media subMessage hd">
+                  <div class="media-body">
+                      <div class="row">
+                          <div class="col-sm-12">
+                                  <div class="row">
+                                      <div class="col-sm-12 msgBox">
+                                          <form class="answerMaibox_{{$list['id']}}">
+                                              <input type="hidden" name="id" value="{{$list['id']}}">
+                                              <textarea style="width: 96%;" name="note" placeholder="请输入回复内容:"></textarea>
+                                              <div class="action">
+                                                <div class="col-sm-12 right">
+                                                   <input onclick="javascript:answerMaibox({{$list['id']}});" class="Btn" type="button" value="确定">
+                                                </div>
+                                              </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                 @endif
+                @if($list['isProcessed'])
+                  <p>{{{ $list['note'] or '' }}}<br></p>
+                </span>
+                <span class="li-content-time">{{$list['htStr']}}</span>
+                @endif
+            </div>
+            @endif
        </li>
        @endforeach
      </ul>
@@ -52,22 +91,59 @@
    function saveMaibox(){
       var title = $('input[name^="title"]').val();
       if(title.length<4){
-          alert("标题必须大于4个字符！");
+          alert("标题必须大于2个字符！");
           return ;
       }
       var content = $('textarea[name^="content"]').val();
       if(content.length<6){
-          alert("内容必须大于6个字符！");
+          alert("内容必须大于4个字符！");
           return ;
       }
       var tel = $('input[name^="mobile"]').val();
       var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
       if (!reg.test(tel)) {
          alert("手机号码错误！");
-      }else{
-         $('.saveMaibox').attr('action',ctx+'/saveMaibox');
-         $(".saveMaibox").submit();
+         return ;
       }
+      var params = {};
+      params.url = ctx+'/saveMaibox';
+      params.postData = $('.saveMaibox').serialize();
+      params.postType = "post";
+      params.error = "操作失败，请确认您的网络是否正常！";
+      params.mustCallBack = true;//是否必须回调
+      params.callBack = function (json){
+        if(json.retCode==CODE_SUCCESS){
+          window.location.reload();
+        }else if(json.retCode==CODE_NOT_LOGIN){
+          alert("登录超时，请重新登录！");
+        }else{
+          alert("操作失败！");
+        }
+      };
+      ajaxJSON(params);
+   }
+   function answerMaibox(id){
+      var content = $("textarea[name='note']").val();;
+      if(content.length<6){
+          alert("内容必须大于4个字符！");
+          return ;
+      }
+      var params = {};
+      params.url = ctx+'/saveMaibox';
+      params.postData = $('.answerMaibox_'+id).serialize();
+      params.postType = "post";
+      params.error = "操作失败，请确认您的网络是否正常！";
+      params.mustCallBack = true;//是否必须回调
+      params.callBack = function (json){
+        if(json.retCode==CODE_SUCCESS){
+          window.location.reload();
+        }else if(json.retCode==CODE_NOT_LOGIN){
+          alert("登录超时，请重新登录！");
+        }else{
+          alert("操作失败！");
+        }
+      };
+      ajaxJSON(params);
    }
  </script>
  @stop

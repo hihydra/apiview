@@ -1,11 +1,3 @@
-//100通用
-var CODE_SUCCESS			= 100000;//成功
-var CODE_NETWORK_ERROR		= 100001;//网络异常
-var CODE_SERVER_INNER_ERROR	= 100002;//失败,内部错误
-var CODE_NOT_LOGIN			= 100003;//未登录
-var CODE_UNAUTHORIZED		= 100004;//权限不够
-var CODE_PARAMETER_NULL     = 100005;//数据为空
-
 var teacherSpace_loadUrl = ctx+"/space/loadSpace";
 var teacherSpace_addUrl = ctx+"/space/addSpace";
 var teacherSpace_delUrl = ctx+"/space/delSpace";
@@ -48,59 +40,6 @@ var methods = {
       },
   };
 
-function ajaxJSON(params){
-	if(params.syncId==null){
-		params.syncId = syncId_default;
-	}
-	if(sync_div_display[params.syncId]==null){
-		sync_div_display[params.syncId] = 0;
-	}
-	var _sync = params.mustCallBack?0:++sync_div_display[params.syncId];
-	relateEleControl(params.disableEles,true);
-	$.ajax({
-		url: params.url,
-		data: params.postData,
-		type: params.postType,
-		async: false,
-		//dataType: "json",
-		success: function(json){
-			relateEleControl(params.disableEles,false);
-			if(!params.mustCallBack&&_sync!=sync_div_display[params.syncId]){
-				return ;
-			}
-			if(json.retCode==CODE_NOT_LOGIN){
-				alert("请重新登录！");
-			}else if(json.retCode==CODE_UNAUTHORIZED){
-				alert("权限不足！");
-				if(params.failedCallBack!=null){
-					params.failedCallBack();
-				}
-			}else{
-				params.callBack(json);
-			}
-		},
-		error:function(){
-			relateEleControl(params.disableEles,false);
-			if(params.failedCallBack!=null){
-				params.failedCallBack();
-			}
-			if(!params.mustCallBack&&_sync!=sync_div_display[params.syncId]){
-				return ;
-			}else if(params.error!=null){
-				//alert(params.error);
-			}
-		}
-	});
-}
-
-function relateEleControl(eles,val){
-	if(eles==null||eles.length==0){
-		return ;
-	}
-	for(var i=0;i<eles.length;i++){
-		$("#"+eles[i]).attr("disabled",val);
-	}
-}
 function doAddTeacherSpaceData(){
 	if($("#textarea_content").attr("disabled")!=null){
 		return ;
@@ -297,7 +236,7 @@ function toPage(id,pageNo){
 	params.url = dynamic_loadComment;
 	params.postData = postData;
 	params.postType = "get";
-	//params.error = "获取动态失败";
+	params.error = "获取动态失败";
 	params.mustCallBack = true;//是否必须回调
 	params.callBack = function (json){
 		if(json.retCode==CODE_SUCCESS){

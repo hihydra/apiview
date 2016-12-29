@@ -10,13 +10,13 @@ class ApiController extends Controller
 	private $api;
 
 	public function __construct(ApiService $api){
-		$this->theme = env('THEME_STYLE');   //设置主题目录
 		$this->api = $api;
 	}
+
 	//首页
 	public function index(){
 		$data = $this->api->loadSchoolIntro(380);
-		return view($this->theme.'.index',$data);
+		return view($this->api->theme.'.index',$data);
 	}
 
 	//列表页
@@ -26,76 +26,80 @@ class ApiController extends Controller
 		switch ($type) {
 			case 'intro':
 				$data = $this->api->loadSchoolIntro();
-				return view($this->theme.'.content',$data);
+				return view($this->api->theme.'.content',$data);
 				break;
 			case 'orgStruct':
 				$data = $this->api->loadSchoolOrgStruct();
-				return view($this->theme.'.content',$data);
+				return view($this->api->theme.'.content',$data);
 				break;
 			case 'enrollment':
 				$data = $this->api->loadSchoolEnrollment();
-				return view($this->theme.'.content',$data);
+				return view($this->api->theme.'.content',$data);
 				break;
 			case 'recipe':
 			    $data = $this->api->loadSchoolRecipes('',$page);
-				return view($this->theme.'.recipe',$data);
+				return view($this->api->theme.'.recipe',$data);
 				break;
 			case 'teacher':
 				$data = $this->api->loadTeacherPagePhoto('',$page);
-				return view($this->theme.'.photo',$data);
+				return view($this->api->theme.'.photo',$data);
 				break;
 			case 'TYPE_PHOTO': case 'TYPE_HONOUR':
 				$data = $this->api->loadSchoolPagePicture($type,$page);
-				return view($this->theme.'.photo',$data);
+				return view($this->api->theme.'.photo',$data);
 				break;
 			case 'notice':
 				$data = $this->api->loadRecentlyNotice();
-				return view($this->theme.'.deslist',$data);
+				return view($this->api->theme.'.deslist',$data);
 				break;
 			case 'mailbox':
 				$data = $this->api->loadChildStar($page);
-				return view($this->theme.'.mailbox',$data);
+				return view($this->api->theme.'.mailbox',$data);
 				break;
 			case 'forum':
 			    $data = $this->api->loadChildStar($page);
-				return view($this->theme.'.forum',$data);
+				return view($this->api->theme.'.forum',$data);
 				break;
 			default:
 				$data = $this->api->loadInfo($type,$page);
-				return view($this->theme.'.deslist',$data);
+				return view($this->api->theme.'.deslist',$data);
 				break;
 		}
 	}
 	//文章页
 	public function article($id){
 		$data = $this->api->article($id);
-		return view($this->theme.'.article',$data);
+		return view($this->api->theme.'.article',$data);
 	}
 	//通知详情
 	public function noticeDetail($id){
 		$data = $this->api->noticeDetail($id);
-		return view($this->theme.'.article',$data);
+		return view($this->api->theme.'.article',$data);
 	}
 	//食谱内容
 	public function recipe($id){
 		$data = $this->api->recipeDetail($id);
-		return view($this->theme.'.article',$data);
+		return view($this->api->theme.'.article',$data);
 	}
 	//教师简介
 	public function profiles($id){
 		$data = $this->api->teacherIntro($id);
-		return view($this->theme.'.intro',$data);
+		return view($this->api->theme.'.intro',$data);
 	}
 	//院长信箱
 	public function saveMaibox(Request $request){
+		/*
+		$this->validate($request, [
+	        'title'   => 'required|min:3|max:40',
+	        'content' => 'required|min:3|max:500'
+	    ]);
+	    */
 		$form = $request->all();
 		$data = $this->api->saveChildStar($form);
-		if ($data['retCode'] == 100000) {
-			return redirect('/open/apply/'.$this->api->school.'/category?type=mailbox');
-		}else{
 
-		}
+		return $data;
 	}
+
 	//上传图片
 	public function uploadPhoto(Request $request){
 		$file = $request->file('file');

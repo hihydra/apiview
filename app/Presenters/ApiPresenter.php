@@ -1,5 +1,6 @@
 <?php
 namespace App\Presenters;
+use Illuminate\Http\Request;
 use App\Service\ApiService;
 
 class ApiPresenter
@@ -73,6 +74,7 @@ class ApiPresenter
 		$data = $this->api->loadSchoolInfo();
 		return $data;
 	}
+
 	public function judgeCookie(){
 		return $this->api->judgeCookie();
 	}

@@ -27,7 +27,9 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .login ul li{ display:inline-block; color:#515151; font-size:12px; padding:0 3px;}
 .login ul li a{ color:#515151; font-size:12px;}
 .nav{ height:36px; line-height:36px;}
-.nav ul li{ float:left; position:relative;}
+.nav ul li{ float:left; position:relative;z-index:999;}
+.nav ul li ul{display:none;}
+.nav ul li ul:hover{display: block;}
 .nav ul li a{ font-size:14px; color:#007a37; padding:0 20px; display:inline-block; height:36px; line-height:36px; border-left:1px solid #e5ddcc;}
 .nav ul li a:hover,.nav ul li a.hover{ background:#007a37; color:#fff; }
 .nav-ul{ background:#fff; position:absolute; left:1px; top:36px;}
@@ -121,6 +123,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .profile-1 ul li{ width:95%; line-height:32px; display: inline-block; font-size:12px; border-bottom:1px solid #ddd; margin:9px; padding:0 10px;}
 .profile-1 ul li a{ display:inline-block; width:80%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font: 600 16px "microsoft yahei",arial;color: #333;padding-bottom:10px;}
 .profile-1 ul li span{ float:right;}
+.profile-1 ul li span.mailbox-content{ float:left;}
 
 /*****分页turnPage*****/
 .turnPage{ padding:10px; text-align:right;height: 20px;}
@@ -290,10 +293,10 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 #errorAlert .cue-detail a{color: #4e90e2; text-decoration: underline;}
 #errorMask{position:absolute; top:0; left: 0;width: 100%; height: 600px; background: #000; opacity: 0.2; filter:alpha(opacity=20); z-index: 1;}
 
-.login1{ background:#fff; box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); border-radius:5px; height:300px; left:50%; margin-left:141px; padding:14px 16px 15px; float: right;text-align:left; top:235px; width:300px; z-index:2;margin: 80px;}
+.login1{ background:#fff; box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); border-radius:5px;  left:50%; margin-left:141px; padding:14px 16px 15px; float: right;text-align:left; top:235px; width:300px; z-index:2;margin: 80px;}
 .tab-2{ background:url(../img/login-bg.png) no-repeat -323px 0; height:320px; left:50%; margin-left:141px; padding:14px 16px 15px; position:absolute; text-align:left; top:135px; width:295px; z-index:2;}
 .loginFunc{ clear:both; height:37px; line-height:37px; overflow:hidden; margin:0 18px; border-bottom:1px dotted #e4e4e4;}
-.loginFunc span{color:#2e2e2e; font-weight:bold; display:block; width:50px;  text-align:center; height:35px; line-height:35px; font-size:20px;}
+.loginFunc span{color:#2e2e2e; font-weight:bold; display:block;height:35px; line-height:35px; font-size:20px;}
 .loginFuncNormal, .loginFuncMobile{ color:#333; font-weight:bold; cursor:pointer; float:left; font-size:14px; height:100%; line-height:46px; overflow:hidden; position:relative; text-align:center; width:148px;}
 .loginFuncMobile{ border-right:medium none; width:147px;}
 .loginForm{ padding-top:20px; position:relative;}
@@ -322,7 +325,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .manual{ border-top:1px solid #dbdbdb; margin:15px 0; height:77px;}
 .manual a{ background:url(../img/bg_v2.png) no-repeat 0 -300px; display:block; width:270px; height:38px; margin:20px auto;}
 .manual a:hover{ text-decoration:none;}
-.btn1{border-radius:3px; cursor:pointer; display:block; height:38px; outline:0 none; padding:0; text-align:center; vertical-align:baseline; width:300px;}
+.btn1{border-radius:3px; cursor:pointer; display:block; height:38px; outline:0 none; padding:0; text-align:center; vertical-align:baseline; width:258px;}
 /*登陆结束*/
 
 #waitbox,#get_more{font-size: 14px;text-align:center;cursor:pointer;color:#56b463;padding-top: 5px;}
@@ -338,12 +341,19 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 
 
 /*院长信箱 开始*/
-.mailbox{width：100%;height: 200px;border: 1px solid #888;margin: 10px;}
+.mailbox{width：100%;height: 216px;border: 1px solid #888;margin: 10px;}
 .mailbox .mailbox-from{margin:20px;color: #000000;}
 .mailbox .mailbox-from .item{padding-bottom:6px;}
 .mailbox textarea {width: 98%; height: 100px;line-height: 20px;padding: 3px 8px 5px;}
 .mailbox .mailbox-from .tel{/*padding-left: 200px;*/padding-top: 5px;height:35px;line-height: 25px;}
 .mailbox .mailbox-from .Btn{float: right;background: #56b463;color: #fff;font-size: 12px;height: 25px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;}
+.mailbox-from .title input{width: 200px;height: 24px;}
+.profile-1 ul li .mailbox-title{width: 200px;height: 100px;border-bottom: 1px dashed #ddd;}
+.profile-1 ul li .mailbox-reply{margin: 0 0 15px 50px;max-height: 800px;min-height: 90px;background-color: #f2f2f2;float: left;}
+.profile-1 ul li span.mailbox-content-left{display: block;width: 110px;float: left;padding-top: 16px;text-align: center;margin-bottom: 10px;font-size: 14px;}
+.profile-1 ul li span.mailbox-content-left img{width: 70px;height: 70px;}
+.profile-1 ul li span.mailbox-content-right{overflow: auto;min-height: 66px;max-height: 700px;display: block;margin: 10px;float: left;width: 577px;text-align: left;padding-top: 5px;color: #394953;}
+.profile-1 ul li span.li-content-time{width: 115px;display: block;}
 /*院长信箱 结束*/
 
 /*输入框 开始*/
@@ -464,42 +474,34 @@ a.Btn:hover{ color:#fff;}
 .item-1{ height:30px; background:#f3f3f3; text-align:right; padding:5px 5px;}
 /*弹出框 结束*/
 
-.profile-1 ul li .mailbox-title{
-	border-bottom: 1px dashed #ddd;
-}
-.profile-1 ul li .mailbox-reply{
-	margin: 0 0 15px 50px;
-    max-height: 800px;
-    min-height: 90px;
-    background-color: #f2f2f2;
-    float: left;
-}
-.profile-1 ul li span.mailbox-content-left {
-    display: block;
-    width: 110px;
-    float: left;
-    padding-top: 16px;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 14px;
-}
-.profile-1 ul li span.mailbox-content-left img{
-	width: 70px;
-	height: 70px;
-}
-.profile-1 ul li span.mailbox-content-right{
-    overflow: auto;
-    min-height: 66px;
-    max-height: 700px;
-    display: block;
-    margin: 10px;
-    float: left;
-    width: 570px;
-    text-align: left;
-    padding-top: 5px;
-    color: #394953;
-}
-.profile-1 ul li span.li-content-time {
-    width: 147px;
-    display: block;
-}
+/*账号设置 开始*/
+.u-tips-err em{ background:url(../img/Wrong.png) no-repeat;}
+.u-tips em{ background:url(../img/pass.png) no-repeat; width:16px; height:16px; display:inline-block;vertical-align:middle;}
+input[type="text"],input[type="password"],textarea{outline-style:none;-webkit-appearance:none;}
+.inp { border: 1px solid #d5d5d5; /*border-radius: 5px;*/ box-shadow: 3px 2px 2px #eaeaea inset; padding: 6px 5px;vertical-align:top; border-radius: 2px;}
+.label-nick{width:60px;text-align:right;float:left;}
+.SW_fun_bg{ cursor:pointer;}
+.account_fold{ border:1px solid #d9d9d9; margin-top:10px;}
+.S_bg1, a.W_gotop, .SW_fun_bg{ background-color:#f2f2f2;}
+.account_title{ line-height:40px; padding:0 20px;}
+.account_title .title{ width:204px;}
+.account_title li{ float:left;}
+.account_title .title_content { width:350px;}
+.account_title .title_option {float: right;width: 56px; text-align:right;}
+.unfold_content{ background:#fff; border:1px solid #d9d9d9; padding-bottom:10px;}
+.unfold_left label.label-nick{ width:120px;}
+.u-tips{ display:inline-block;height:25px; line-height:25px;margin-left:15px;vertical-align:middle;}
+.u-tips-err span{ color:#fe6201;}
+.u-tips em{ background:url(../img/pass.png) no-repeat; width:16px; height:16px; display:inline-block;vertical-align:middle;}
+.u-tips span{vertical-align:middle;}
+.u-tips-err em{ background:url(../img/Wrong.png) no-repeat;}
+.u-tips-default em{background:none;}
+.top-right ul li .gn_topmenulist{ display:none;}
+.top-right ul .Hover{ position:relative;}
+.top-right ul .Hover .gn_topmenulist{ display:block;}
+.gn_topmenulist{ background:#fff; border:1px solid #666; border-top:none; font-size:12px; padding:5px 0 0; position:absolute; z-index:9998; right:0; top:25px; width:76px;border-radius:2px;}
+.gn_topmenulist .gn_text_list li{ height:25px; line-height:25px; text-align:center; width:85%; display:block;}
+.gn_topmenulist .gn_text_list li:hover{ background:#f1f1f1;}
+.top-right ul .Hover .gn_tab{ display:inline-block; height:27px; line-height:27px; padding:0 4px 0; width:68px; z-index:9999;background:#fff; border:1px solid #666; border-bottom:none;vertical-align:middle; border-radius:2px;}
+.top-right ul li .gn_tab{ display:inline-block; height:27px; line-height:27px; padding:1px 5px 0; width:68px;vertical-align:middle;}
+/*账号设置 结束*/
