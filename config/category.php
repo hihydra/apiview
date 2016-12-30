@@ -29,7 +29,7 @@ return [
 			'TYPE_SPECIAL_PROGRAMS'         =>  '特色课程',
 			'TYPE_TEACHING_RESULTS'         =>  '教学成果',
 			'TYPE_SCIENTIFIC_RESEARCH'      =>  '科研课题',
-			'TYPE_SCSCS'                    =>  '教学资源',
+			'TYPE_EDUCATIONAL_RESOURCES'    =>  '教学资源',
 		]
 	],
 	'interaction' => [

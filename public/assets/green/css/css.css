@@ -68,7 +68,7 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 .fl_4 ul li a img{width:327px; height:327px;}
 .fl_4 ul li:hover .z-1{display:block;}
 .fl_4 ul li .z-1{display:none;position:absolute; background:url(../img/img-m.png) repeat; height:247px; width:247px; left:0; top:0; padding:40px;}
-.fl_4 ul li .z-1 h2{ color:#fff; padding-bottom:20px; padding-top:30px;}
+.fl_4 ul li .z-1 h2{ color:#fff; padding-bottom:20px; padding-top:30px;font-size: 20px;}
 .fl_4 ul li .z-1 p a{ color:#fff; font-size:24px; line-height:45px;}
 .fl_4 ul li.li-2{ padding-right:0;}
 
@@ -85,7 +85,7 @@ body{ background:url(../img/bg.jpg) top center #fdfbd9 no-repeat; position:relat
 
 .crumbs{ height:40px; line-height:20px;}
 .crumbs ul li{ float:left;}
-.crumbs ul li a{ padding-left:20px; font-size:14px; background:url(../img/crumbs.png) no-repeat 4px 5px;}
+.crumbs ul li a{ padding-left:20px; font-size:14px; background:url(../img/crumbs.png) no-repeat 4px 5px;color: #515151;}
 .crumbs ul li a:hover,.crumbs ul li a.hover{ color:#007a37;}
 .crumbs ul li a.no{ background:none; padding:0; color:#515151;}
 
@@ -398,11 +398,15 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .media-review{background: #f3f3f3; padding:0 10px 10px;}
 .media-review .subMessage{ border-bottom:1px dotted #ccc; padding:4px 0 7px; width:auto;}
 .imgXsmall { max-width: 35px;}
-.imgSmall{ height: auto; max-width: 50px; opacity: 1; transition: opacity 0.25s ease 0s; border-radius:4px;}
-.media-object { display: block;}
+.imgSmall{ height: auto; max-width: 50px; opacity: 1; transition: opacity 0.25s ease 0s;/* border-radius:4px;*/}
+.media-object { display: block;float: left;padding-right: 20px;}
 /*动态图片结束*/
 
 /*空间动态 开始*/
+.forGroup{ margin-left:3px; padding-left:14px; background:url(../img/Ico_Allow_Right.png) no-repeat -3px -2px; height:25px; line-height:25px;}
+.forGroup a{ font-size:14px; font-weight:100; display:inline-block; color:#666;}
+.sitedesc{padding:82px 0 0 167px;font-size: 14px;font-weight: bold;}
+.media-content{width:90%;}
 .dynamic_notice{background-color: #fff;padding:5px;margin-bottom: 15px;}
 .dynamic_notice .profile-1{padding: 10px;}
 .dynamic_notice .profile-1 .notice_title{padding:10px 19px 30px;border: 1px solid #ddd;background-color: #f2f2f2;}

@@ -65,26 +65,37 @@ class SpaceController extends Controller
 			<div id="div_data_{$value['id']}">
 				<div class="control-inner" style="height:0px;"></div>
 				    <div class="media newMessage">
+			    		<a title="肖洁" href="javascript:void(0);" class="pull-left">
+							<img class="imgSmall media-object" src="http://111.47.13.92:9004/resource/front/images/default_l.jpg" title="肖洁">
+						</a>
 						<div class="media-body">
-						    <p class="messageCon">{$value['c']}</p>
-						        <h4 class="media-heading">
-						            <ul class="feedbacks pull-right list-inline">
-										{$str['delspace']}
-						                <li>{$str['hasLike']} (<span id="like_count_{$value['id']}">{$value['lc']}</span>)</li>
-						                <li>|</li>
-						                <li><a id="a_dynamic_comments_178" href="javascript:comment_click('{$value['id']}');">评论</a>({$value['cc']})
-						                </li>
-						            </ul>
-						            <ul class="feedbacks pull-left list-inline">
-						                <li>{$value['timeStr']}</li>
-						            </ul>
-						        </h4>
+							<div class="media-content left">
+								<a href="javascript:void(0);"><span class="name text-primary ellipsis">肖洁</span></a>
+								<!----
+								<span class="forGroup"><i class="icon icon-group"></i><a href="javascript:void(0);">小一班</a></span>
+								---!>
+								<p class="messageCon">{$value['c']}</p>
+							</div>
+						</div>
+						<div class="clear"></div>
+						<h4 class="media-heading">
+				            <ul class="feedbacks pull-right list-inline">
+								{$str['delspace']}
+				                <li>{$str['hasLike']} (<span id="like_count_{$value['id']}">{$value['lc']}</span>)</li>
+				                <li>|</li>
+				                <li><a id="a_dynamic_comments_178" href="javascript:comment_click('{$value['id']}');">评论</a>({$value['cc']})
+				                </li>
+				            </ul>
+				            <ul class="feedbacks pull-left list-inline">
+				                <li>{$value['timeStr']}</li>
+				            </ul>
+				        </h4>
+						<div class="media-comment">
+							{$str['atthtml']}
 
-									{$str['atthtml']}
+							{$str['spacefrom']}
 
-									{$str['spacefrom']}
-
-									{$str['commenthtml']}
+							{$str['commenthtml']}
 						</div>
 				    </div>
 				</div>
@@ -161,15 +172,15 @@ Eof;
 	//是否有权限操作
 	private function ishtml($space){
 		if (!empty($space['comments'])) {
-			$commenthtml  = '<div id="div_dynamic_comments_'.$space['id'].'" class="media-review">';
+			$commenthtml  = '<div id="div_dynamic_comments_'.$space['id'].'">';
 			$commenthtml .= $this->commenthtml($space['comments']);
 			if ($space['cc']>count($space['comments'])) {
 				$comentCount = $space['cc']-count($space['comments']);
-				$commenthtml .= "<p class=\"more_{$space['id']}\">后面还有{$comentCount}条评论，<a href=\"javascript:loadComment('{$space['id']}');\">点击查看<span>&gt;&gt;</span></a></p>";
+				$commenthtml .= "<p class=\"media-review more_{$space['id']}\">后面还有{$comentCount}条评论，<a href=\"javascript:loadComment('{$space['id']}');\">点击查看<span>&gt;&gt;</span></a></p>";
 			}
 			$commenthtml .= "</div>";
 		}else{
-			$commenthtml = "";
+			$commenthtml = '<div id="div_dynamic_comments_'.$space['id'].'"></div>';
 		}
 		if(!empty($space['att'])){
 			$atthtml = $this->atthtml($space['att'],$space['id']);

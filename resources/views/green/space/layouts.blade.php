@@ -2,18 +2,6 @@
 @section('css')
 <link rel="stylesheet" href="/assets/green/css/jquery.Jcrop.css" type="text/css" />
 @stop
-@section('headScript')
-<script type="text/javascript">
-      var userId = {{$id}};
-</script>
-<script type="text/javascript" src="/assets/green/js/utils.js"></script>
-<script type="text/javascript" src="/assets/green/js/global.js"></script>
-<script type="text/javascript" src="/assets/green/js/main.js"></script>
-<script type="text/javascript" src="/assets/green/js/space.js"></script>
-<script type="text/javascript" src="/assets/green/js/photoPreview.js"></script>
-<script type="text/javascript" src="/assets/green/js/jquery.Jcrop.js"></script>
-<script type="text/javascript" src="/assets/green/js/jquery.rotate.1-1.js"></script>
-@stop
 @section('content')
 <div class="pf_head">
     <div class="pf_head_pic">
@@ -26,7 +14,15 @@
       </div>
       @endif
     </div>
-  <span class="title-text">{{$name}} 【{{$typeStr == 'SCHOOL_RECTOR'?'园长':'教师'}}】</span>
+  <span class="title-text">{{$name}}
+  【@if($typeStr == 'SCHOOL_RECTOR')园长@elseif($typeStr == 'SCHOOL_TEACHER')教师@elseif($typeStr == 'SCHOOL_STUDENT')家长@endif】</span>
+  <div class="sitedesc">
+  @if(!empty($classs))
+    @foreach($classs as $class)
+      {{$class['name']}}
+    @endforeach
+  @endif
+  </div>
 </div>
 <div id="dialog_photoEdit" class="popup dis_none jumpBox1" style="display:none;width:485px;">
   <div class="content">
@@ -87,4 +83,17 @@
   </ul>
 </div>
 @yield('spaceContent')
+@stop
+@section('script')
+<script type="text/javascript" src="/assets/green/js/jquery.Jcrop.js"></script>
+<script type="text/javascript" src="/assets/green/js/photoPreview.js"></script>
+<script type="text/javascript" src="/assets/green/js/utils.js"></script>
+<script type="text/javascript" src="/assets/green/js/global.js"></script>
+<script type="text/javascript">
+var url = window.location.pathname;
+  $(".nav").find("a[class='hover']").removeClass();
+  var nav = $(".nav").find("a[href='" + url + "']");
+  nav.addClass("hover");
+  $(".three_2").find("a[href='" + url + "']").addClass("hover");
+</script>
 @stop

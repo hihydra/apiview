@@ -8,6 +8,7 @@ class SpaceService extends BaseService
         $path = '/personal/info';
         $query = array('id'=>$id);
         $body = $this->result($path,$query);
+        $body['classs'] = $this->myClass();
         $body['img'] = $this->url.'/'.$body['largePhotoUrl'];
         if($this->judgeCookie() && !$id){
             $body['isOwner'] = true;
@@ -16,17 +17,10 @@ class SpaceService extends BaseService
         }
         return $body;
     }
-    //教师动态
+    //用户动态
     public function teacherSpace($id="",$pageNo=""){
         $path = '/teacherSpace/load';
         $query = array('teacherId'=>$id,'pageNo'=>$pageNo);
-        $body = $this->result($path,$query);
-        return $body;
-    }
-    //动态评论
-    public function loadComments($id,$anchor=""){
-        $path = '/task/teacherSpace/loadComments';
-        $query = array('spaceId'=>$id,'anchor'=>$anchor);
         $body = $this->result($path,$query);
         return $body;
     }
@@ -99,6 +93,14 @@ class SpaceService extends BaseService
         $path = '/password/modify';
         $query = array('oldPwd'=>$oldPwd,'newPwd'=>$newPwd);
         $body = $this->result($path,$query,'POST');
+        return $body;
+    }
+
+    //获取班级
+    public function myClass(){
+        $path = '/personal/myClass';
+        $query = array();
+        $body = $this->result($path,$query);
         return $body;
     }
 

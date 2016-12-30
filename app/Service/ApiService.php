@@ -110,7 +110,7 @@ class ApiService extends BaseService
                 $body['typeCh'] = config('category.information.next.'.$type);
                 break;
             case 'TYPE_ACADEMIC_ARRANGEMENT':case 'TYPE_SPECIAL_PROGRAMS':case 'TYPE_TEACHING_RESULTS':
-            case 'TYPE_SCIENTIFIC_RESEARCH':
+            case 'TYPE_SCIENTIFIC_RESEARCH':case 'TYPE_EDUCATIONAL_RESOURCES':
                 $body['typeCh'] = config('category.teaching.next.'.$type);
                 break;
             case 'TYPE_PHOTO_ACTIVITY':case 'TYPE_FAMILY_EDUCATION':

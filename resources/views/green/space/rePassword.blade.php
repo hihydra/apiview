@@ -1,5 +1,15 @@
 @extends('green.space.layouts')
 @section('title')修改密码-@stop
+@section('headScript')
+<script type="text/javascript" src="/assets/green/js/password.js"></script>
+<script type="text/javascript" src="/assets/green/js/passwordCheck.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    doLoadPwd();
+    loadPersonalInfo(true);
+});
+</script>
+@stop
 @section('spaceContent')
     <div class="three_l zixun_left">
         <div class="three_con clearfix">
@@ -40,14 +50,4 @@
         </div>
     </div>
     </div>
-@stop
-@section('script')
-<script type="text/javascript" src="/assets/green/js/password.js"></script>
-<script type="text/javascript" src="/assets/green/js/passwordCheck.js"></script>
-<script type="text/javascript">
-  $(document).ready(function(){
-    doLoadPwd();
-    loadPersonalInfo(true);
-});
-</script>
 @stop

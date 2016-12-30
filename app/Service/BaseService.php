@@ -46,7 +46,7 @@ class BaseService
                         setcookie($str[0],$str[1]);
                     }
                 }
-				if(!empty($body['data'])){
+				if(isset($body['data'])){
                     return $body['data'];
                 }else{
                     return $body;

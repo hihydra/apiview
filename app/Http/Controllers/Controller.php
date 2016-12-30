@@ -8,7 +8,7 @@ class Controller extends BaseController
 
 	public function pagination($id,$totalPages,$currentPage){
 		if($totalPages>1){
-			$html  =  '<ul class="pagination">';
+			$html  =  '<ul class="pagination media-review">';
 				if($currentPage>1){
 					$last = $currentPage-1;
 					$html .=  '<a href="javascript:toPage('.$id.','.$last.');">上一页</a>';

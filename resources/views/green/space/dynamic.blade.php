@@ -1,5 +1,19 @@
 @extends('green.space.layouts')
 @section('title')空间动态-@stop
+@section('headScript')
+<script type="text/javascript">
+      var userId = {{$id}};
+      $(document).ready(function(){
+          methods.get_data();
+          $('#get_more').on('click',function(){
+                methods.get_data();
+          })
+      });
+</script>
+<script type="text/javascript" src="/assets/green/js/jquery.rotate.1-1.js"></script>
+<script type="text/javascript" src="/assets/green/js/main.js"></script>
+<script type="text/javascript" src="/assets/green/js/space.js"></script>
+@stop
 @section('spaceContent')
 <div class="three_l zixun_left">
     <div class="dynamic_notice">
@@ -30,10 +44,14 @@
             <input type="hidden" id="ipt_form_fname" name="fname">
             <div class="item Special">
                 <label class="radioTb">
+                    @if($typeStr == 'SCHOOL_TEACHER'||$typeStr == 'SCHOOL_RECTOR')
                     <input type="radio" name="isAll">
                         <span>全园</span>
+                    @endif
+                    @if($typeStr == 'SCHOOL_TEACHER'||$typeStr == 'SCHOOL_STUDENT')
                     <input type="radio" name="isAll" checked="checked">
                         <span>班级</span>
+                    @endif
                     <input type="radio" name="isAll">
                         <span>自己</span>
                 </label>
@@ -91,13 +109,3 @@
  </div>
  </div>
  @stop
-@section('script')
-<script type="text/javascript">
-$(document).ready(function(){
-    methods.get_data();
-    $('#get_more').on('click',function(){
-          methods.get_data();
-    })
-});
-</script>
-@stop

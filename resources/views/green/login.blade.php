@@ -36,9 +36,6 @@
             <input type="password" name="password" placeholder="您的密码">
           </div>
           <div class="loginFormCheck">
-            <div class="forgetPwdLine">
-              <a target="_top" href="{{ url('open/apply/'.$school.'/rePassword') }}">修改密码</a>
-            </div>
             <label><input type="checkbox" name="rememberMe" value="true">记住我</label>
             <div class="clearfix"></div>
           </div>
