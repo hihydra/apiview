@@ -2,9 +2,27 @@
 @section('title')空间动态-@stop
 @section('spaceContent')
 <div class="three_l zixun_left">
+    <div class="dynamic_notice">
+        <div class="profile-1 clearfix">
+           <div class="notice_title">
+             <h2>通知</h2>
+             <span><a href="{{$notices['more']}}">>>更多</a></span>
+           </div>
+           <ul>
+            @foreach($notices['datas'] as $notice)
+             <li>
+               <span>{{$notice['timeStr']}}</span>
+               <a href="{{$notice['url']}}">{{$notice['title']}}</a>
+             </li>
+             @endforeach
+           </ul>
+           <div class="clear"></div>
+      </div>
+  </div>
   <div class="three_con clearfix">
     <div class="clearfix">
-      <div class="qz-poster" @if(empty($_COOKIE['kindergarten_sid']))style="display: none;"@endif>
+    @if($isOwner)
+      <div class="qz-poster">
         <div class="qz-poster-bd">
           <form id="form_teacherSpace" method="post">
             <input type="hidden" id="ipt_form_ftype" name="ftype" value="NONE">
@@ -34,6 +52,9 @@
               </form>
             </div>
         </div>
+        <script type="text/javascript">
+          $("#textarea_content").FormFace({ faceTitle : "#a_weibo_face", cid : "", left : "-5" , top : "5" });
+        </script>
         <div id="weibo_div_uploadResult" class="post" style="display: none;">
             <div class="right">
               <a href="javascript:delAttachment();">
@@ -44,14 +65,17 @@
             <div><img id="weibo_img" src=""></div>
             <div class="clear"></div>
         </div>
-        <div class="spaceCate">
+      </div>
+      @endif
+      <div class="spaceCate">
           <h3>空间动态</h3>
+          @if($isOwner)
             <ul>
               <li><a href="">全部</a></li>
               <li><a href="">班级</a></li>
               <li><a href="">与我相关</a></li>
             </ul>
-        </div>
+          @endif
       </div>
 
 
@@ -74,9 +98,6 @@ $(document).ready(function(){
     $('#get_more').on('click',function(){
           methods.get_data();
     })
-    $("#textarea_content").FormFace({ faceTitle : "#a_weibo_face", cid : "", left : "-5" , top : "5" });
 });
-
 </script>
-
 @stop

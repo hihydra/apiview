@@ -100,6 +100,7 @@ class ApiService extends BaseService
             $value['url'] = "/open/apply/".$this->school."/info/{$value['id']}";
         }
         $body['type'] = $type;
+        $body['more'] = '/open/apply/'.$this->school.'/category?type='.$type;
         switch ($type) {
             case 'TYPE_PHOTO_ACTIVITY':
                 $body['typeCh'] = config('category.survey.next.'.$type);
@@ -135,8 +136,10 @@ class ApiService extends BaseService
             $value['url'] = "/open/apply/".$this->school."/noticeDetail/{$value['id']}";
         }
         $data['datas'] = $body;
-        $data['typeCh'] = config('category.interaction.next.notice');
-        $data['type'] = 'notice';
+        $type = 'notice';
+        $data['typeCh'] = config('category.interaction.next.'.$type);
+        $data['type'] = $type;
+        $data['more'] = '/open/apply/'.$this->school.'/category?type='.$type;
         return $data;
     }
     //通知详情

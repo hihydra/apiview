@@ -61,7 +61,7 @@ function doModifyPassword(){
 		success:function(json){
 			if(json.retCode==CODE_SUCCESS){
 				alert("密码修改成功！");
-				//location.href=location.href;
+				window.location.reload();
 			}else{
 				alert("密码修改失败！");
 			}

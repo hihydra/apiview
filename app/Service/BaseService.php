@@ -20,6 +20,16 @@ class BaseService
        return !empty($_COOKIE['kindergarten_sid']);
     }
 
+    //上传图片
+    public function uploadPhoto($filePath){
+        $path = env('API_URL')."/attachment/uploadForTask";
+        $query = array('file'=>new \CURLFile($filePath));
+        $body = $this->result_curl($path,$query);
+        unlink($filePath);
+        $body['data']['img'] = $this->url."/attachment/photo/source/{$body['data']['hash']}/{$body['data']['id']}.jpg";
+        return $body;
+    }
+
 	protected function result($path,$query,$mothod="GET",$cookie=false){
         if (!empty($_COOKIE['kindergarten_sid'])) {
             $query['kindergarten_sid'] = $_COOKIE['kindergarten_sid'];
@@ -42,10 +52,29 @@ class BaseService
                     return $body;
                 }
 			}else{
-			   return $body;
+			    return $body;
 			}
 		}else{
 			abort(404);
 		}
+    }
+
+    private function result_curl($path,$query){
+        if (!empty($_COOKIE['kindergarten_sid'])) {
+            $cookieStr = 'kindergarten_sid='.$_COOKIE['kindergarten_sid'];
+        }
+        //初始化
+        $ch = curl_init ();
+        curl_setopt ( $ch, CURLOPT_URL,$path);
+        curl_setopt ( $ch, CURLOPT_POST, 1 );//post方式
+        curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt ( $ch, CURLOPT_COOKIE,$cookieStr);
+        curl_setopt ( $ch, CURLOPT_POSTFIELDS,$query);
+        $body = curl_exec ( $ch );
+
+        curl_close ( $ch );
+
+        return json_decode($body,true);
     }
 }

@@ -4,41 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service\SpaceService;
+use App\Service\ApiService;
 
 class SpaceController extends Controller
 {
+	private $space;
 	private $api;
 
-	public function __construct(SpaceService $api){
+	public function __construct(SpaceService $space,ApiService $api){
+		$this->space = $space;
 		$this->api = $api;
 	}
 
 	//空间
 	public function space(Request $request){
 		$id = $request->input('id','');
-		$data = $this->api->personal($id);
-		return view($this->api->theme.'.space.dynamic',$data);
+		if(!$this->space->judgeCookie() && !$id){
+           return redirect('/open/apply/'.$this->space->school.'/login');
+        }
+		$data = $this->space->personal($id);
+		$data['notices'] = $this->api->loadRecentlyNotice(3);
+		return view($this->space->theme.'.space.dynamic',$data);
 	}
 
 	//修改密码
 	public function rePassword(Request $request){
-		$data = $this->api->personal();
 		if($request->isMethod('post')){
 			$oldPwd = $request->input('oldPwd');
 			$newPwd = $request->input('newPwd');
-			$data = $this->api->rePassword($oldPwd,$newPwd);
-			if($body['retCode'] == 100000){
+			$data = $this->space->rePassword($oldPwd,$newPwd);
+			if($data['retCode'] == 100000){
             	setcookie('kindergarten_sid','');
-            	return redirect('/open/apply/'.$this->school.'/login');
+            	return $data;
        		}
+		}else{
+			if(!$this->space->judgeCookie()){
+           		return redirect('/open/apply/'.$this->space->school.'/login');
+        	}
+			$data = $this->space->personal();
+			return view($this->space->theme.'.space.rePassword',$data);
 		}
-		return view($this->api->theme.'.space.rePassword',$data);
 	}
 
 	//确认密码
 	public function checkPassword(Request $request){
 		$oldPwd = $request->input('oldPwd','');
-		$data = $this->api->checkPassword($oldPwd);
+		$data = $this->space->checkPassword($oldPwd);
 		return $data;
 	}
 
@@ -46,7 +57,7 @@ class SpaceController extends Controller
 	public function loadSpace(Request $request){
 		$id = $request->input('id','');
 		$pageNo = $request->input('pageNo','');
-		$data = $this->api->teacherSpace($id,$pageNo);
+		$data = $this->space->teacherSpace($id,$pageNo);
 		$html = "";
 		foreach ($data['datas'] as $value) {
 			$str = $this->ishtml($value);
@@ -92,32 +103,32 @@ Eof;
 		$fname = $request->input('fname');
 		$fid = $request->input('fid');
 		$ftype = $request->input('ftype');
-		$data = $this->api->doAddteacherSpace($c,$fname,$fid,$ftype);
+		$data = $this->space->doAddteacherSpace($c,$fname,$fid,$ftype);
 		return $data;
 	}
 	//删除动态
 	public function doDelTeacherSpace(Request $request){
 		$id = $request->input('id');
-		$data = $this->api->doDelTeacherSpace($id);
+		$data = $this->space->doDelTeacherSpace($id);
 		return $data;
 	}
 	//点赞
 	public function doLike(Request $request){
 		$id = $request->input('id');
-		$data = $this->api->doLike($id);
+		$data = $this->space->doLike($id);
 		return $data;
 	}
 	//取消赞
 	public function doCancelLike(Request $request){
 		$id = $request->input('id');
-		$data = $this->api->doCancelLike($id);
+		$data = $this->space->doCancelLike($id);
 		return $data;
 	}
 	//添加评论
 	public function addcomment(Request $request){
 		$id = $request->input('id');
 		$c = $request->input('c');
-		$data[] = $this->api->addComment($id,$c);
+		$data[] = $this->space->addComment($id,$c);
 		$html['datas'] = $this->commenthtml($data);
 		$html['retCode'] = 100000;
 		return $html;
@@ -125,14 +136,14 @@ Eof;
 	//删除评论
 	public function delComment(Request $request){
 		$id = $request->input('id');
-		$data = $this->api->delComment($id);
+		$data = $this->space->delComment($id);
 		return $data;
 	}
 	//查看评论
 	public function loadComment(Request $request){
 		$id = $request->input('id');
 		$pageNo = $request->input('pageNo');
-		$data = $this->api->loadComment($id,$pageNo);
+		$data = $this->space->loadComment($id,$pageNo);
 		$data['datas'] = $this->commenthtml($data['datas']);
 		$html = $this->pagination($id,$data['totalPages'],$data['currentPage']);
 		$data['datas'] .= $html;
@@ -142,7 +153,7 @@ Eof;
 	//修改用户图片
     public function saveUserPhoto(Request $request){
         $form = $request->all();
-        $data = $this->api->saveUserPhoto($form);
+        $data = $this->space->saveUserPhoto($form);
         $data['retCode'] = 100000;
         return $data;
     }
@@ -171,7 +182,7 @@ Eof;
 	    	$delspace = "";
 		}
 
-		if($this->api->judgeCookie()){
+		if($this->space->judgeCookie()){
 			if ($space['hasLike']) {
 				$hasLike = "<a id=\"like_{$space['id']}\" href=\"javascript:doCancelLike('{$space['id']}');\">已赞</a>";
 			}else{
@@ -205,7 +216,7 @@ Eof;
 	            </div>
 Eof;
 		}else{
-			$hasLike = "<a id=\"like_{$space['id']}\" href=\"javascript:(0));\">赞</a>";
+			$hasLike = "<a id=\"like_{$space['id']}\" href=\"javascript:(0);\">赞</a>";
 			$spacefrom = "";
 		}
 		return array(
@@ -219,7 +230,7 @@ Eof;
 
 	//评论
 	private function commenthtml($comments){
-		$url = $this->api->url;
+		$url = $this->space->url;
     	$commenthtml = '';
     	foreach ($comments as $val) {
     		if($val['isOwner']){
@@ -254,7 +265,7 @@ Eof;
 	}
 	//上传图片
 	private function atthtml($att,$id){
-		$url = $this->api->url;
+		$url = $this->space->url;
 		$rotateLeft = '{'."$('#div_img_{$id}_l_img').rotateLeft(90);".'}';
 		$rotateRight = '{'."$('#div_img_{$id}_l_img').rotateRight(90);".'}';
 		$atthtml = <<<Eof

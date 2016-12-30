@@ -63,13 +63,15 @@
                       </div>
                   </div>
                 </div>
-                 @endif
+                @endif
                 @if($list['isProcessed'])
                   <p>{{{ $list['note'] or '' }}}<br></p>
                 </span>
                 <span class="li-content-time">{{$list['htStr']}}</span>
                 @endif
             </div>
+            @else
+              <span style="color: red;">待处理</span>
             @endif
        </li>
        @endforeach

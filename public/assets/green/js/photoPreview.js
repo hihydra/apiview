@@ -6,10 +6,7 @@ var hasload = false;//jQuery('#cropbox').Jcrop时好象是不是也是要reload�
 var hasbind = false;
 
 function showPhotoEdit(){
-	$('#dialog_photoEdit').show();
-}
-function hideEdit(){
-	$('#dialog_photoEdit').hide();
+	$("#dialog_photoEdit").jumpBox2(true);
 }
 function userPhotoDisplayInit(){
 	var _html = "";

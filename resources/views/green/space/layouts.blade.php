@@ -8,9 +8,9 @@
 </script>
 <script type="text/javascript" src="/assets/green/js/utils.js"></script>
 <script type="text/javascript" src="/assets/green/js/global.js"></script>
+<script type="text/javascript" src="/assets/green/js/main.js"></script>
 <script type="text/javascript" src="/assets/green/js/space.js"></script>
 <script type="text/javascript" src="/assets/green/js/photoPreview.js"></script>
-<script type="text/javascript" src="/assets/green/js/main.js"></script>
 <script type="text/javascript" src="/assets/green/js/jquery.Jcrop.js"></script>
 <script type="text/javascript" src="/assets/green/js/jquery.rotate.1-1.js"></script>
 @stop
@@ -18,11 +18,13 @@
 <div class="pf_head">
     <div class="pf_head_pic">
       <li><img id="img_userPhoto" src="{{$img}}"></li>
+      @if($isOwner)
       <div id="div_photoEdit" class="change_btn_div">
           <a class="W_btn_c" href="javascript:showPhotoEdit();">
             <span>更换头像</span>
           </a>
       </div>
+      @endif
     </div>
   <span class="title-text">{{$name}} 【{{$typeStr == 'SCHOOL_RECTOR'?'园长':'教师'}}】</span>
 </div>

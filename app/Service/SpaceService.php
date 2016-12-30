@@ -9,6 +9,11 @@ class SpaceService extends BaseService
         $query = array('id'=>$id);
         $body = $this->result($path,$query);
         $body['img'] = $this->url.'/'.$body['largePhotoUrl'];
+        if($this->judgeCookie() && !$id){
+            $body['isOwner'] = true;
+        }else{
+            $body['isOwner'] = false;
+        }
         return $body;
     }
     //教师动态
@@ -81,15 +86,6 @@ class SpaceService extends BaseService
         $body = $this->result($path,$query);
         return $body;
     }
-    //上传图片
-    public function uploadPhoto($filePath){
-        $path = env('API_URL')."/attachment/uploadForTask";
-        $query = array('file'=>new \CURLFile($filePath));
-        $body = $this->result_curl($path,$query);
-        unlink($filePath);
-        $body['data']['img'] = $this->url."/attachment/photo/source/{$body['data']['hash']}/{$body['data']['id']}.jpg";
-        return $body;
-    }
     //修改用户图片
     public function saveUserPhoto($form){
         $path = "/userPhoto/save";
@@ -112,24 +108,5 @@ class SpaceService extends BaseService
         $query = array('oldPwd'=>$oldPwd);
         $body = $this->result($path,$query,'POST');
         return $body;
-    }
-
-    private function result_curl($path,$query){
-        if (!empty($_COOKIE['kindergarten_sid'])) {
-            $cookieStr = 'kindergarten_sid='.$_COOKIE['kindergarten_sid'];
-        }
-        //初始化
-        $ch = curl_init ();
-        curl_setopt ( $ch, CURLOPT_URL,$path);
-        curl_setopt ( $ch, CURLOPT_POST, 1 );//post方式
-        curl_setopt ( $ch, CURLOPT_HEADER, 0 );
-        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
-        curl_setopt ( $ch, CURLOPT_COOKIE,$cookieStr);
-        curl_setopt ( $ch, CURLOPT_POSTFIELDS,$query);
-        $body = curl_exec ( $ch );
-
-        curl_close ( $ch );
-
-        return json_decode($body,true);
     }
 }
