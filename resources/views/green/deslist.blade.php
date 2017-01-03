@@ -28,5 +28,5 @@
    暂时没有{{$typeCh}}哟
    @endif
  </div>
- </div>
- @stop
+</div>
+@stop

@@ -34,6 +34,9 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->post('rePassword','SpaceController@rePassword');
 	$app->post('checkPassword','SpaceController@checkPassword');
 
+	//论坛
+	$app->get('forum/content/{id}','ForumController@content');
+
 	//园长信箱
 	$app->post('/saveMaibox', 'ApiController@saveMaibox');
 
@@ -45,4 +48,5 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->post('login','LoginController@login');
 	$app->get('loginOut','LoginController@loginOut');
 });
+
 

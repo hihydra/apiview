@@ -199,32 +199,32 @@ Eof;
 			}else{
 				$hasLike = "<a id=\"like_{$space['id']}\" href=\"javascript:doLike('{$space['id']}');\">赞</a>";
 			}
-			$spacefrom = <<<Eof
-				<div class="media subMessage hd">
-	                <div class="media-body">
-	                    <div class="row">
-	                        <div class="col-sm-12">
-	                            <form method="post" class="form-inline" id="form_comment_{$space['id']}">
-	                                <div class="row">
-	                                    <div class="col-sm-12 msgBox">
-	                                        <textarea rows="30" cols="10" name="c" id="ipt_coment_c_{$space['id']}" placeholder="评论:" onclick="javascript:commentForm_show('{$space['id']}');"></textarea>
-	                                    </div>
-	                                    <div class="action" id="div_dynamic_comments_commentForm_{$space['id']}" style="display: none;">
-	                                      <div class="col-sm-12 right">
-	                                      	<input type="hidden" name="id" value="{$space['id']}">
-	                                        <input onclick="javascript:doAddComment('{$space['id']}');" class="Btn" type="button" value="确定">
-	                                       </div>
-	                                      <div class="left">
-	                                        <a id="a_comment_face_{$space['id']}" href="javascript:showFaceList('ipt_coment_c_{$space['id']}','a_comment_face_{$space['id']}');"><i class="icon icon-Expression-1"></i></a>
-	                                      </div>
-	                                    </div>
-	                                </div>
-	                            </form>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="clear"></div>
-	            </div>
+				$spacefrom = <<<Eof
+					<div class="media subMessage hd">
+		                <div class="media-body">
+		                    <div class="row">
+		                        <div class="col-sm-12">
+		                            <form method="post" class="form-inline" id="form_comment_{$space['id']}">
+		                                <div class="row">
+		                                    <div class="col-sm-12 msgBox">
+		                                        <textarea rows="30" cols="10" name="c" id="ipt_coment_c_{$space['id']}" placeholder="评论:" onclick="javascript:commentForm_show('{$space['id']}');"></textarea>
+		                                    </div>
+		                                    <div class="action" id="div_dynamic_comments_commentForm_{$space['id']}" style="display: none;">
+		                                      <div class="col-sm-12 right">
+		                                      	<input type="hidden" name="id" value="{$space['id']}">
+		                                        <input onclick="javascript:doAddComment('{$space['id']}');" class="Btn" type="button" value="确定">
+		                                       </div>
+		                                      <div class="left">
+		                                        <a id="a_comment_face_{$space['id']}" href="javascript:showFaceList('ipt_coment_c_{$space['id']}','a_comment_face_{$space['id']}');"><i class="icon icon-Expression-1"></i></a>
+		                                      </div>
+		                                    </div>
+		                                </div>
+		                            </form>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="clear"></div>
+		            </div>
 Eof;
 		}else{
 			$hasLike = "<a id=\"like_{$space['id']}\" href=\"javascript:(0);\">赞</a>";

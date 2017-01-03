@@ -1,15 +1,15 @@
 @inject('apiPresenter','App\Presenters\ApiPresenter')
 <div class="crumbs">
 	<ul>
-	  {!!$apiPresenter->nav($type,$typeCh)!!}
-	  @if(!empty($title)||!empty($startStr))
-	  <li><a href="">{{{ $title or $startStr.'-'.$startStr.'食谱' }}}</a></li>
-	  @endif
+		{!!$apiPresenter->nav($type,$typeCh)!!}
+		@if(!empty($title)||!empty($startStr))
+		<li><a href="">{{{ $title or $startStr.'-'.$startStr.'食谱' }}}</a></li>
+		@endif
 	</ul>
 </div>
 <div class="clear"></div>
 <div class="three_2">
-{!!$apiPresenter->sidebar($type)!!}
+	{!!$apiPresenter->sidebar($type)!!}
 </div>
 <script type="text/javascript">
   //导航高亮

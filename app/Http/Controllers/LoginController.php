@@ -16,12 +16,12 @@ class LoginController extends Controller
 	//登陆
 	public function login(Request $request){
 		$school = $this->api->school;
+		setcookie('kindergarten_sid','');
 		if($request->isMethod('post')){
 			$username = $request->input('username');
 			$password = $request->input('password');
 			$data = $this->api->login_in($username,$password);
 			if (empty($data['retCode'])) {
-				//$_SESSION['userId']=$data[0]['id'];
 				return redirect('/open/apply/'.$this->api->school.'/index');
 			}else{
 				return view($this->api->theme.'.login',compact('school','data'));

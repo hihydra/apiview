@@ -58,7 +58,7 @@ class ApiController extends Controller
 				break;
 			case 'forum':
 			    $data = $this->api->loadSchoolRecipes('',$page);
-				return view($this->api->theme.'.forum',$data);
+				return view($this->api->theme.'.forum.list',$data);
 				break;
 			default:
 				$data = $this->api->loadInfo($type,$page);
