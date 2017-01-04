@@ -31,7 +31,7 @@
       @if($apiPresenter->judgeCookie())
       <div class="login">
         <ul>
-          <li><a href="{!!env('API_URL').'/login'!!}">管理</a></li>
+          <li><a href="{!!env('API_URL').'/login/tips'!!}">管理</a></li>
           <li>|</li>
           <li><a href="{{ url('/open/apply/'.$info['id'].'/loginOut') }}">退出</a></li>
         </ul>

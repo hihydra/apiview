@@ -223,9 +223,6 @@ function loadComment(id){
 	//$("#div_display").html($("#div_comments_loading").html());
 	ajaxJSON(params);
 }
-function page(data){
-
-}
 function toPage(id,pageNo){
 	//var dataId = $("#ipt_dataId").val();
 	var postData = {};
@@ -241,6 +238,9 @@ function toPage(id,pageNo){
 	params.callBack = function (json){
 		if(json.retCode==CODE_SUCCESS){
 			$('#div_dynamic_comments_'+id).html(json.datas);
+			$('html, body').animate({
+                    scrollTop: $('#div_data_'+id).offset().top
+                }, 500);
 			//useModel("model_dataDetail_comments","div_dynamic_comments_"+dataId,json.data);
 			//$("#div_dynamic_comments_"+dataId).ReplaceFace();
 		}

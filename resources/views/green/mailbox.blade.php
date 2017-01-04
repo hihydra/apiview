@@ -120,15 +120,15 @@
      return ;
    }
    var captcha = $('input[name^="captcha"]').val();
-    if(captcha.length==0){
-      alert("验证码不能为空！");
-      return ;
-    }
-   var params = {};
-   params.url = ctx+'/saveMaibox';
-   params.postData = $('.saveMaibox').serialize();
-   params.postType = "post";
-   params.error = "操作失败，请确认您的网络是否正常！";
+   if(captcha.length==0){
+    alert("验证码不能为空！");
+    return ;
+  }
+  var params = {};
+  params.url = ctx+'/saveMaibox';
+  params.postData = $('.saveMaibox').serialize();
+  params.postType = "post";
+  params.error = "操作失败，请确认您的网络是否正常！";
       params.mustCallBack = true;//是否必须回调
       params.callBack = function (json){
         if(json.retCode==CODE_SUCCESS){
@@ -142,18 +142,18 @@
         }
       };
       ajaxJSON(params);
-  }
-  function answerMaibox(id){
-    var content = $("textarea[name='note']").val();;
-    if(content.length<6){
-      alert("内容必须大于4个字符！");
-      return ;
     }
-    var params = {};
-    params.url = ctx+'/saveMaibox';
-    params.postData = $('.answerMaibox_'+id).serialize();
-    params.postType = "post";
-    params.error = "操作失败，请确认您的网络是否正常！";
+    function answerMaibox(id){
+      var content = $("textarea[name='note']").val();;
+      if(content.length<6){
+        alert("内容必须大于4个字符！");
+        return ;
+      }
+      var params = {};
+      params.url = ctx+'/saveMaibox';
+      params.postData = $('.answerMaibox_'+id).serialize();
+      params.postType = "post";
+      params.error = "操作失败，请确认您的网络是否正常！";
     params.mustCallBack = true;//是否必须回调
     params.callBack = function (json){
       if(json.retCode==CODE_SUCCESS){
@@ -166,5 +166,5 @@
     };
     ajaxJSON(params);
   }
-  </script>
-  @stop
+</script>
+@stop

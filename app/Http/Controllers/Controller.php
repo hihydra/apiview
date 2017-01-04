@@ -30,14 +30,13 @@ class Controller extends BaseController
 		}
 		return $html;
 	}
-
 	//验证验证码
     public static function check($code)
     {
         if($_SESSION['milkcaptcha'] == $code) {
             return true;
         } else {
-            return false;
+        	return false;
         }
     }
 

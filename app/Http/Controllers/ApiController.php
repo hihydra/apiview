@@ -96,11 +96,11 @@ class ApiController extends Controller
 	    */
 		$captcha = $request->get('captcha');
 
-		if($this->check($captcha)) {
+		if($this->check($captcha) == true) {
 			$form = $request->all();
 			$data = $this->api->saveChildStar($form);
 			return $data;
-		} else {
+		}else{
 			return response()->json(array( 'retCode' => 200004));
 		}
 	}
