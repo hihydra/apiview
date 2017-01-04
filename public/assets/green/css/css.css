@@ -337,6 +337,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .profile-1 .forum table tbody tr{border-bottom: 1px solid #F4F4F4;}
 .profile-1 .forum table tbody tr td{background:#FFF;color: #666;}
 .profile-1 .forum table tbody tr td a{color: #333333;}
+.profile-1 .forum table tbody tr td a:hover{color:#56b463;}
 .busbox {border: #ddd solid 1px;}
 .area{position: absolute;z-index:1000;}
 .hm{padding: 200px 200px 200px 260px}
@@ -345,14 +346,17 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 
 /*院长信箱 开始*/
 .poster{width：100%;margin: 10px;}
-.poster .poster-from{color: #000000;border: #ddd solid 1px;padding-bottom: 10px;}
+.poster .poster-from{color: #000000;border: #ddd solid 1px;padding-bottom: 10px;overflow:auto;}
 .saveMaibox{margin:20px;}
 .poster .poster-from .item{padding-bottom:6px;}
-.poster .poster-from .item input{border: 1px solid #ddd;width: 200px;height: 24px;}
+.poster .poster-from .item input{border: 1px solid #ddd;width: 200px;height: 30px;padding-left: 8px;}
 .poster .poster-from .item textarea{border: 1px solid #ddd;}
+.poster .poster-from .tel{float: left;}
+.poster .poster-from .captcha{float: right;padding-top: 4px;}
+.poster .poster-from .captcha a{padding-right: 10px;}
 .poster textarea {width: 98%; height: 100px;line-height: 20px;padding: 3px 8px 5px;}
 .poster .poster-from .tel{/*padding-left: 200px;*/padding-top: 5px;line-height: 25px;}
-.poster .poster-from .Btn{float: right;background: #56b463;color: #fff;font-size: 12px;height: 25px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;}
+.poster .poster-from .Btn{float: right;background: #56b463;color: #fff;font-size: 12px;height: 30px;line-height: 25px;padding: 0 8px;border: none;cursor: pointer;display: inline-block;vertical-align: middle;}
 .profile-1 ul li .mailbox-title{width: 200px;height: 100px;border-bottom: 1px dashed #ddd;}
 .profile-1 ul li .mailbox-reply{margin: 0 0 15px 50px;max-height: 800px;min-height: 90px;background-color: #f2f2f2;float: left;}
 .profile-1 ul li span.mailbox-content-left{display: block;width: 110px;float: left;padding-top: 16px;text-align: center;margin-bottom: 10px;font-size: 14px;}

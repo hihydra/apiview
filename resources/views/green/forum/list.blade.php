@@ -83,6 +83,8 @@
 						</script>
 					</div>
 					<div class="item">
+						<input type="text" name="captcha" style="width:100px;" placeholder="请输入验证码...">
+						<a onclick="javascript:re_captcha();" ><img src="{{ URL('captcha/1') }}"  alt="验证码" title="刷新图片" width="100" height="30" id="captcha" border="0"></a>
 						<button class="Btn" type="button" onclick="javascript:saveMaibox();">发帖</button>
 					</div>
 				</form>
@@ -103,5 +105,10 @@
 		@endif
 	});
 	$('.login_xt').attr('href',ctx+'/login');
+	function re_captcha() {
+		$url = "{{ URL('/captcha') }}";
+		$url = $url + "/" + Math.random();
+		$('#captcha').attr('src',$url);
+	}
 </script>
 @stop

@@ -94,10 +94,15 @@ class ApiController extends Controller
 	        'content' => 'required|min:3|max:500'
 	    ]);
 	    */
-		$form = $request->all();
-		$data = $this->api->saveChildStar($form);
+		$captcha = $request->get('captcha');
 
-		return $data;
+		if($this->check($captcha)) {
+			$form = $request->all();
+			$data = $this->api->saveChildStar($form);
+			return $data;
+		} else {
+			return response()->json(array( 'retCode' => 200004));
+		}
 	}
 
 	//上传图片

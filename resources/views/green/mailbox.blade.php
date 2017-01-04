@@ -25,6 +25,10 @@
           </div>
           <div class="tel item">
             <input type="tel" name="mobile" placeholder="请输入手机号..." required="required">
+          </div>
+          <div class="captcha item">
+            <input type="text" name="captcha" style="width:100px;" placeholder="请输入验证码...">
+            <a onclick="javascript:re_captcha();" ><img src="{{ URL('captcha/1') }}"  alt="验证码" title="刷新图片" width="100" height="30" id="captcha" border="0"></a>
             <button class="Btn" type="button" onclick="javascript:saveMaibox();">提交</button>
           </div>
         </form>
@@ -93,62 +97,74 @@
 @stop
 @section('script')
 <script type="text/javascript">
- function saveMaibox(){
-  var title = $('input[name^="title"]').val();
-  if(title.length<4){
-    alert("标题必须大于2个字符！");
-    return ;
+  function re_captcha() {
+    $url = "{{ URL('/captcha') }}";
+    $url = $url + "/" + Math.random();
+    $('#captcha').attr('src',$url);
   }
-  var content = $('textarea[name^="content"]').val();
-  if(content.length<6){
-    alert("内容必须大于4个字符！");
-    return ;
-  }
-  var tel = $('input[name^="mobile"]').val();
-  var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
-  if (!reg.test(tel)) {
-   alert("手机号码错误！");
-   return ;
- }
- var params = {};
- params.url = ctx+'/saveMaibox';
- params.postData = $('.saveMaibox').serialize();
- params.postType = "post";
- params.error = "操作失败，请确认您的网络是否正常！";
+  function saveMaibox(){
+    var title = $('input[name^="title"]').val();
+    if(title.length<4){
+      alert("标题必须大于2个字符！");
+      return ;
+    }
+    var content = $('textarea[name^="content"]').val();
+    if(content.length<6){
+      alert("内容必须大于4个字符！");
+      return ;
+    }
+    var tel = $('input[name^="mobile"]').val();
+    var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+    if (!reg.test(tel)) {
+     alert("手机号码格式错误！");
+     return ;
+   }
+   var captcha = $('input[name^="captcha"]').val();
+    if(captcha.length==0){
+      alert("验证码不能为空！");
+      return ;
+    }
+   var params = {};
+   params.url = ctx+'/saveMaibox';
+   params.postData = $('.saveMaibox').serialize();
+   params.postType = "post";
+   params.error = "操作失败，请确认您的网络是否正常！";
       params.mustCallBack = true;//是否必须回调
       params.callBack = function (json){
         if(json.retCode==CODE_SUCCESS){
           window.location.reload();
         }else if(json.retCode==CODE_NOT_LOGIN){
           alert("登录超时，请重新登录！");
+        }else if(json.retCode==CODE_USER_CAPTCHA_ERROR){
+          alert("验证码错误！");
         }else{
           alert("操作失败！");
         }
       };
       ajaxJSON(params);
+  }
+  function answerMaibox(id){
+    var content = $("textarea[name='note']").val();;
+    if(content.length<6){
+      alert("内容必须大于4个字符！");
+      return ;
     }
-    function answerMaibox(id){
-      var content = $("textarea[name='note']").val();;
-      if(content.length<6){
-        alert("内容必须大于4个字符！");
-        return ;
+    var params = {};
+    params.url = ctx+'/saveMaibox';
+    params.postData = $('.answerMaibox_'+id).serialize();
+    params.postType = "post";
+    params.error = "操作失败，请确认您的网络是否正常！";
+    params.mustCallBack = true;//是否必须回调
+    params.callBack = function (json){
+      if(json.retCode==CODE_SUCCESS){
+        window.location.reload();
+      }else if(json.retCode==CODE_NOT_LOGIN){
+        alert("登录超时，请重新登录！");
+      }else{
+        alert("操作失败！");
       }
-      var params = {};
-      params.url = ctx+'/saveMaibox';
-      params.postData = $('.answerMaibox_'+id).serialize();
-      params.postType = "post";
-      params.error = "操作失败，请确认您的网络是否正常！";
-      params.mustCallBack = true;//是否必须回调
-      params.callBack = function (json){
-        if(json.retCode==CODE_SUCCESS){
-          window.location.reload();
-        }else if(json.retCode==CODE_NOT_LOGIN){
-          alert("登录超时，请重新登录！");
-        }else{
-          alert("操作失败！");
-        }
-      };
-      ajaxJSON(params);
-    }
+    };
+    ajaxJSON(params);
+  }
   </script>
   @stop

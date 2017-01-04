@@ -65,13 +65,15 @@ class SpaceController extends Controller
 			<div id="div_data_{$value['id']}">
 				<div class="control-inner" style="height:0px;"></div>
 				    <div class="media newMessage">
+				    	<!----
 			    		<a title="肖洁" href="javascript:void(0);" class="pull-left">
 							<img class="imgSmall media-object" src="http://111.47.13.92:9004/resource/front/images/default_l.jpg" title="肖洁">
 						</a>
+						---!>
 						<div class="media-body">
 							<div class="media-content left">
-								<a href="javascript:void(0);"><span class="name text-primary ellipsis">肖洁</span></a>
 								<!----
+								<a href="javascript:void(0);"><span class="name text-primary ellipsis">肖洁</span></a>
 								<span class="forGroup"><i class="icon icon-group"></i><a href="javascript:void(0);">小一班</a></span>
 								---!>
 								<p class="messageCon">{$value['c']}</p>

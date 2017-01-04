@@ -5,7 +5,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-
+	//翻页
 	public function pagination($id,$totalPages,$currentPage){
 		if($totalPages>1){
 			$html  =  '<ul class="pagination media-review">';
@@ -30,5 +30,15 @@ class Controller extends BaseController
 		}
 		return $html;
 	}
+
+	//验证验证码
+    public static function check($code)
+    {
+        if($_SESSION['milkcaptcha'] == $code) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

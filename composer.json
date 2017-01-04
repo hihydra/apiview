@@ -9,6 +9,7 @@
         "laravel/lumen-framework": "5.3.*",
         "vlucas/phpdotenv": "~2.2",
         "guzzlehttp/guzzle": "^6.2",
+        "gregwar/captcha": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

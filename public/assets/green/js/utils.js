@@ -133,26 +133,26 @@ var ztree_chk_ulId = "";
 var ztree_chk_eleModel = "";
 var ztree_chk_liIdPrefix = "";
 var ztree_chk_setting = {
-		check: {
-			enable: true,
-			chkboxType: {"Y":"", "N":""}
-		},
-		view: {
-			dblClickExpand: false
-		},
-		data: {
-			simpleData: {
-				enable: true
-			}
-		},
-		callback: {
-			beforeClick: beforeClick,
-			onCheck: onCheck
-		},
-		async: {
-			enable: false
+	check: {
+		enable: true,
+		chkboxType: {"Y":"", "N":""}
+	},
+	view: {
+		dblClickExpand: false
+	},
+	data: {
+		simpleData: {
+			enable: true
 		}
-	};
+	},
+	callback: {
+		beforeClick: beforeClick,
+		onCheck: onCheck
+	},
+	async: {
+		enable: false
+	}
+};
 function beforeClick(treeId, treeNode) {
 	var zTree = $.fn.zTree.getZTreeObj(ztree_chk_treeId);
 	zTree.checkNode(treeNode, !treeNode.checked, null, true);
@@ -169,12 +169,12 @@ function insertEle(treeNode){
 		$("#"+ztree_chk_ulId).prepend(_ele);
 //		$("#div_mems_empty").hide();
 //		$("#div_mems_content").show();
-	}else{
+}else{
 //		if($("#"+ztree_chk_elesId).find("li").length==0){
 //			$("#div_mems_content").hide();
 //			$("#div_mems_empty").show();
 //		}
-	}
+}
 }
 function removeEle(id){
 	var zTree = $.fn.zTree.getZTreeObj(ztree_chk_treeId);

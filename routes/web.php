@@ -50,3 +50,4 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 });
 
 
+$app->get('captcha/{tmp}', 'CaptchaController@captcha');
