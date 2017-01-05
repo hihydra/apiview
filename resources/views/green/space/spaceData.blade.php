@@ -21,7 +21,7 @@
 			<h4 class="media-heading">
 				<ul class="feedbacks pull-right list-inline">
 					@if($isLogin)
-						<li id=\"delspace\"><a href="javascript:doDelTeacherSpaceData('{{$data['id']}}');">删除</a></li><li>|</li>
+						<li id="delspace"><a href="javascript:doDelTeacherSpaceData('{{$data['id']}}');">删除</a></li><li>|</li>
 						@if($data['hasLike'])
 							<li><a id="like_{{$data['id']}}" href="javascript:doCancelLike('{{$data['id']}}');">已赞</a>
 						@else
@@ -102,5 +102,5 @@
 	</div>
 	@endforeach
 @else
-	还没有发布动态
+	<center>还没有发布动态</center>
 @endif

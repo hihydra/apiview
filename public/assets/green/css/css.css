@@ -110,6 +110,7 @@ span.title-text{float: left;    padding-left: 20px; font-size:35px; font-weight:
 .three_con .profile p span{ font-weight:bold;}
 .profile{ padding:15px 0;}
 .profile .title{text-align: center;padding: 15px 0 10px;}
+.profile .title h3{font-size: 15px;}
 .profile p.info{ line-height:30px; font-size:12px;}
 .profile ul li{ width:248px; float:left; margin:9px;height: 150px;padding-bottom: 40px;}
 .photo ul li a{height: 30px; line-height: 30px; width: 100%; background: url(../img/img-m.png) repeat; color: #fff; display: inline-block; text-align: center; font-size: 12px;}

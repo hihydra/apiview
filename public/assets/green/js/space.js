@@ -17,30 +17,30 @@ var syncId_default = "syncId_default";
 
 var pageNo = '';
 var methods = {
-    get_data: function() {
-        $("#vlist").append('<div class="loading ft12" id="waitbox"><img src="/assets/green/img/loader.gif" width="19" height="19" />载入中..</div>');
-        $.ajax({url:teacherSpace_loadUrl,
-          data:{id:userId,pageNo:pageNo},
-          type: 'GET',
-          async: false,
-          error: function(){
-          	alert('加载动态失败!');
-          },
-          success: function(data){
-          	 html = $(".busbox").html();
-             $(".busbox").html(html+data.datas);
-             $("#waitbox").remove();
-             $('.busbox').ReplaceFace();
-             if (data.hasMore) {
-                pageNo = data.anchor;
-                $('#get_more').css('display', 'block');
-             }else{
-                $('#get_more').css('display', 'none');
-             }
-          }
-        });
-      },
-  };
+	get_data: function() {
+		$("#vlist").append('<div class="loading ft12" id="waitbox"><img src="/assets/green/img/loader.gif" width="19" height="19" />载入中..</div>');
+		$.ajax({url:teacherSpace_loadUrl,
+			data:{id:userId,pageNo:pageNo},
+			type: 'GET',
+			async: false,
+			error: function(){
+				alert('加载动态失败!');
+			},
+			success: function(data){
+				html = $(".busbox").html();
+				$(".busbox").html(html+data.datas);
+				$("#waitbox").remove();
+				$('.busbox').ReplaceFace();
+				if (data.hasMore) {
+					pageNo = data.anchor;
+					$('#get_more').css('display', 'block');
+				}else{
+					$('#get_more').css('display', 'none');
+				}
+			}
+		});
+	},
+};
 
 function doAddTeacherSpaceData(){
 	if($("#textarea_content").attr("disabled")!=null){
@@ -74,26 +74,26 @@ function doAddTeacherSpaceData(){
 	ajaxJSON(params);
 }
 function doDelTeacherSpaceData(id){
-    var _eleId = id;
-    var isDo = confirm("确定要删除吗？");
-    if(!isDo){
-      return;
-    }
+	var _eleId = id;
+	var isDo = confirm("确定要删除吗？");
+	if(!isDo){
+		return;
+	}
 
-    var params = {};
-    params.url = teacherSpace_delUrl;
-    params.postData = {id:id};
-    params.postType = "post";
-    params.error = "删除失败，请确认您的网络是否正常！";
+	var params = {};
+	params.url = teacherSpace_delUrl;
+	params.postData = {id:id};
+	params.postType = "post";
+	params.error = "删除失败，请确认您的网络是否正常！";
     params.mustCallBack = true;//是否必须回调
     params.callBack = function (json){
-      if(json.retCode==CODE_SUCCESS){
-        $("#div_data_"+_eleId).remove();
-      }else if(json.retCode==CODE_NOT_LOGIN){
-        alert("登录超时，请重新登录！");
-      }else{
-        alert("删除失败！");
-      }
+    	if(json.retCode==CODE_SUCCESS){
+    		$("#div_data_"+_eleId).remove();
+    	}else if(json.retCode==CODE_NOT_LOGIN){
+    		alert("登录超时，请重新登录！");
+    	}else{
+    		alert("删除失败！");
+    	}
     };
     ajaxJSON(params);
 }
@@ -242,8 +242,8 @@ function toPage(id,pageNo){
 		if(json.retCode==CODE_SUCCESS){
 			$('#div_dynamic_comments_'+id).html(json.datas);
 			$('html, body').animate({
-                    scrollTop: $('#div_data_'+id).offset().top
-                }, 500);
+				scrollTop: $('#div_data_'+id).offset().top
+			}, 500);
 			//useModel("model_dataDetail_comments","div_dynamic_comments_"+dataId,json.data);
 			//$("#div_dynamic_comments_"+dataId).ReplaceFace();
 		}

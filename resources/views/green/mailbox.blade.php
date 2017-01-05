@@ -13,7 +13,7 @@
   <div class="three_con clearfix">
     <div class="poster">
       <div class="spaceCate">
-        <h3>院长信箱</h3>
+        <h3>{{$typeCh}}</h3>
       </div>
       <div class="poster-from">
         <form class="saveMaibox">

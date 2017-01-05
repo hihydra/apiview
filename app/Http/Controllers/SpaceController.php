@@ -20,8 +20,8 @@ class SpaceController extends Controller
 	public function space(Request $request){
 		$id = $request->input('id','');
 		if(!$this->space->judgeCookie() && !$id){
-           return redirect('/open/apply/'.$this->space->school.'/login');
-        }
+			return redirect('/open/apply/'.$this->space->school.'/login');
+		}
 		$data = $this->space->personal($id);
 		$data['notices'] = $this->api->loadRecentlyNotice(3);
 		return view($this->space->theme.'.space.dynamic',$data);
@@ -34,13 +34,13 @@ class SpaceController extends Controller
 			$newPwd = $request->input('newPwd');
 			$data = $this->space->rePassword($oldPwd,$newPwd);
 			if($data['retCode'] == 100000){
-            	setcookie('kindergarten_sid','');
-            	return $data;
-       		}
+				setcookie('kindergarten_sid','');
+				return $data;
+			}
 		}else{
 			if(!$this->space->judgeCookie()){
-           		return redirect('/open/apply/'.$this->space->school.'/login');
-        	}
+				return redirect('/open/apply/'.$this->space->school.'/login');
+			}
 			$data = $this->space->personal();
 			return view($this->space->theme.'.space.rePassword',$data);
 		}
@@ -111,7 +111,6 @@ class SpaceController extends Controller
 		$pageNo = $request->input('pageNo');
 		$data = $this->space->loadComment($id,$pageNo);
 		$data['datas'] = $this->commenthtml($data['datas']);
-		$data['type'] = 'comment';
 		$data['id'] = $id;
 		//$html = $this->pagination($id,$data['totalPages'],$data['currentPage']);
 		$html = view('vendor.JSpagination',$data);
@@ -120,16 +119,16 @@ class SpaceController extends Controller
 		return $data;
 	}
 	//修改用户图片
-    public function saveUserPhoto(Request $request){
-        $form = $request->all();
-        $data = $this->space->saveUserPhoto($form);
-        $data['retCode'] = 100000;
-        return $data;
-    }
+	public function saveUserPhoto(Request $request){
+		$form = $request->all();
+		$data = $this->space->saveUserPhoto($form);
+		$data['retCode'] = 100000;
+		return $data;
+	}
 	//评论
 	private function commenthtml($comments){
 		$url = $this->space->url;
-	    return view($this->space->theme.'.space.comment',compact('comments','url'));
+		return view($this->space->theme.'.space.comment',compact('comments','url'));
 	}
 
 }
