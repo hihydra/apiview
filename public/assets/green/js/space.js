@@ -23,7 +23,9 @@ var methods = {
           data:{id:userId,pageNo:pageNo},
           type: 'GET',
           async: false,
-          error: function(){},
+          error: function(){
+          	alert('加载动态失败!');
+          },
           success: function(data){
           	 html = $(".busbox").html();
              $(".busbox").html(html+data.datas);
@@ -164,6 +166,7 @@ function doAddComment(id){
 			//json.comment = json.data;
 			$("#div_dynamic_comments_"+_eleId).prepend(json.datas);
 			$("#ipt_coment_c_"+_eleId).val("");
+			$('.busbox').ReplaceFace();
 			//reply_hide(id);
 		}else if(json.retCode==CODE_NOT_LOGIN){
 			alert("登录超时，请重新登录！");

@@ -90,7 +90,7 @@
 <script type="text/javascript" src="/assets/green/js/utils.js"></script>
 <script type="text/javascript" src="/assets/green/js/global.js"></script>
 <script type="text/javascript">
-var url = window.location.pathname;
+  var url = window.location.pathname;
   $(".nav").find("a[class='hover']").removeClass();
   var nav = $(".nav").find("a[href='" + url + "']");
   nav.addClass("hover");
