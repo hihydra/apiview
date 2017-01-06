@@ -31,7 +31,7 @@
 						<li><a id="like_{{$data['id']}}" href="javascript:(0);">赞</a>
 					@endif
 					(<span id="like_count_{{$data['id']}}">{{$data['lc']}}</span>)</li><li>|</li>
-					<li><a id="a_dynamic_comments_178" href="javascript:comment_click('{{$data['id']}}');">评论</a>({{$data['cc']}})</li>
+					<li><a id="a_dynamic_comments_{{$data['id']}}" href="javascript:comment_click('{{$data['id']}}');">评论</a>({{$data['cc']}})</li>
 				</ul>
 				<ul class="feedbacks pull-left list-inline">
 					<li>{{$data['timeStr']}}</li>

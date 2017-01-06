@@ -43,10 +43,10 @@
 					<tbody>
 						@foreach ($datas as $list)
 						<tr>
-							<td><a href="{{$list['url']}}">{{$list['startStr']}}--{{$list['endStr']}}食谱</a></td>
+							<td><a href="{{$list['url']}}">{{$list['title']}}</a></td>
 							<td>小明</td>
 							<td>10|20</td>
-							<td>{{$list['utStr']}}</td>
+							<td>{{$list['timeStr']}}</td>
 							<td>小w</td>
 						</tr>
 						@endforeach

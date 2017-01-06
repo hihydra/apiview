@@ -1,6 +1,6 @@
 @inject('apiPresenter','App\Presenters\ApiPresenter')
 @extends('green.layouts')
-@section('title')-@stop
+@section('title')论坛测试-@stop
 @section('content')
 @section('headScript')
 <script type="text/javascript" src="/assets/green/js/jquery.rotate.1-1.js"></script>

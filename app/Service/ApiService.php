@@ -124,6 +124,7 @@ class ApiService extends BaseService
         $path = '/open/info/'.$id;
         $query = array();
         $body = $this->result($path,$query);
+        $body['content'] = str_replace('src="','src="'.$this->url,$body['content']);
         return $body;
     }
 
@@ -194,6 +195,21 @@ class ApiService extends BaseService
         $body = $this->result($path,$query);
         $body['typeCh'] = config('category.interaction.next.mailbox');
         $body['type'] = 'mailbox';
+        return $body;
+    }
+
+    //论坛
+    public function loadSchoolforums($limit=6,$pageNo=1){
+        //$path = '/open/school/'.$this->school.'/loadSchoolRecipe';
+        //$query = array('pageNo'=>$pageNo,'limit'=>$limit);
+        //$body = $this->result($path,$query);
+        $body = '{"currentPage":1,"datas":[{"id":1132,"isOwner":false,"reduced":"","scopes":[],"time":1463995234681,"timeStr":"2016-05-23","title":"论坛测试"}],"hasMore":false,"limit":4,"offset":0,"totalPages":1,"totalRecords":1}';
+        $body = json_decode($body,true);
+        foreach ($body['datas'] as &$value) {
+            $value['url'] = "/open/apply/".$this->school."/forum/content/{$value['id']}";
+        }
+        $body['typeCh'] = config('category.interaction.next.forum');
+        $body['type'] = 'forum';
         return $body;
     }
 
