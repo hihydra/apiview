@@ -30,7 +30,7 @@ class BaseService
         return $body;
     }
 
-	protected function result($path,$query,$mothod="GET",$cookie=false){
+	protected function result($path,$query,$mothod="GET",$code=false,$cookie=false){
         if (!empty($_COOKIE['kindergarten_sid'])) {
             $query['kindergarten_sid'] = $_COOKIE['kindergarten_sid'];
         }
@@ -46,10 +46,10 @@ class BaseService
                         setcookie($str[0],$str[1]);
                     }
                 }
-				if(isset($body['data'])){
-                    return $body['data'];
-                }else{
+				if(!isset($body['data'])||$code){
                     return $body;
+                }else{
+                    return $body['data'];
                 }
 			}else{
 			    return $body;

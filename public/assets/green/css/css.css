@@ -1,6 +1,6 @@
 ﻿@charset "utf-8";
 /* CSS Document */
-body,form,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,table,fieldset{margin:0; padding:0;}
+body,form,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,table,fieldset{margin:0; padding:0;font-size:14px;}
 input,select,textarea{color:#888; font-size:12px;line-height:140%; font-family:'宋体';vertical-align: middle;resize:none;}
 img{border:0; vertical-align:middle;}
 em,i{font-style:normal;}
@@ -527,3 +527,8 @@ input[type="text"],input[type="password"],textarea{outline-style:none;-webkit-ap
 .top-right ul .Hover .gn_tab{ display:inline-block; height:27px; line-height:27px; padding:0 4px 0; width:68px; z-index:9999;background:#fff; border:1px solid #666; border-bottom:none;vertical-align:middle; border-radius:2px;}
 .top-right ul li .gn_tab{ display:inline-block; height:27px; line-height:27px; padding:1px 5px 0; width:68px;vertical-align:middle;}
 /*账号设置 结束*/
+
+table tbody tr{text-align:center;}
+
+a.sign-up{ position:fixed; right:10px; top:15%; z-index:1998; background:url(../img/sign-up.png) no-repeat; display:block; width:145px; height:200px;}
+a.sign-up:hover{ background:url(../img/sign-up-hover.png) no-repeat;}

@@ -49,7 +49,7 @@
 </div>
 <div class="fl_3 Teach">
   <div class="tittle_1"><img src="/assets/green/img/tittle_3.jpg" /></div>
-  <div class="bannar-2"><a href="#"><img src="/assets/green/img/img-2.jpg" /></a></div>
+  <div class="bannar-2"><a href="http://yuer.eduyun.cn/ys/"><img src="/assets/green/img/img-2.jpg" /></a></div>
   <ul class="fl_ul">
     @foreach ($news['datas'] as $key => $new)
     <li>

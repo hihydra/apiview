@@ -38,10 +38,16 @@ $app->group(['prefix' => 'open/apply/{school}','middleware' => ['api']], functio
 	$app->get('forum/content/{id}','ForumController@content');
 
 	//园长信箱
-	$app->post('/saveMaibox', 'ApiController@saveMaibox');
+	$app->post('saveMaibox', 'ApiController@saveMaibox');
 
 	//上传图片
 	$app->post('uploadPhoto','ApiController@uploadPhoto');
+
+	//招生
+	$app->get('recruit','RecruitController@recruit');
+	$app->get('recruit/check','RecruitController@recruitCheck');
+	$app->post('regions/load','RecruitController@recruitLoad');
+	$app->post('recruit/save','RecruitController@recruitSave');
 
 	//登陆
 	$app->get('login','LoginController@login');

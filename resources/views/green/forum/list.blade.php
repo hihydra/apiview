@@ -75,7 +75,7 @@
 						@if(!$apiPresenter->judgeCookie())
 						<div class="area">
 							<div class="pt hm">
-								您需要登录后才可以回帖 <a href="" class="login_xt">登录</a>
+								您需要登录后才可以发帖 <a href="" class="login_xt">登录</a>
 							</div>
 						</div>
 						@endif

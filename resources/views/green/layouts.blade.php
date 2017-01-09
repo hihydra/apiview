@@ -10,6 +10,7 @@
   <script type="text/javascript" src="/assets/green/js/jquery.min.js"></script>
   <script type="text/javascript">
     var ctx = "/open/apply/{{$info['id']}}";
+    var schoolId = {{$info['id']}};
   </script>
   @yield('headScript')
 </head>
@@ -47,6 +48,10 @@
         <ul>{!!$apiPresenter->navList()!!}</ul>
       </div>
     </div>
+<!-- 右边报名气球 开始-->
+<a id="qiqiu_right" class="sign-up" href="/open/apply/{{$info['id']}}/recruit" style="top:30%;">&nbsp;</a>
+<a id="qiqiu_left" class="sign-up" href="/open/apply/{{$info['id']}}/recruit" style="top:30%;left:10px;">&nbsp;</a>
+<!-- 右边报名气球 结束-->
 
     <div class="center">
       @yield('content')
